@@ -1,5 +1,5 @@
-import { colors } from "@/styles/GlobalStyles";
-import styled from "styled-components";
+import { colors } from '@/styles/GlobalStyles'
+import styled from 'styled-components'
 
 export const HeaderContainer = styled.section`
   display: flex;
@@ -11,21 +11,21 @@ export const HeaderContainer = styled.section`
   box-shadow: 0px 3px 10px 0px rgba(88, 88, 88, 0.28);
 
   background-color: ${colors.mostarda};
-  `
+`
 
 export const Content = styled.div`
-display: flex;
-justify-content: space-around;
-align-items: center;
-width: 100%;
-max-width: 1440px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  max-width: 1440px;
 `
 
 export const Menu = styled.nav`
   display: flex;
   flex-direction: row;
 
-  height: auto ;
+  height: auto;
   padding: 1em;
 
   ul {
@@ -45,7 +45,7 @@ export const LogoContainer = styled.div`
   height: 4em;
   width: 4em;
 
-  background-image: url("https://placehold.co/64x64") ;
+  background-image: url('https://placehold.co/64x64');
 `
 
 export const Carrinho = styled.div`
@@ -79,8 +79,7 @@ export const Carrinho = styled.div`
 
   &:hover {
     box-shadow: 0px 0px 10px 10px rgb(249 249 249 / 25%);
-        transition: 0.3s ease;
-        transform: scale(1.05);
-
+    transition: 0.3s ease;
+    transform: scale(1.05);
   }
 `
