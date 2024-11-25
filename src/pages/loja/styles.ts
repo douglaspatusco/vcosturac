@@ -1,5 +1,5 @@
-import { colors } from "@/styles/GlobalStyles";
-import styled from "styled-components";
+import { colors } from '@/styles/GlobalStyles'
+import styled from 'styled-components'
 
 export const ContainerStore = styled.section`
   display: flex;
@@ -9,7 +9,9 @@ export const ContainerStore = styled.section`
   width: 100%;
   padding-top: 2em;
   background-color: #fff;
-  box-shadow: 5px 0 10px rgba(0, 0, 0, 0.2), -5px 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    5px 0 10px rgba(0, 0, 0, 0.2),
+    -5px 0 10px rgba(0, 0, 0, 0.2);
 `
 export const ProductContainer = styled.div`
   display: flex;
@@ -55,7 +57,9 @@ export const Thumbnail = styled.img`
   cursor: pointer;
 
   &:hover {
-    box-shadow:0 1px 2px 0 rgba(0,0,0,.3),0 2px 6px 2px rgba(0,0,0,.15);
+    box-shadow:
+      0 1px 2px 0 rgba(0, 0, 0, 0.3),
+      0 2px 6px 2px rgba(0, 0, 0, 0.15);
     transition: 0.3s ease;
     transform: scale(1.05);
   }
@@ -100,7 +104,9 @@ export const Prints = styled.div`
       cursor: pointer;
 
       &:hover {
-        box-shadow:0 1px 2px 0 rgba(0,0,0,.3),0 2px 6px 2px rgba(0,0,0,.15);
+        box-shadow:
+          0 1px 2px 0 rgba(0, 0, 0, 0.3),
+          0 2px 6px 2px rgba(0, 0, 0, 0.15);
         transition: 0.3s ease;
         transform: scale(1.05);
       }
@@ -135,13 +141,13 @@ export const Amount = styled.div`
     outline: none;
   }
 
-  input[type="number"]::-webkit-outer-spin-button,
-  input[type="number"]::-webkit-inner-spin-button {
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  input[type="number"] {
+  input[type='number'] {
     width: 50px;
     height: 20px;
     font-size: 1em;
@@ -163,7 +169,9 @@ export const BuyButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    box-shadow:0 1px 2px 0 rgba(0,0,0,.3),0 2px 6px 2px rgba(0,0,0,.15);
+    box-shadow:
+      0 1px 2px 0 rgba(0, 0, 0, 0.3),
+      0 2px 6px 2px rgba(0, 0, 0, 0.15);
   }
 
   &:active {
@@ -171,7 +179,6 @@ export const BuyButton = styled.button`
   }
 `
 
-export const Description = styled.div`
-`
+export const Description = styled.div``
 
 // https://cdn.awsli.com.br/2500x2500/1275/1275983/produto/50157355/15e033c992.jpg

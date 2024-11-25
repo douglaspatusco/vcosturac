@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+declare
+Product = {
+  id: number,
+  thumb: string,
+  name: string,
+  description: string,
+=======
 declare interface image {
   url: string
 }
@@ -10,4 +18,5 @@ declare type Product = {
   description: string,
   details: string,
   images:
+>>>>>>> main
 }

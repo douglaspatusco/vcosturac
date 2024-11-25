@@ -24,7 +24,6 @@ export default function StyledComponentsRegistry({
       <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
         {children}
       </StyleSheetManager>
-
     </>
   )
 }
