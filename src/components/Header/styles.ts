@@ -1,15 +1,16 @@
 import { colors } from '@/styles/GlobalStyles'
 import styled from 'styled-components'
 
-export const HeaderContainer = styled.section`
+export const HeaderContainer = styled.header<{ pageIsScrolled: boolean }>`
+  position: fixed;
   display: flex;
   justify-content: center;
-  padding: 1em;
   width: 100%;
-  position: fixed;
+  height: ${(props) => (props.pageIsScrolled ? '50px' : '100px')};
+  padding: 1em;
   z-index: 2;
   box-shadow: 0px 3px 10px 0px rgba(88, 88, 88, 0.28);
-
+  transition: height 0.1s ease;
   background-color: ${colors.mostarda};
 `
 
@@ -74,7 +75,7 @@ export const Carrinho = styled.div`
     right: 9px;
     top: 8px;
     padding: 0 1px;
-    background: #914c36;
+    background: ${colors.salmaoEscuro};
   }
 
   &:hover {

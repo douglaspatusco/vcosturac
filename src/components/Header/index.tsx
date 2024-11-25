@@ -8,10 +8,24 @@ import {
   LogoContainer,
   Menu,
 } from './styles'
+import { useEffect, useState } from 'react';
 
 const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 40);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <HeaderContainer>
+    <HeaderContainer pageIsScrolled={isScrolled}>
       <Content>
         <Link href="/">
           <LogoContainer />
