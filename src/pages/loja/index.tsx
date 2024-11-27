@@ -18,7 +18,12 @@ import {
   Thumbnail,
   ZoomContainer,
 } from './styles'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+interface Image {
+  src: string
+  alt: string
+}
 
 const floral =
   'https://cdn.awsli.com.br/2500x2500/2220/2220511/produto/176766434/tecidos-tricoline-tecido-tricoline-digital-flores-ref-9017-cor-304--p-1690983761-viv6bctvh3.png'
@@ -28,11 +33,6 @@ const geometrico =
   'https://img.freepik.com/vetores-premium/estampa-geometrica_598830-6.jpg'
 const corSemEstampa =
   'https://w7.pngwing.com/pngs/349/570/png-transparent-colorful-rainbow-gradient-colorful-rainbow-gradient-colorful-rainbow-circle-gradual-change.png'
-
-interface Image {
-  src: string
-  alt: string
-}
 
 const images: Image[] = [
   {
@@ -52,11 +52,22 @@ const images: Image[] = [
 
 const Loja = () => {
   const [value, setValue] = useState(1)
+  const [items, setItems] = useState([])
 
   const [mainImage, setMainImage] = useState(images[0])
   const handleThumbnailClick = (image: Image) => {
     setMainImage(image)
   }
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      const response = await fetch('/api/items')
+      const data = await response.json()
+      setItems(data)
+    }
+
+    fetchItems()
+  }, [])
 
   // Funções de quantidade dos produtos
   const increment = () => setValue((prevValue) => prevValue + 1)
@@ -87,7 +98,9 @@ const Loja = () => {
           </ThumbnailsContainer>
         </ProductImages>
         <ProductDetails>
-          <ProductName>Mochila Franzmann</ProductName>
+          {items.map((item: any) => (
+            <ProductName>{item.name}</ProductName>
+          ))}
           <div>
             <Price>R$ 399,90</Price>
             <span>

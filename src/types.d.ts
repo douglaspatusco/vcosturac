@@ -1,22 +1,19 @@
-<<<<<<< HEAD
-declare
-Product = {
-  id: number,
-  thumb: string,
-  name: string,
-  description: string,
-=======
-declare interface image {
+declare interface Image {
+  title: string
   url: string
 }
 
 declare type Product = {
-  id: number,
-  thumb: string,
-  name: string,
-  price: string,
-  description: string,
-  details: string,
-  images:
->>>>>>> main
+  id: number
+  name: string
+  price: number
+  description: string
+  details: string
+  medias: {
+    thumbnail: string
+    floral?: Image[]
+    listrado?: Image[]
+    geometrico?: Image[]
+    semEstampa?: Image[]
+  }
 }
