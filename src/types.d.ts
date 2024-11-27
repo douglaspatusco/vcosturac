@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 declare Product = {
   id: number,
@@ -24,4 +25,18 @@ declare type Product = {
     semEstampa?: Image[]
   }
 >>>>>>> Stashed changes
+=======
+declare interface image {
+  url: string
+}
+
+declare type Product = {
+  id: number,
+  thumb: string,
+  name: string,
+  price: string,
+  description: string,
+  details: string,
+  images:
+>>>>>>> main
 }

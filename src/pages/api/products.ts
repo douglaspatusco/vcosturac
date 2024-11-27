@@ -5,7 +5,7 @@ type Product = {
   id: number
   thumb: string
   name: string
-  preco: number
+  price: number
   description: string
 };
 =======
@@ -16,11 +16,15 @@ const products: Product[] = [
   {
     id: 1,
     name: 'Mochila',
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     preco: 200.00,
 =======
     price: 200.0,
 >>>>>>> Stashed changes
+=======
+    price: 200.00,
+>>>>>>> main
     description: 'Mochila com bolsos muito confortável.',
     details:
       'Capacidade: 50 litros.<br /> Material: Tecido impermeável.<br /> Conforto: Alças acolchoadas e ajustáveis, interior acolchoado.<br /> Organização: Múltiplos compartimentos internos e externos. Durabilidade: Confeccionada para resistir a condições extremas.',
@@ -88,11 +92,15 @@ const products: Product[] = [
   {
     id: 2,
     name: 'Pochete',
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     preco: 50.00,
 =======
     price: 50.0,
 >>>>>>> Stashed changes
+=======
+    price: 50.00,
+>>>>>>> main
     description: 'Pochete estilosa para todos os lugares.',
     details:
       'Capacidade: 50 litros.<br /> Material: Tecido impermeável.<br /> Conforto: Alças acolchoadas e ajustáveis, interior acolchoado.<br /> Organização: Múltiplos compartimentos internos e externos. Durabilidade: Confeccionada para resistir a condições extremas.',
@@ -132,11 +140,15 @@ const products: Product[] = [
   {
     id: 3,
     name: 'Bolsa',
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     preco: 150.00,
 =======
     price: 150.0,
 >>>>>>> Stashed changes
+=======
+    price: 150.00,
+>>>>>>> main
     description: 'Bolsa feita para eventos de gala.',
     details:
       'Capacidade: 50 litros.<br /> Material: Tecido impermeável.<br /> Conforto: Alças acolchoadas e ajustáveis, interior acolchoado.<br /> Organização: Múltiplos compartimentos internos e externos. Durabilidade: Confeccionada para resistir a condições extremas.',
