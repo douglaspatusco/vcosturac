@@ -103,9 +103,7 @@ const Loja = () => {
           ))}
           <div>
             <Price>R$ 399,90</Price>
-            <span>
-              <b>2x</b> de <b>R$ 199,95</b> sem juros
-            </span>
+            <span><b>2x</b> de <b>R$ 199,95</b> sem juros</span>
           </div>
           <form action="/comprar/">
             <Prints>
@@ -114,11 +112,7 @@ const Loja = () => {
                 <img title="Floral" alt="Floral" src={floral} />
                 <img title="Listrado" alt="Listrado" src={listrado} />
                 <img title="Geométrico" alt="Geométrico" src={geometrico} />
-                <img
-                  title="Cor sem estampa"
-                  alt="Cor sem estampa"
-                  src={corSemEstampa}
-                />
+                <img title="Cor sem estampa" alt="Cor sem estampa" src={corSemEstampa}  />
               </div>
             </Prints>
             <ContainerBuy>

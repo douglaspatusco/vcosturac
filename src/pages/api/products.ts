@@ -140,4 +140,5 @@ const products: Product[] = [
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   // Retorna a lista de produtos com status 200
   res.status(200).json(products)
+  res.status(200).json(products)
 }
