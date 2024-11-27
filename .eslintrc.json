@@ -1,7 +1,4 @@
 {
-<<<<<<< Updated upstream
-  "extends": ["next/core-web-vitals", "next/typescript"]
-=======
   "env": {
     "browser": true,
     "es2021": true
@@ -21,5 +18,4 @@
   "rules": {
     "prettier/prettier": "error"
   }
->>>>>>> Stashed changes
 }
