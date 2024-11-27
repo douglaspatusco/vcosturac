@@ -6,7 +6,7 @@ export const HeaderContainer = styled.header<{ pageIsScrolled: boolean }>`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: ${(props) => (props.pageIsScrolled ? '50px' : '100px')};
+  height: ${(props) => (props.pageIsScrolled ? '80px' : '100px')};
   padding: 1em;
   z-index: 2;
   box-shadow: 0px 3px 10px 0px rgba(88, 88, 88, 0.28);
