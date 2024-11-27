@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 
 export const colors = {
   creme: '#f7f9ec',
@@ -9,12 +9,10 @@ export const colors = {
   marrom: '#b57d64',
   azul: '#bdc5de',
   cinza: '#f9f9f9',
-  preto: '#000000'
+  preto: '#000000',
 }
 
-export const breakpoints = {
-
-}
+export const breakpoints = {}
 
 const GlobalStyle = createGlobalStyle`
   html,

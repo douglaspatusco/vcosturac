@@ -1,31 +1,32 @@
-import { colors } from "@/styles/GlobalStyles";
-import styled from "styled-components";
+import { colors } from '@/styles/GlobalStyles'
+import styled from 'styled-components'
 
-export const HeaderContainer = styled.section`
+export const HeaderContainer = styled.header<{ pageIsScrolled: boolean }>`
+  position: fixed;
   display: flex;
   justify-content: center;
-  padding: 1em;
   width: 100%;
-  position: fixed;
+  height: ${(props) => (props.pageIsScrolled ? '80px' : '100px')};
+  padding: 1em;
   z-index: 2;
   box-shadow: 0px 3px 10px 0px rgba(88, 88, 88, 0.28);
-
+  transition: height 0.1s ease;
   background-color: ${colors.mostarda};
-  `
+`
 
 export const Content = styled.div`
-display: flex;
-justify-content: space-around;
-align-items: center;
-width: 100%;
-max-width: 1440px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  max-width: 1440px;
 `
 
 export const Menu = styled.nav`
   display: flex;
   flex-direction: row;
 
-  height: auto ;
+  height: auto;
   padding: 1em;
 
   ul {
@@ -45,7 +46,7 @@ export const LogoContainer = styled.div`
   height: 4em;
   width: 4em;
 
-  background-image: url("https://placehold.co/64x64") ;
+  background-image: url('https://placehold.co/64x64');
 `
 
 export const Carrinho = styled.div`
@@ -74,13 +75,12 @@ export const Carrinho = styled.div`
     right: 9px;
     top: 8px;
     padding: 0 1px;
-    background: #914c36;
+    background: ${colors.salmaoEscuro};
   }
 
   &:hover {
     box-shadow: 0px 0px 10px 10px rgb(249 249 249 / 25%);
-        transition: 0.3s ease;
-        transform: scale(1.05);
-
+    transition: 0.3s ease;
+    transform: scale(1.05);
   }
 `
