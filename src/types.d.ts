@@ -6,10 +6,10 @@ declare interface Image {
 declare type Product = {
   id: number
   name: string
-  price: number
-  description: string
-  details: string
-  medias: {
+  price?: number
+  description?: string
+  details?: string
+  medias?: {
     thumbnail: string
     floral?: Image[]
     listrado?: Image[]
