@@ -3,7 +3,8 @@ import { NextApiRequest, NextApiResponse } from 'next'
 const products: Product[] = [
   {
     id: 1,
-    name: 'Mochila',
+    category: 'mochila',
+    name: 'Mochila Escolar',
     price: 200.0,
     description: 'Mochila com bolsos muito confortável.',
     details:
@@ -71,7 +72,8 @@ const products: Product[] = [
   },
   {
     id: 2,
-    name: 'Pochete',
+    category: 'pochete',
+    name: 'Pochete de Carnaval',
     price: 50.0,
     description: 'Pochete estilosa para todos os lugares.',
     details:
@@ -111,7 +113,8 @@ const products: Product[] = [
   },
   {
     id: 3,
-    name: 'Bolsa',
+    name: 'Bolsa Rosa',
+    category: 'bolsa',
     price: 150.0,
     description: 'Bolsa feita para eventos de gala.',
     details:
