@@ -1,25 +1,22 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-// Async thunk para buscar os produtos
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
-  const response = await fetch('http://localhost:3000/api/products');
-  return response.json();
-});
+export const fetchProducts = createAsyncThunk(
+  'products/fetchProducts',
+  async () => {
+    const response = await fetch('http://localhost:3000/api/products')
 
-type ProductTest = {
-  id: number;
-  name: string;
-};
+    return response.json()
+})
 
 type ProductsTestState = {
-  items: ProductTest[];
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
-};
+  items: Product[]
+  status: 'idle' | 'loading' | 'succeeded' | 'failed'
+}
 
 const initialState: ProductsTestState = {
   items: [],
   status: 'idle',
-};
+}
 
 export const productsSlice = createSlice({
   name: 'products',
@@ -28,16 +25,16 @@ export const productsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
-        state.status = 'loading';
+        state.status = 'loading'
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.items = action.payload;
+        state.status = 'succeeded'
+        state.items = action.payload
       })
       .addCase(fetchProducts.rejected, (state) => {
-        state.status = 'failed';
-      });
+        state.status = 'failed'
+      })
   },
-});
+})
 
-export const productsReducer = productsSlice.reducer;
+export const productsReducer = productsSlice.reducer
