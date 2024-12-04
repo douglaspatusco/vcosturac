@@ -53,8 +53,8 @@ const images: Image[] = [
 const Loja = () => {
   const [value, setValue] = useState(1)
   const [items, setItems] = useState([])
-
   const [mainImage, setMainImage] = useState(images[0])
+
   const handleThumbnailClick = (image: Image) => {
     setMainImage(image)
   }
@@ -65,15 +65,11 @@ const Loja = () => {
       const data = await response.json()
       setItems(data)
     }
-
     fetchItems()
   }, [])
 
-  // Funções de quantidade dos produtos
   const increment = () => setValue((prevValue) => prevValue + 1)
-
-  const decrement = () =>
-    setValue((prevValue) => (prevValue > 1 ? prevValue - 1 : prevValue))
+  const decrement = () => setValue((prevValue) => (prevValue > 1 ? prevValue - 1 : prevValue))
 
   return (
     <ContainerStore>
