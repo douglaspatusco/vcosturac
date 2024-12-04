@@ -9,7 +9,7 @@ export const Categories = styled.div`
   }
 
   li {
-    margin: 4em 0 4em 0;
+    margin: 4em 0;
     list-style: none;
     font-size: 1.5em;
   }
@@ -27,11 +27,17 @@ export const Card = styled(Link)`
   background-color: ${colors.creme};
 
   &:hover {
-    background-color: aqua;
+    transition: 0.3s ease;
+    transform: scale(1.05);
   }
 
   img {
     width: 200px;
     mix-blend-mode: darken;
+
+    &:hover {
+      transition: 0.3s ease;
+      transform: scale(1.2);
+    }
   }
 `
