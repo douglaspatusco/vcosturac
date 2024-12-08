@@ -8,12 +8,12 @@ export const fetchProducts = createAsyncThunk(
     return response.json()
 })
 
-type ProductsTestState = {
+type ProductsState = {
   items: Product[]
   status: 'idle' | 'loading' | 'succeeded' | 'failed'
 }
 
-const initialState: ProductsTestState = {
+const initialState: ProductsState = {
   items: [],
   status: 'idle',
 }

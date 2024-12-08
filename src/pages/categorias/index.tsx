@@ -11,6 +11,8 @@ const Categorias = () => {
   const dispatch = useDispatch();
   const { items, status } = useSelector((state: RootState) => state.products);
 
+  const categories = Array.from(new Set(items.map((product) => product.category)));
+
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
@@ -21,11 +23,15 @@ const Categorias = () => {
   return (
     <Categories>
       <ul>
-        {items.map((product) => (
-          <li key={product.id}>
-            <Card href={'categorias/'.concat(product.category.concat('s'))}>
-              <img src={product.medias?.thumbnail} alt={product.category} title={getFirstLetter(product.category.concat('s'))} />
-              {getFirstLetter(product.category.concat('s'))}
+        {categories.map((category) => (
+          <li key={category}>
+            <Card href={`categorias/${category}`}>
+              <img
+                src={items.find((item) => item.category === category)?.medias?.thumbnail || ""}
+                alt={category}
+                title={getFirstLetter(`${category}s`)}
+              />
+              {getFirstLetter(category)}
             </Card>
           </li>
         ))}
