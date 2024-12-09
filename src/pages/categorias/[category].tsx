@@ -1,4 +1,6 @@
+import { getFirstLetter } from '@/services/utility'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 interface Props {
@@ -14,16 +16,21 @@ const CategoryPage = ({ produtos, categoria }: Props) => {
   }
 
   return (
-    <div>
-      <h1>Produtos da categoria: {categoria}</h1>
-      <ul>
-        {produtos.map((produto) => (
-          <li key={produto.id}>
-            {produto.name} - R$ {produto.price}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <Head>
+        <title>{`${getFirstLetter(categoria as string)} | Vânia Costura Criativa`}</title>
+      </Head>
+      <div>
+        <h1>Produtos da categoria: {getFirstLetter(categoria)}</h1>
+        <ul>
+          {produtos.map((produto) => (
+            <li key={produto.id}>
+              {produto.name} - R$ {produto.price}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   )
 }
 

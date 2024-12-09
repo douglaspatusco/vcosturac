@@ -1,22 +1,26 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-
-export const fetchProducts = createAsyncThunk(
-  'products/fetchProducts',
-  async () => {
-    const response = await fetch('http://localhost:3000/api/products')
-
-    return response.json()
-})
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 
 type ProductsState = {
   items: Product[]
-  status: 'idle' | 'loading' | 'succeeded' | 'failed'
+  loading: boolean
+  error: string | null
 }
 
 const initialState: ProductsState = {
   items: [],
-  status: 'idle',
+  loading: false,
+  error: null
 }
+
+export const fetchProducts = createAsyncThunk(
+  'products/fetchProducts',
+  async () => {
+    const response = await fetch('/api/products')
+    return (
+      await response.json()
+    ) as Product[]
+  }
+)
 
 export const productsSlice = createSlice({
   name: 'products',
@@ -25,14 +29,16 @@ export const productsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
-        state.status = 'loading'
+        state.loading = true
+        state.error = null
       })
-      .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.status = 'succeeded'
+      .addCase(fetchProducts.fulfilled, (state, action: PayloadAction<Product[]>) => {
+        state.loading = false
         state.items = action.payload
       })
-      .addCase(fetchProducts.rejected, (state) => {
-        state.status = 'failed'
+      .addCase(fetchProducts.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error.message || 'Erro desconhecido'
       })
   },
 })

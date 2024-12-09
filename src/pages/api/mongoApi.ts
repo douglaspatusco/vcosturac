@@ -30,3 +30,5 @@ export default async function handler(
     res.status(500).json({ message: 'Erro ao conectar com o MongoDB', error })
   }
 }
+
+// https://cloud.mongodb.com/v2/67448447e3343c1cbc8abebf#/metrics/replicaSet/674485a2894949025fb3e95f/explorer/vania_costura_criativa/products/find
