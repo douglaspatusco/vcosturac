@@ -4,7 +4,7 @@ declare interface Image {
 }
 
 declare type Product = {
-  id: number
+  id: string
   category: string
   name: string
   price?: number

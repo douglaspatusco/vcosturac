@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 const products: Product[] = [
   {
-    id: 1,
+    id: '1',
     category: 'mochilas',
     name: 'Mochila Escolar',
     price: 200.0,
@@ -71,7 +71,7 @@ const products: Product[] = [
     },
   },
   {
-    id: 4,
+    id: '4',
     category: 'mochilas',
     name: 'Mochila de Couro',
     price: 200.0,
@@ -140,7 +140,7 @@ const products: Product[] = [
     },
   },
   {
-    id: 2,
+    id: '2',
     category: 'pochetes',
     name: 'Pochete de Carnaval',
     price: 50.0,
@@ -181,7 +181,7 @@ const products: Product[] = [
     },
   },
   {
-    id: 3,
+    id: '3',
     name: 'Bolsa Rosa',
     category: 'bolsas',
     price: 150.0,
