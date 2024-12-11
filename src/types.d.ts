@@ -1,6 +1,7 @@
-declare interface Image {
+declare interface PrintsImages {
   title: string
-  url: string
+  alt: string
+  src: string
 }
 
 declare type Product = {
@@ -11,10 +12,22 @@ declare type Product = {
   description?: string
   details?: string
   medias?: {
-    thumbnail: string
-    floral?: Image[]
-    listrado?: Image[]
-    geometrico?: Image[]
-    semEstampa?: Image[]
+    mainThumbnail: string
+    floral?: {
+      thumbnail: string
+      pics: PrintsImages[] | undefined
+    }
+    listrado?: {
+      thumbnail: string
+      pics: PrintsImages[] | undefined
+    }
+    geometrico?: {
+      thumbnail: string
+      pics: PrintsImages[] | undefined
+    }
+    semEstampa?: {
+      thumbnail: string
+      pics: PrintsImages[] | undefined
+    }
   }
 }

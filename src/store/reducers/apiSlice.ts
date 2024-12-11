@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 
-type ProductsState = {
-  items: Product[]
+type ProductsApiState = {
+  products: Product[]
   loading: boolean
   error: string | null
 }
 
-const initialState: ProductsState = {
-  items: [],
+const initialState: ProductsApiState = {
+  products: [],
   loading: false,
   error: null
 }
@@ -16,6 +16,11 @@ export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async () => {
     const response = await fetch('/api/products')
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch products');
+    }
+
     return (
       await response.json()
     ) as Product[]
@@ -34,11 +39,11 @@ export const productsSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action: PayloadAction<Product[]>) => {
         state.loading = false
-        state.items = action.payload
+        state.products = action.payload
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false
-        state.error = action.error.message || 'Erro desconhecido'
+        state.error = action.error.message || 'Failed to fetch products'
       })
   },
 })
