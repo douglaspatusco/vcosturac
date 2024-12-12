@@ -4,6 +4,8 @@ import { RootState, AppDispatch } from '../../store'
 import { useEffect } from 'react'
 import { fetchProducts } from '../../store/reducers/apiSlice'
 import Head from 'next/head'
+import { ItemLink, ContainerProducts, ListItem, ProductsList, Thumb } from './styles'
+import { formattedPrice } from '@/services/utility'
 
 const CategoriaPage = () => {
   const router = useRouter()
@@ -29,16 +31,22 @@ const CategoriaPage = () => {
     <Head>
       <title>Categorias | Vânia Costura Criativa</title>
     </Head>
-      <div>
+      <ContainerProducts>
         <h1>Categoria: {categoria}</h1>
-        <ul>
+        <ProductsList>
           {filteredProducts.map((product) => (
-            <li key={product.id} onClick={() => router.push(`/loja/${categoria}/${product.id}`)}>
-              {product.name}
-            </li>
+            <ListItem key={product.id}>
+              <ItemLink href={`/loja/${categoria}/${product.id}`}>
+                <Thumb src={product.medias?.thumbnail} alt={product.name} width={100} height={100} />
+                <div>
+                  <h3>{product.name}</h3>
+                  <p>{formattedPrice(product.price)}</p>
+                </div>
+              </ItemLink>
+            </ListItem>
           ))}
-        </ul>
-      </div>
+        </ProductsList>
+      </ContainerProducts>
     </>
   )
 }

@@ -1,3 +1,4 @@
+import { Product } from '@/types'
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 
 type ProductsApiState = {

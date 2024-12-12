@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { productsReducer } from './reducers/apiSlice'
+import { printsThumbnailsReducer } from './reducers/thumbnailsSlice';
 
 export const store = configureStore({
   reducer: {
     products: productsReducer,
+    thumbnails: printsThumbnailsReducer,
   },
 });
 

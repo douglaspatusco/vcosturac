@@ -1,7 +1,15 @@
+import { StaticImport } from "next/dist/shared/lib/get-img-props"
+
 declare interface PrintsImages {
-  title: string
   alt: string
   src: string
+}
+
+declare interface PrintsProducts {
+  floral?: PrintsImages[]
+  listrado?: PrintsImages[]
+  geometrico?: PrintsImages[]
+  semEstampa?: PrintsImages[]
 }
 
 declare type Product = {
@@ -9,25 +17,12 @@ declare type Product = {
   category: string
   name: string
   price?: number
+  division: string
+  installment: number
   description?: string
   details?: string
   medias?: {
-    mainThumbnail: string
-    floral?: {
-      thumbnail: string
-      pics: PrintsImages[] | undefined
-    }
-    listrado?: {
-      thumbnail: string
-      pics: PrintsImages[] | undefined
-    }
-    geometrico?: {
-      thumbnail: string
-      pics: PrintsImages[] | undefined
-    }
-    semEstampa?: {
-      thumbnail: string
-      pics: PrintsImages[] | undefined
-    }
+    thumbnail: string | StaticImport
+    prints: PrintsProducts
   }
 }

@@ -4,3 +4,9 @@ export const getFirstLetter = (word?: string): string => {
   }
   return word.charAt(0).toUpperCase() + word.slice(1);
 };
+
+export const formattedPrice = (price) => {
+  return (
+    `R$ ${price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+  )
+}

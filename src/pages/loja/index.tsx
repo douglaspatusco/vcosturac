@@ -38,7 +38,7 @@ const Loja = () => {
             <li key={category}>
               <Card href={`/loja/${category}`}>
                 <Imagem
-                  src={products.find((item) => item.category === category)?.medias?.mainThumbnail || ""}
+                  src={products.find((item) => item.category === category)?.medias?.thumbnail || ""}
                   alt={category}
                   title={getFirstLetter(`${category}s`)}
                 />

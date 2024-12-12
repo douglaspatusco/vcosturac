@@ -179,6 +179,8 @@ export const BuyButton = styled.button`
   }
 `
 
-export const Description = styled.div``
-
-// https://cdn.awsli.com.br/2500x2500/1275/1275983/produto/50157355/15e033c992.jpg
+export const Description = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+`
