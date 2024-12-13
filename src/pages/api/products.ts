@@ -164,7 +164,7 @@ const products: Product[] = [
             src: 'https://images.tcdn.com.br/img/img_prod/876307/mochila_farm_xodo_floral_encanto_78315304_caramelo_floral_37269_1_5477ef8af6fdde64f68e50404e083249.jpg',
           },
           {
-            alt: '',
+            alt: 'Mochila Floral Natureza',
             src: 'https://lebiscuit.vtexassets.com/arquivos/ids/3401689/5132782_00000_01.jpg',
           },
           {
@@ -174,16 +174,20 @@ const products: Product[] = [
         ],
       listrado: [
           {
-            alt: 'Mochila Listrada com Estrelas do Mar',
-            src: 'https://m.media-amazon.com/images/I/61hF-5A2zWL._AC_SX522_.jpg',
+            alt: 'Mochila Listrada laranja',
+            src: 'https://down-br.img.susercontent.com/file/732399a1d2b913c0aa990b8b0260010b',
           },
           {
-            alt: 'Mochila Cross Style',
-            src: 'https://a-static.mlcdn.com.br/800x560/mochila-cross-style-listras-estampa-juvenil-escolar-casual-clio-style/olistplus/opmj4liem8immpgq/48f382387562fda46123d96e609f3e77.jpeg',
+            alt: 'Mochila Listrada Azul',
+            src: 'https://a-static.mlcdn.com.br/1500x1500/mochila-feminina-viagem-couro-impermeavel-listrada-azul-porta-niquel-shamrock/velkrosales/mochfemlist01blue/13b451f8ea53d89e7b7df1d31be86292.jpeg',
           },
           {
-            alt: 'Mochila Feminina Escolar',
-            src: 'https://io.convertiez.com.br/m/feiradamadrugada/shop/products/images/418577036/large/mochila-feminina-escolar-juvenil-estampa-floral-e-listrada_163163.JPG',
+            alt: 'Mochila Listrada Rosa',
+            src: 'https://a-static.mlcdn.com.br/800x560/kit-mochila-feminina-faculdade-couro-listrada-vermelha-porta-niquel-shamrock/velkrosales/mochfemlist01red/26360c9fa63186065edbdd08bf3dac70.jpeg',
+          },
+          {
+            alt: 'Mochila Listrada Preta',
+            src: 'https://down-br.img.susercontent.com/file/8a4f95efead61f8b23c12fb0252bfdcf',
           }
         ],
       geometrico: [

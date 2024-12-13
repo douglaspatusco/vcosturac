@@ -2,7 +2,7 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props"
 
 declare interface PrintsImages {
   alt: string
-  src: string
+  src: string | StaticImport
 }
 
 declare interface PrintsProducts {

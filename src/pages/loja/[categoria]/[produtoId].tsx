@@ -22,24 +22,8 @@ import {
   ThumbnailsContainer,
   ZoomContainer,
   ZoomedImage } from './styles';
-import { PrintsImages, PrintsProducts } from '@/types';
+import { PrintsImages } from '@/types';
 import { formattedPrice } from '@/services/utility';
-
-const images: PrintsImages[] = [
-  {
-    alt: 'Imagem 1',
-    src: 'https://images.tcdn.com.br/img/img_prod/886231/mochila_masculina_18_schock_preta_5907_1_9f65b96a1a223c80fe5bd40562cad95c.jpg'
-  },
-  {
-    alt: 'Imagem 2',
-    src: 'https://cdn.dooca.store/1780/products/mochila-feminina-rebecca-bonbon-clio-rb24042-rosa-3_1600x1600+fill_ffffff.jpeg'
-  },
-  {
-    alt: 'Imagem 3',
-    src: 'https://images.tcdn.com.br/img/img_prod/886231/mochila_masculina_18_matelasse_azul_5891_1_5338f7fda7f60f12a50fd28032a85736.jpg'
-  },
-  // ... mais imagens
-]
 
 const ProdutoPage = () => {
   const router = useRouter();
@@ -47,16 +31,14 @@ const ProdutoPage = () => {
 
   const dispatch: AppDispatch = useDispatch();
   const { products, loading } = useSelector((state: RootState) => state.products);
-  const [amountValue, setAmountValue] = useState(1)
-  const [mainImage, setMainImage] = useState(images[0])
 
+  const [amountValue, setAmountValue] = useState(1)
+  const [mainImage, setMainImage] = useState<PrintsImages | null>(null);
   const [selectedPrint, setSelectedPrint] = useState<string>('floral'); // Inicializa com 'floral' ou outra estampa por padrão
 
   const handlePrintClick = (printType: string) => {
     setSelectedPrint(printType);  // Altera o estado da estampa selecionada
   };
-
-
 
   useEffect(() => {
     if (products.length === 0) {
@@ -64,12 +46,20 @@ const ProdutoPage = () => {
     }
   }, [dispatch, products]);
 
+  // Obtém o produto específico com base no produtoId
   const product = products.find((product) => product.id === produtoId);
-  const printImages = product?.medias?.prints[selectedPrint]; // Filtra as imagens da estampa selecionada
-  console.log(product)
 
-  if (loading) return <p>Carregando...</p>;
-  if (!product) return <p>Produto não encontrado.</p>;
+  useEffect(() => {
+    if (product?.medias?.thumbnail) {
+      setMainImage({ src: product.medias.thumbnail, alt: product.name });
+    }
+  }, [product]);
+
+  const printImages = product?.medias?.prints[selectedPrint] || []; // Filtra as imagens da estampa selecionada
+
+  // Obter as estampas disponíveis dinamicamente
+  const availablePrints = Object.entries(product?.medias?.prints || {})
+    .filter(([_, images]) => images && images.length > 0);
 
   const incrementValue = () => setAmountValue((prevValue) => prevValue + 1)
   const decrementValue = () => setAmountValue((prevValue) => (prevValue > 1 ? prevValue - 1 : prevValue))
@@ -78,16 +68,25 @@ const ProdutoPage = () => {
     setMainImage(image)
   }
 
+  if (loading) return <p>Carregando...</p>;
+  if (!product) return <p>Produto não encontrado.</p>;
+
   return (
     <>
       <ContainerStore>
         <Head>
-          <title>{`${product.name} | Vânia Costura Criativa`}</title>
+          <title>
+            {`${product.name} | Vânia Costura Criativa`}
+          </title>
         </Head>
       <ProductContainer>
         <ProductImages>
           <ZoomContainer>
-            <ZoomedImage src={mainImage.src} alt={mainImage.alt} />
+            {mainImage ? (
+              <ZoomedImage src={mainImage.src} alt={mainImage.alt} />
+            ) : (
+              <p>Carregando imagem...</p>
+            )}
           </ZoomContainer>
           <ThumbnailsContainer>
             {printImages.map((image) => (
@@ -112,10 +111,15 @@ const ProdutoPage = () => {
             <Prints>
               <p>Estampas: </p>
               <div>
-                <img onClick={() => handlePrintClick('floral')} title="Floral" alt="Floral" src={'https://cdn.awsli.com.br/2500x2500/2220/2220511/produto/176766434/tecidos-tricoline-tecido-tricoline-digital-flores-ref-9017-cor-304--p-1690983761-viv6bctvh3.png'} />
-                <img onClick={() => handlePrintClick('listrado')} title="Listrado" alt="Listrado" src={'https://images.tcdn.com.br/img/img_prod/1057913/estampa_listrado_texturizado_577_1_97a65b787864bc1cc60c02262baee29c.jpg'} />
-                <img onClick={() => handlePrintClick('geometrico')} title="Geométrico" alt="Geométrico" src={'https://img.freepik.com/vetores-premium/estampa-geometrica_598830-6.jpg'} />
-                <img onClick={() => handlePrintClick('semEstampa')} title="Cor sem estampa" alt="Cor sem estampa" src={'https://w7.pngwing.com/pngs/349/570/png-transparent-colorful-rainbow-gradient-colorful-rainbow-gradient-colorful-rainbow-circle-gradual-change.png'}  />
+                {availablePrints.map(([key, _]) => (
+                  <img
+                    key={key}
+                    onClick={() => setSelectedPrint(key)}
+                    title={key.charAt(0).toUpperCase() + key.slice(1)} // Capitaliza o nome
+                    alt={key}
+                    src={`https://raw.githubusercontent.com/eyelexx/vcosturac/cee1a9fffd41dc999f2bb2fb733e80b78498c9da/src/public/images/facebook-logo.svg`} // Use URLs dinâmicas ou estáticas conforme necessário
+                  />
+                ))}
               </div>
             </Prints>
             <ContainerBuy>
