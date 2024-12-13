@@ -6,10 +6,10 @@ declare interface PrintsImages {
 }
 
 declare interface PrintsProducts {
-  floral?: PrintsImages[]
-  listrado?: PrintsImages[]
-  geometrico?: PrintsImages[]
-  semEstampa?: PrintsImages[]
+  floral?: PrintsImages[] | null
+  listrado?: PrintsImages[] | null
+  geometrico?: PrintsImages[] | null
+  semEstampa?: PrintsImages[] | null
 }
 
 declare type Product = {

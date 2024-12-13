@@ -11,8 +11,8 @@ const initialState: ProductState = {
   thumbnails: [],
 };
 
-const printsThumbnailsSlice = createSlice({
-  name: 'product',
+const thumbnailsSlice = createSlice({
+  name: 'thumbnail',
   initialState,
   reducers: {
     setSelectedPrint(state, action: PayloadAction<keyof PrintsProducts>) {
@@ -24,6 +24,5 @@ const printsThumbnailsSlice = createSlice({
   },
 });
 
-export const { setSelectedPrint, setThumbnails } = printsThumbnailsSlice.actions;
-
-export const printsThumbnailsReducer =  printsThumbnailsSlice.reducer
+export const { setSelectedPrint, setThumbnails } = thumbnailsSlice.actions;
+export const thumbnailsReducer =  thumbnailsSlice.reducer
