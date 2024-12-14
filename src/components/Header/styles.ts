@@ -42,11 +42,15 @@ export const Menu = styled.nav`
   }
 `
 
-export const LogoContainer = styled.div`
-  height: 4em;
-  width: 4em;
+export const Logotipo = styled.img`
+  height: 5em;
+  width: 5em;
 
-  background-image: url('https://placehold.co/64x64');
+  border-radius: 50%;
+
+  mix-blend-mode: multiply;
+
+
 `
 
 export const Carrinho = styled.div`

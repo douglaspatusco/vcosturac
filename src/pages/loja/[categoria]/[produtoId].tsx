@@ -6,6 +6,9 @@ import Head from 'next/head';
 import { RootState, AppDispatch } from '../../../store';
 import { fetchProducts } from '@/store/reducers/apiSlice';
 
+import { PrintsImages } from '@/types';
+import { formattedPrice, getFirstLetter } from '@/services/utility';
+
 import {
   Amount,
   BuyButton,
@@ -22,8 +25,6 @@ import {
   ThumbnailsContainer,
   ZoomContainer,
   ZoomedImage } from './styles';
-import { PrintsImages } from '@/types';
-import { formattedPrice } from '@/services/utility';
 
 const ProdutoPage = () => {
   const router = useRouter();
@@ -34,11 +35,7 @@ const ProdutoPage = () => {
 
   const [amountValue, setAmountValue] = useState(1)
   const [mainImage, setMainImage] = useState<PrintsImages | null>(null);
-  const [selectedPrint, setSelectedPrint] = useState<string>('floral'); // Inicializa com 'floral' ou outra estampa por padrão
-
-  const handlePrintClick = (printType: string) => {
-    setSelectedPrint(printType);  // Altera o estado da estampa selecionada
-  };
+  const [selectedPrint, setSelectedPrint] = useState<string>(''); // Inicializa com 'floral' ou outra estampa por padrão
 
   useEffect(() => {
     if (products.length === 0) {
@@ -83,7 +80,7 @@ const ProdutoPage = () => {
         <ProductImages>
           <ZoomContainer>
             {mainImage ? (
-              <ZoomedImage src={mainImage.src} alt={mainImage.alt} />
+              <ZoomedImage src={mainImage.src} alt={mainImage.alt} title={mainImage.alt} />
             ) : (
               <p>Carregando imagem...</p>
             )}
@@ -94,6 +91,7 @@ const ProdutoPage = () => {
                 key={image.src}
                 src={image.src}
                 alt={image.alt}
+                title={image.alt}
                 onClick={() => handleThumbnailClick(image)}
               />
             ))}
@@ -115,26 +113,25 @@ const ProdutoPage = () => {
                   <img
                     key={key}
                     onClick={() => setSelectedPrint(key)}
-                    title={key.charAt(0).toUpperCase() + key.slice(1)} // Capitaliza o nome
+                    title={getFirstLetter(key)} // Capitaliza o nome
                     alt={key}
-                    src={`https://raw.githubusercontent.com/eyelexx/vcosturac/cee1a9fffd41dc999f2bb2fb733e80b78498c9da/src/public/images/facebook-logo.svg`} // Use URLs dinâmicas ou estáticas conforme necessário
+                    src={`https://raw.githubusercontent.com/eyelexx/vcosturac/refs/heads/main/src/public/images/estampas/${key}.jpg`} // Use URLs dinâmicas ou estáticas conforme necessário
                   />
                 ))}
               </div>
             </Prints>
             <ContainerBuy>
               <Amount>
-                <span onClick={decrementValue}>-</span>
+                <span onClick={decrementValue} title='Remover um item'>-</span>
                 <input
                   type="number"
                   value={amountValue}
                   readOnly
                   onChange={(e) => setAmountValue(e.target.value)}
                 />
-                <span onClick={incrementValue}>+</span>
+                <span onClick={incrementValue} title='Adicionar um item'>+</span>
               </Amount>
-              <BuyButton type="submit">ADICIONAR AO CARRINHO</BuyButton>{' '}
-              {/*Na verdade será adicionado ao carrinho, então vai abrir uma modal com opções de continuar comprando ou finalizar a compra*/}
+              <BuyButton type="submit" title='Adicionar ao carrinho'>ADICIONAR AO CARRINHO</BuyButton>
             </ContainerBuy>
           </form>
           <Description>

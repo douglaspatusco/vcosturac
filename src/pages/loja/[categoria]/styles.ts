@@ -34,6 +34,10 @@ export const ProductImages = styled.div`
 `
 
 export const ZoomContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   position: relative;
   overflow: hidden;
   width: 40em;
@@ -41,20 +45,24 @@ export const ZoomContainer = styled.div`
 `
 
 export const ZoomedImage = styled.img`
-  width: 100%;
-  height: 100%;
   position: absolute;
+  height: inherit;
 `
 
 export const ThumbnailsContainer = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 1em;
+  width: 40em;
 `
 
 export const Thumbnail = styled.img`
   width: 5em;
   height: 5em;
   cursor: pointer;
+
+  mix-blend-mode: color;
 
   &:hover {
     box-shadow:

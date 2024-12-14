@@ -32,7 +32,7 @@ const products: Product[] = [
         listrado: [
           {
             alt: 'Mochila Listrada com Estrelas do Mar',
-            src: 'https://m.media-amazon.com/images/I/61hF-5A2zWL._AC_SX522_.jpg',
+            src: 'https://a-static.mlcdn.com.br/800x600/mochila-teen-clio-quadrada-listrada-modelo-mf8021-item-sortido-brigth/lojaslebiscuit/2147330402/eecc72828d79e335751b2e76c6ce5c50.jpeg',
           },
           {
             alt: 'Mochila Cross Style',
@@ -89,7 +89,7 @@ const products: Product[] = [
         listrado: [
           {
             alt: 'Mochila Listrada com Estrelas do Mar',
-            src: 'https://m.media-amazon.com/images/I/61hF-5A2zWL._AC_SX522_.jpg',
+            src: 'https://a-static.mlcdn.com.br/800x600/mochila-teen-clio-quadrada-listrada-modelo-mf8021-item-sortido-brigth/lojaslebiscuit/2147330402/eecc72828d79e335751b2e76c6ce5c50.jpeg',
           },
           {
             alt: 'Mochila Cross Style',
