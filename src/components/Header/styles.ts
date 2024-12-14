@@ -45,12 +45,7 @@ export const Menu = styled.nav`
 export const Logotipo = styled.img`
   height: 5em;
   width: 5em;
-
   border-radius: 50%;
-
-  mix-blend-mode: multiply;
-
-
 `
 
 export const Carrinho = styled.div`
