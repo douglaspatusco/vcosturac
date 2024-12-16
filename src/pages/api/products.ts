@@ -5,6 +5,7 @@ const products: Product[] = [
   {
     id: '1',
     category: 'mochilas',
+    slug: 'mochila-escolar',
     name: 'Mochila Escolar',
     price: 200.0,
     division: '2x',
@@ -77,6 +78,7 @@ const products: Product[] = [
   {
     id: '2',
     category: 'pochetes',
+    slug: 'pochete-de-carnaval',
     name: 'Pochete de Carnaval',
     price: 50.0,
     division: '2x',
@@ -121,6 +123,7 @@ const products: Product[] = [
     id: '3',
     name: 'Bolsa Rosa',
     category: 'bolsas',
+    slug: 'bolsa-rosa',
     price: 150.0,
     division: '2x',
     installment: 75.0,
@@ -149,6 +152,7 @@ const products: Product[] = [
   {
     id: '4',
     category: 'mochilas',
+    slug: 'mochila-de-couro',
     name: 'Mochila de Couro',
     price: 390.0,
     division: '2x',

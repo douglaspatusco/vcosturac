@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Head from 'next/head';
+import Breadcrumbs from '@/components/Breadcrumbs/Breadcrubs';
 
 import { RootState, AppDispatch } from '../../../store';
 import { fetchProducts } from '@/store/reducers/apiSlice';
@@ -28,10 +29,11 @@ import {
 
 const ProdutoPage = () => {
   const router = useRouter();
-  const { produtoId } = router.query;
+  const { produtoSlug } = router.query;
 
   const dispatch: AppDispatch = useDispatch();
   const { products, loading } = useSelector((state: RootState) => state.products);
+  const produto = products[produtoSlug as string];
 
   const [amountValue, setAmountValue] = useState(1)
   const [mainImage, setMainImage] = useState<PrintsImages | null>(null);
@@ -44,7 +46,7 @@ const ProdutoPage = () => {
   }, [dispatch, products]);
 
   // Obtém o produto específico com base no produtoId
-  const product = products.find((product) => product.id === produtoId);
+  const product = products.find((product) => product.slug === produtoSlug);
 
   useEffect(() => {
     if (product?.medias?.thumbnail) {
@@ -76,6 +78,7 @@ const ProdutoPage = () => {
             {`${product.name} | Vânia Costura Criativa`}
           </title>
         </Head>
+      <Breadcrumbs />
       <ProductContainer>
         <ProductImages>
           <ZoomContainer>

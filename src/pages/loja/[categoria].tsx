@@ -8,8 +8,7 @@ import { ItemLink, ContainerProducts, ListItem, ProductsList, Thumb } from './st
 import { formattedPrice } from '@/services/utility'
 
 const CategoriaPage = () => {
-  const router = useRouter()
-  const { categoria } = router.query
+  const { categoria } = useRouter().query
   const dispatch: AppDispatch = useDispatch()
 
   const { products, loading } = useSelector((state: RootState) => state.products)
@@ -35,8 +34,8 @@ const CategoriaPage = () => {
         <h1>Categoria: {categoria}</h1>
         <ProductsList>
           {filteredProducts.map((product) => (
-            <ListItem key={product.id}>
-              <ItemLink href={`/loja/${categoria}/${product.id}`}>
+            <ListItem key={product.slug}>
+              <ItemLink href={`/loja/${categoria}/${product.slug}`}>
                 <Thumb src={product.medias?.thumbnail} alt={product.name} width={100} height={100} />
                 <div>
                   <h3>{product.name}</h3>

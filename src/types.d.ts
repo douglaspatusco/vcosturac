@@ -14,6 +14,7 @@ declare interface PrintsProducts {
 
 declare type Product = {
   id: string
+  slug: string
   category: string
   name: string
   price?: number
