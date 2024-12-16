@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { BreadcrumbsNav } from './styles';
+import { Container, List } from './styles';
 import { getFirstLetter } from '@/services/utility';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
@@ -11,8 +11,14 @@ const Breadcrumbs = () => {
   const product = products.find((product) => product.slug === produtoSlug);
 
   return (
-    <nav>
-      <BreadcrumbsNav>
+    <Container>
+      <List>
+        <li>
+          <a href={`/loja`}>
+            Categorias
+          </a>
+        </li>
+        <p>&nbsp;&gt;&nbsp;</p>
         {categoria && (
           <li>
             <a href={`/loja/${categoria}`}>
@@ -30,8 +36,8 @@ const Breadcrumbs = () => {
             {product.name}
           </li>
         )}
-      </BreadcrumbsNav>
-    </nav>
+      </List>
+    </Container>
   );
 };
 
