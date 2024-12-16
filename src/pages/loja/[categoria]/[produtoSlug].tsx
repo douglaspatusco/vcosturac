@@ -33,11 +33,29 @@ const ProdutoPage = () => {
 
   const dispatch: AppDispatch = useDispatch();
   const { products, loading } = useSelector((state: RootState) => state.products);
-  const produto = products[produtoSlug as string];
 
   const [amountValue, setAmountValue] = useState(1)
   const [mainImage, setMainImage] = useState<PrintsImages | null>(null);
   const [selectedPrint, setSelectedPrint] = useState<string>(''); // Inicializa com 'floral' ou outra estampa por padrão
+
+  // Zoom na imagem principal
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [transformOrigin, setTransformOrigin] = useState("center center");
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100; // Percentual X
+    const y = ((e.clientY - rect.top) / rect.height) * 100; // Percentual Y
+    setTransformOrigin(`${x}% ${y}%`);
+  };
+
+  const handleMouseEnter = () => {
+    setIsZoomed(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsZoomed(false);
+  };
 
   useEffect(() => {
     if (products.length === 0) {
@@ -81,9 +99,9 @@ const ProdutoPage = () => {
       <Breadcrumbs />
       <ProductContainer>
         <ProductImages>
-          <ZoomContainer>
+          <ZoomContainer onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
             {mainImage ? (
-              <ZoomedImage src={mainImage.src} alt={mainImage.alt} title={mainImage.alt} />
+              <ZoomedImage src={mainImage.src} alt={mainImage.alt} title={mainImage.alt} isZoomed={isZoomed} transformOrigin={transformOrigin} />
             ) : (
               <p>Carregando imagem...</p>
             )}

@@ -38,16 +38,20 @@ export const ZoomContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  position: relative;
-  overflow: hidden;
   width: 40em;
   height: 40em;
+  position: relative;
+  overflow: hidden;
 `
 
-export const ZoomedImage = styled.img`
-  position: absolute;
-  height: inherit;
-`
+export const ZoomedImage = styled.img<{ isZoomed: boolean; transformOrigin: string }>`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.1s ease;
+  transform: ${({ isZoomed }) => (isZoomed ? "scale(2)" : "scale(1)")};
+  transform-origin: ${({ transformOrigin }) => transformOrigin};
+`;
 
 export const ThumbnailsContainer = styled.div`
   display: flex;
