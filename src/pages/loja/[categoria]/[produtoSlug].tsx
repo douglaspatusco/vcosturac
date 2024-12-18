@@ -7,7 +7,7 @@ import Breadcrumbs from '@/components/Breadcrumbs/Breadcrubs';
 import { RootState, AppDispatch } from '../../../store';
 import { fetchProducts } from '@/store/reducers/apiSlice';
 
-import { PrintsImages } from '@/types';
+import { PrintsImages, Product } from '@/types';
 import { formattedPrice, getFirstLetter } from '@/services/utility';
 
 import {
@@ -26,6 +26,7 @@ import {
   ThumbnailsContainer,
   ZoomContainer,
   ZoomedImage } from './styles';
+import { addItemToCart, toggleCart } from '@/store/reducers/cartSlice';
 
 const ProdutoPage = () => {
   const router = useRouter();
@@ -37,12 +38,14 @@ const ProdutoPage = () => {
   const [amountValue, setAmountValue] = useState(1)
   const [mainImage, setMainImage] = useState<PrintsImages | null>(null);
   const [selectedPrint, setSelectedPrint] = useState<string>(''); // Inicializa com 'floral' ou outra estampa por padrão
+  const getPrintImageUrl = (key: string) => `https://raw.githubusercontent.com/eyelexx/vcosturac/refs/heads/main/src/public/images/estampas/${key}.jpg`
 
   // Zoom na imagem principal
   const [isZoomed, setIsZoomed] = useState(false);
   const [transformOrigin, setTransformOrigin] = useState("center center");
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isZoomed) return
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100; // Percentual X
     const y = ((e.clientY - rect.top) / rect.height) * 100; // Percentual Y
@@ -58,14 +61,13 @@ const ProdutoPage = () => {
   };
 
   useEffect(() => {
-    if (products.length === 0) {
+    if (!loading && products.length === 0) {
       dispatch(fetchProducts());
     }
   }, [dispatch, products]);
 
   // Obtém o produto específico com base no produtoId
   const product = products.find((product) => product.slug === produtoSlug);
-
   useEffect(() => {
     if (product?.medias?.thumbnail) {
       setMainImage({ src: product.medias.thumbnail, alt: product.name });
@@ -83,6 +85,11 @@ const ProdutoPage = () => {
 
   const handleThumbnailClick = (image: PrintsImages) => {
     setMainImage(image)
+  }
+
+  const addToCart = (product: Product) => {
+    dispatch(toggleCart())
+    dispatch(addItemToCart(product))
   }
 
   if (loading) return <p>Carregando...</p>;
@@ -126,7 +133,6 @@ const ProdutoPage = () => {
               ou <b>{product.division}</b> de <b>{formattedPrice(product.installment)}</b> sem juros!
             </span>
           </div>
-          <form action="/comprar/">
             <Prints>
               <p>Estampas: </p>
               <div>
@@ -136,7 +142,7 @@ const ProdutoPage = () => {
                     onClick={() => setSelectedPrint(key)}
                     title={getFirstLetter(key)} // Capitaliza o nome
                     alt={key}
-                    src={`https://raw.githubusercontent.com/eyelexx/vcosturac/refs/heads/main/src/public/images/estampas/${key}.jpg`} // Use URLs dinâmicas ou estáticas conforme necessário
+                    src={getPrintImageUrl(key)} // Use URLs dinâmicas ou estáticas conforme necessário
                   />
                 ))}
               </div>
@@ -152,9 +158,14 @@ const ProdutoPage = () => {
                 />
                 <span onClick={incrementValue} title='Adicionar um item'>+</span>
               </Amount>
-              <BuyButton type="submit" title='Adicionar ao carrinho'>ADICIONAR AO CARRINHO</BuyButton>
+              <BuyButton
+                type="submit"
+                title='Adicionar ao carrinho'
+                onClick={() => addToCart(product)}
+              >
+                ADICIONAR AO CARRINHO
+              </BuyButton>
             </ContainerBuy>
-          </form>
           <Description>
             <h4>Descrição:</h4>
             <p>{product.description}</p>

@@ -4,6 +4,7 @@ import { Container, List } from './styles';
 import { getFirstLetter } from '@/services/utility';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
+import Link from 'next/link';
 
 const Breadcrumbs = () => {
   const { categoria, produtoSlug } = useRouter().query;
@@ -14,16 +15,16 @@ const Breadcrumbs = () => {
     <Container>
       <List>
         <li>
-          <a href={`/loja`}>
+          <Link href={`/loja`}>
             Categorias
-          </a>
+          </Link>
         </li>
         <p>&nbsp;&gt;&nbsp;</p>
         {categoria && (
           <li>
-            <a href={`/loja/${categoria}`}>
+            <Link href={`/loja/${categoria}`}>
               {getFirstLetter(categoria as string)}
-            </a>
+            </Link>
           </li>
         )}
         {categoria && produtoSlug && (
