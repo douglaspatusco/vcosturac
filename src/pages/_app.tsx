@@ -8,6 +8,7 @@ import { Content } from './styles'
 
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
+import Cart from '@/components/Cart'
 
 
 export default function MyApp({ Component, pageProps }: AppProps) {
@@ -19,6 +20,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </Content>
       <Footer />
+      <Cart />
     </Provider>
   )
 }

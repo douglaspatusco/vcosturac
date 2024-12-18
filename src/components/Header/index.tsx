@@ -1,6 +1,11 @@
 'use client'
 
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleCart } from "../../store/reducers/cartSlice"
+import { RootState } from '@/store'
+
 import {
   Carrinho,
   Content,
@@ -8,10 +13,11 @@ import {
   Logotipo,
   Menu,
 } from './styles'
-import { useEffect, useState } from 'react'
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
+  const { isCartOpen, items } = useSelector((state: RootState) => state.cart)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +49,7 @@ const Header = () => {
             </li>
           </ul>
         </Menu>
-        <Carrinho>
+        <Carrinho onClick={() => dispatch(toggleCart())}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -81,7 +87,7 @@ const Header = () => {
               strokeWidth="1.5"
             ></path>
           </svg>
-          <span>3</span>
+          <span>{items.length}</span>
         </Carrinho>
       </Content>
     </HeaderContainer>
