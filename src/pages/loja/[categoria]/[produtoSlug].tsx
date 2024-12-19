@@ -27,6 +27,7 @@ import {
   ZoomContainer,
   ZoomedImage } from './styles';
 import { addItemToCart, toggleCart } from '@/store/reducers/cartSlice';
+import FreightCalculator from '@/components/Freight';
 
 const ProdutoPage = () => {
   const router = useRouter();
@@ -140,7 +141,7 @@ const ProdutoPage = () => {
                   <img
                     key={key}
                     onClick={() => setSelectedPrint(key)}
-                    title={getFirstLetter(key)} // Capitaliza o nome
+                    title={getFirstLetter(key)}
                     alt={key}
                     src={getPrintImageUrl(key)} // Use URLs dinâmicas ou estáticas conforme necessário
                   />
@@ -170,6 +171,7 @@ const ProdutoPage = () => {
             <h4>Descrição:</h4>
             <p>{product.description}</p>
           </Description>
+          <FreightCalculator shippingData={undefined} error={null} />
         </ProductDetails>
       </ProductContainer>
     </ContainerStore>
