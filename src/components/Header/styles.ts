@@ -2,16 +2,16 @@ import { colors } from '@/styles/GlobalStyles'
 import styled from 'styled-components'
 
 export const HeaderContainer = styled.header<{ pageIsScrolled: boolean }>`
-  position: fixed;
   display: flex;
   justify-content: center;
+  position: fixed;
   width: 100%;
-  height: ${(props) => (props.pageIsScrolled ? '80px' : '100px')};
+  height: ${(props) => (props.pageIsScrolled ? '80px' : '120px')};
   padding: 1em;
   z-index: 2;
   box-shadow: 0px 3px 10px 0px rgba(88, 88, 88, 0.28);
-  transition: height 0.1s ease;
   background-color: ${colors.mostarda};
+  transition: height 0.1s ease;
 `
 
 export const Content = styled.div`
@@ -25,7 +25,6 @@ export const Content = styled.div`
 export const Menu = styled.nav`
   display: flex;
   flex-direction: row;
-
   height: auto;
   padding: 1em;
 
@@ -42,38 +41,39 @@ export const Menu = styled.nav`
   }
 `
 
-export const Logotipo = styled.img`
-  height: 5em;
-  width: 5em;
+export const Logotipo = styled.img<{ headerIsShort: boolean }>`
+  height: ${(props) => (props.headerIsShort ? '4em' : '5em;')};
+  width: ${(props) => (props.headerIsShort ? '4em' : '5em;')};
   border-radius: 50%;
+  transition: height 0.1s ease;
 `
 
 export const Carrinho = styled.div`
   display: flex;
   align-items: center;
-  padding: 1em;
-  gap: 1em;
-  border-radius: 2em;
-  cursor: pointer;
-  background-color: ${colors.salmao};
-  color: ${colors.creme};
   position: relative;
+  gap: 1em;
+  padding: 1em;
+  border-radius: 2em;
+  color: ${colors.creme};
+  background-color: ${colors.salmao};
+  cursor: pointer;
 
   span {
+    position: absolute;
+    right: 9px;
+    top: 8px;
     display: inline-block;
     vertical-align: middle;
     font-size: 9px;
     font-weight: 400;
-    color: #fff;
     border-radius: 100%;
     width: 17px;
     text-align: center;
     height: 17px;
     line-height: 17px;
-    position: absolute;
-    right: 9px;
-    top: 8px;
     padding: 0 1px;
+    color: ${colors.creme};
     background: ${colors.salmaoEscuro};
   }
 
