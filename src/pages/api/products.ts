@@ -14,7 +14,8 @@ const products: Product[] = [
     details:
       'Capacidade: 50 litros.<br /> Material: Tecido impermeável.<br /> Conforto: Alças acolchoadas e ajustáveis, interior acolchoado.<br /> Organização: Múltiplos compartimentos internos e externos. Durabilidade: Confeccionada para resistir a condições extremas.',
     medias: {
-      thumbnail: 'https://images.tcdn.com.br/img/img_prod/886231/mochila_masculina_18_schock_preta_5907_1_9f65b96a1a223c80fe5bd40562cad95c.jpg',
+      thumbnail:
+        'https://images.tcdn.com.br/img/img_prod/886231/mochila_masculina_18_schock_preta_5907_1_9f65b96a1a223c80fe5bd40562cad95c.jpg',
       prints: {
         floral: [
           {
@@ -28,7 +29,7 @@ const products: Product[] = [
           {
             alt: 'Mochila Floral e Listrada',
             src: 'https://io.convertiez.com.br/m/feiradamadrugada/shop/products/images/418574850/large/mochila-feminina-universitaria-ou-escolar-floral-alto-relevo_156507.JPG',
-          }
+          },
         ],
         listrado: [
           {
@@ -42,7 +43,7 @@ const products: Product[] = [
           {
             alt: 'Mochila Feminina Escolar',
             src: 'https://io.convertiez.com.br/m/feiradamadrugada/shop/products/images/418577036/large/mochila-feminina-escolar-juvenil-estampa-floral-e-listrada_163163.JPG',
-          }
+          },
         ],
         geometrico: [
           {
@@ -56,7 +57,7 @@ const products: Product[] = [
           {
             alt: 'Mochila Jiayou Girl',
             src: 'https://a-static.mlcdn.com.br/800x560/mochila-escolar-jiayou-girl-com-estampa-geometrica-35l-roxa/nocnoceua/aub07gnjpdt5/3c02d0adb9d21127f4361192432be88c.jpeg',
-          }
+          },
         ],
         semEstampa: [
           {
@@ -70,8 +71,8 @@ const products: Product[] = [
           {
             alt: 'Mochila Crinkle',
             src: 'https://images.tcdn.com.br/img/img_prod/638637/mochila_crinkle_com_matelasse_17_5_1060_1_3ebc70be3a3ffdfc76399381b9ad751c.jpg',
-          }
-        ]
+          },
+        ],
       },
     },
   },
@@ -84,9 +85,11 @@ const products: Product[] = [
     division: '2x',
     installment: 25.0,
     description: 'Pochete estilosa para todos os lugares.',
-    details: 'Capacidade: 50 litros.<br /> Material: Tecido impermeável.<br /> Conforto: Alças acolchoadas e ajustáveis, interior acolchoado.<br /> Organização: Múltiplos compartimentos internos e externos. Durabilidade: Confeccionada para resistir a condições extremas.',
+    details:
+      'Capacidade: 50 litros.<br /> Material: Tecido impermeável.<br /> Conforto: Alças acolchoadas e ajustáveis, interior acolchoado.<br /> Organização: Múltiplos compartimentos internos e externos. Durabilidade: Confeccionada para resistir a condições extremas.',
     medias: {
-      thumbnail: 'https://images.tcdn.com.br/img/img_prod/553674/bolsa_pochete_stones_em_couro_legitimo_2125_galvani_399_1_808bd33285d6c501efc660656a1d7ba1_20220614122441.jpg',
+      thumbnail:
+        'https://images.tcdn.com.br/img/img_prod/553674/bolsa_pochete_stones_em_couro_legitimo_2125_galvani_399_1_808bd33285d6c501efc660656a1d7ba1_20220614122441.jpg',
       prints: {
         listrado: [
           {
@@ -100,7 +103,7 @@ const products: Product[] = [
           {
             alt: 'Mochila Feminina Escolar',
             src: 'https://io.convertiez.com.br/m/feiradamadrugada/shop/products/images/418577036/large/mochila-feminina-escolar-juvenil-estampa-floral-e-listrada_163163.JPG',
-          }
+          },
         ],
         geometrico: [
           {
@@ -114,10 +117,10 @@ const products: Product[] = [
           {
             alt: 'Mochila Jiayou Girl',
             src: 'https://a-static.mlcdn.com.br/800x560/mochila-escolar-jiayou-girl-com-estampa-geometrica-35l-roxa/nocnoceua/aub07gnjpdt5/3c02d0adb9d21127f4361192432be88c.jpeg',
-          }
+          },
         ],
       },
-    }
+    },
   },
   {
     id: '3',
@@ -128,9 +131,11 @@ const products: Product[] = [
     division: '2x',
     installment: 75.0,
     description: 'Bolsa feita para eventos de gala.',
-    details: 'Capacidade: 50 litros.<br /> Material: Tecido impermeável.<br /> Conforto: Alças acolchoadas e ajustáveis, interior acolchoado.<br /> Organização: Múltiplos compartimentos internos e externos. Durabilidade: Confeccionada para resistir a condições extremas.',
+    details:
+      'Capacidade: 50 litros.<br /> Material: Tecido impermeável.<br /> Conforto: Alças acolchoadas e ajustáveis, interior acolchoado.<br /> Organização: Múltiplos compartimentos internos e externos. Durabilidade: Confeccionada para resistir a condições extremas.',
     medias: {
-      thumbnail: 'https://constance.vtexassets.com/arquivos/ids/2097666-1600-auto?v=637971288810530000&width=1600&height=auto&aspect=true',
+      thumbnail:
+        'https://constance.vtexassets.com/arquivos/ids/2097666-1600-auto?v=637971288810530000&width=1600&height=auto&aspect=true',
       prints: {
         floral: [
           {
@@ -144,9 +149,9 @@ const products: Product[] = [
           {
             alt: 'Mochila Floral e Listrada',
             src: 'https://io.convertiez.com.br/m/feiradamadrugada/shop/products/images/418574850/large/mochila-feminina-universitaria-ou-escolar-floral-alto-relevo_156507.JPG',
-          }
+          },
         ],
-      }
+      },
     },
   },
   {
@@ -158,9 +163,11 @@ const products: Product[] = [
     division: '2x',
     installment: 195.0,
     description: 'Mochila com bolsos muito confortável.',
-    details: 'Capacidade: 50 litros.<br /> Material: Tecido impermeável.<br /> Conforto: Alças acolchoadas e ajustáveis, interior acolchoado.<br /> Organização: Múltiplos compartimentos internos e externos. Durabilidade: Confeccionada para resistir a condições extremas.',
+    details:
+      'Capacidade: 50 litros.<br /> Material: Tecido impermeável.<br /> Conforto: Alças acolchoadas e ajustáveis, interior acolchoado.<br /> Organização: Múltiplos compartimentos internos e externos. Durabilidade: Confeccionada para resistir a condições extremas.',
     medias: {
-      thumbnail: 'https://images.tcdn.com.br/img/img_prod/732403/mochila_executiva_grande_de_couro_legitimo_bovino_notebook_3_1_20200415154531.jpg',
+      thumbnail:
+        'https://images.tcdn.com.br/img/img_prod/732403/mochila_executiva_grande_de_couro_legitimo_bovino_notebook_3_1_20200415154531.jpg',
       prints: {
         floral: [
           {
@@ -174,9 +181,9 @@ const products: Product[] = [
           {
             alt: 'Mochila Floral e Listrada',
             src: 'https://io.convertiez.com.br/m/feiradamadrugada/shop/products/images/418574850/large/mochila-feminina-universitaria-ou-escolar-floral-alto-relevo_156507.JPG',
-          }
+          },
         ],
-      listrado: [
+        listrado: [
           {
             alt: 'Mochila Listrada laranja',
             src: 'https://down-br.img.susercontent.com/file/732399a1d2b913c0aa990b8b0260010b',
@@ -192,9 +199,9 @@ const products: Product[] = [
           {
             alt: 'Mochila Listrada Preta',
             src: 'https://down-br.img.susercontent.com/file/8a4f95efead61f8b23c12fb0252bfdcf',
-          }
+          },
         ],
-      geometrico: [
+        geometrico: [
           {
             alt: 'Mochila Geometrix',
             src: 'https://i.zst.com.br/thumbs/12/38/3d/1972508439.jpg',
@@ -206,7 +213,7 @@ const products: Product[] = [
           {
             alt: 'Mochila Jiayou Girl',
             src: 'https://a-static.mlcdn.com.br/800x560/mochila-escolar-jiayou-girl-com-estampa-geometrica-35l-roxa/nocnoceua/aub07gnjpdt5/3c02d0adb9d21127f4361192432be88c.jpeg',
-          }
+          },
         ],
         semEstampa: [
           {
@@ -220,10 +227,10 @@ const products: Product[] = [
           {
             alt: 'Mochila Crinkle',
             src: 'https://images.tcdn.com.br/img/img_prod/638637/mochila_crinkle_com_matelasse_17_5_1060_1_3ebc70be3a3ffdfc76399381b9ad751c.jpg',
-          }
+          },
         ],
-      }
-    }
+      },
+    },
   },
 ]
 

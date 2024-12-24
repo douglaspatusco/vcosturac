@@ -20,13 +20,16 @@ const ShippingOptions: React.FC<ShippingOptionsProps> = ({ options }) => {
         <Card key={index}>
           <img src={option.company.picture} alt={option.name} />
           <h5>{option.name}</h5>
-          <p>Preço: <strong>R$ {option.price}</strong></p>
-          <p>Prazo de entrega: <strong>{option.delivery_time}</strong> dias úteis</p>
+          <p>
+            Preço: <strong>R$ {option.price}</strong>
+          </p>
+          <p>
+            Prazo de entrega: <strong>{option.delivery_time}</strong> dias úteis
+          </p>
         </Card>
       ))}
     </Container>
   )
 }
-
 
 export default ShippingOptions

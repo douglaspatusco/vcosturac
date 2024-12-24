@@ -1,8 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit'
 
 import { productsReducer } from './reducers/apiSlice'
-import { thumbnailsReducer } from './reducers/thumbnailsSlice';
-import { cartReducer } from './reducers/cartSlice';
+import { thumbnailsReducer } from './reducers/thumbnailsSlice'
+import { cartReducer } from './reducers/cartSlice'
 
 export const store = configureStore({
   reducer: {
@@ -10,8 +10,8 @@ export const store = configureStore({
     thumbnails: thumbnailsReducer,
     cart: cartReducer,
   },
-});
+})
 
 // Tipos para TypeScript
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

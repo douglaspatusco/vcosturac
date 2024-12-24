@@ -14,6 +14,7 @@ const nextConfig = {
         pathname: '/img/img_prod/**', // Caminho específico (use '**' para wildcard)
       },
     ],
-  },}
+  },
+}
 
 export default nextConfig
