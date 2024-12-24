@@ -10,7 +10,7 @@ type ProductsApiState = {
 const initialState: ProductsApiState = {
   products: [],
   loading: false,
-  error: null
+  error: null,
 }
 
 export const fetchProducts = createAsyncThunk(
@@ -19,12 +19,10 @@ export const fetchProducts = createAsyncThunk(
     const response = await fetch('/api/products')
 
     if (!response.ok) {
-      throw new Error('Failed to fetch products');
+      throw new Error('Failed to fetch products')
     }
 
-    return (
-      await response.json()
-    ) as Product[]
+    return (await response.json()) as Product[]
   }
 )
 
@@ -38,10 +36,13 @@ export const productsSlice = createSlice({
         state.loading = true
         state.error = null
       })
-      .addCase(fetchProducts.fulfilled, (state, action: PayloadAction<Product[]>) => {
-        state.loading = false
-        state.products = action.payload
-      })
+      .addCase(
+        fetchProducts.fulfilled,
+        (state, action: PayloadAction<Product[]>) => {
+          state.loading = false
+          state.products = action.payload
+        }
+      )
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false
         state.error = action.error.message || 'Failed to fetch products'

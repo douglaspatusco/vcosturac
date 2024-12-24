@@ -13,8 +13,8 @@ if (!process.env.MONGODB_URI) {
 if (process.env.NODE_ENV === 'development') {
   // Para evitar criar múltiplas conexões em desenvolvimento
   if (!(global as any)._mongoClientPromise) {
-    client = new MongoClient(uri, options);
-    (global as any)._mongoClientPromise = client.connect()
+    client = new MongoClient(uri, options)
+    ;(global as any)._mongoClientPromise = client.connect()
   }
   clientPromise = (global as any)._mongoClientPromise
 } else {

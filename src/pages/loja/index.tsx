@@ -1,29 +1,33 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '../../store';
-import { useEffect } from 'react';
-import { fetchProducts } from '@/store/reducers/apiSlice';
-import { Card, Categories, Imagem } from './styles';
-import { getFirstLetter } from '@/services/utility';
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState, AppDispatch } from '../../store'
+import { useEffect } from 'react'
+import { fetchProducts } from '@/store/reducers/apiSlice'
+import { Card, Categories, Imagem } from './styles'
+import { getFirstLetter } from '@/services/utility'
 
 const Loja = () => {
-  const router = useRouter();
-  const dispatch: AppDispatch = useDispatch();
+  const router = useRouter()
+  const dispatch: AppDispatch = useDispatch()
 
-  const { products, loading } = useSelector((state: RootState) => state.products);
+  const { products, loading } = useSelector(
+    (state: RootState) => state.products
+  )
 
   // Buscar produtos quando a página é carregada
   useEffect(() => {
     if (products.length === 0) {
-      dispatch(fetchProducts());
+      dispatch(fetchProducts())
     }
-  }, [dispatch, products]);
+  }, [dispatch, products])
 
-  if (loading) return <p>Carregando...</p>;
+  if (loading) return <p>Carregando...</p>
 
   // Obter todas as categorias únicas
-  const categories = Array.from(new Set(products.map((product) => product.category)));
+  const categories = Array.from(
+    new Set(products.map((product) => product.category))
+  )
 
   return (
     <>
@@ -38,7 +42,10 @@ const Loja = () => {
             <li key={category}>
               <Card href={`/loja/${category}`}>
                 <Imagem
-                  src={products.find((item) => item.category === category)?.medias?.thumbnail || ""}
+                  src={
+                    products.find((item) => item.category === category)?.medias
+                      ?.thumbnail || ''
+                  }
                   alt={category}
                   title={getFirstLetter(`${category}s`)}
                 />
@@ -52,4 +59,4 @@ const Loja = () => {
   )
 }
 
-export default Loja;
+export default Loja

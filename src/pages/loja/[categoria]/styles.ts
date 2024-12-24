@@ -44,14 +44,17 @@ export const ZoomContainer = styled.div`
   overflow: hidden;
 `
 
-export const ZoomedImage = styled.img<{ isZoomed: boolean; transformOrigin: string }>`
+export const ZoomedImage = styled.img<{
+  isZoomed: boolean
+  transformOrigin: string
+}>`
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.1s ease;
-  transform: ${({ isZoomed }) => (isZoomed ? "scale(2)" : "scale(1)")};
+  transform: ${({ isZoomed }) => (isZoomed ? 'scale(2)' : 'scale(1)')};
   transform-origin: ${({ transformOrigin }) => transformOrigin};
-`;
+`
 
 export const ThumbnailsContainer = styled.div`
   display: flex;
@@ -127,45 +130,6 @@ export const Prints = styled.div`
 export const ContainerBuy = styled.div`
   display: flex;
   gap: 2em;
-`
-
-export const Amount = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #b4b4b4;
-  border-radius: 0.25em;
-
-  span {
-    padding: 0 0.5em 0 0.5em;
-    font-size: 2em;
-    cursor: pointer;
-    user-select: none;
-
-    &:active {
-      transform: scale(1.05);
-    }
-  }
-
-  &:focus-visible {
-    outline: none;
-  }
-
-  input[type='number']::-webkit-outer-spin-button,
-  input[type='number']::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input[type='number'] {
-    width: 50px;
-    height: 20px;
-    font-size: 1em;
-    text-align: center;
-    border: none;
-    outline: none;
-    appearance: textfield;
-  }
 `
 
 export const BuyButton = styled.button`

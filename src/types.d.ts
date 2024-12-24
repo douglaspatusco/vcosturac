@@ -1,4 +1,4 @@
-import { StaticImport } from "next/dist/shared/lib/get-img-props"
+import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 
 declare interface PrintsImages {
   alt: string
@@ -13,6 +13,7 @@ declare interface PrintsProducts {
 }
 
 declare type Product = {
+  selectedPrint: any
   id: string
   slug: string
   category: string

@@ -1,6 +1,6 @@
-import { colors } from "@/styles/GlobalStyles";
-import Link from "next/link";
-import styled from "styled-components";
+import Link from 'next/link'
+import { colors } from '@/styles/GlobalStyles'
+import styled from 'styled-components'
 
 export const Overlay = styled.div`
   position: fixed;
@@ -23,13 +23,15 @@ export const Container = styled.div`
   z-index: 1;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
+  transition:
+    opacity 0.3s ease-in-out,
+    visibility 0s 0.3s;
 
   &.is-open {
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.3s ease-in-out
-  };
+    transition: opacity 0.3s ease-in-out;
+  }
 `
 
 export const CartContainer = styled.div`
@@ -43,7 +45,7 @@ export const Sidebar = styled.aside`
   position: fixed;
   right: 0;
   top: 0;
-  max-width: 360px;
+  max-width: 440px;
   width: 100%;
   height: 100%;
   padding: 2.5em 1em 0 1em;
@@ -66,11 +68,11 @@ export const ProductsList = styled.ul`
 
 export const ProductItem = styled.li`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
   gap: 1em;
   border-radius: 0.2em;
-  height: 5em;
+  height: 6em;
   position: relative;
   background-color: ${colors.marromClaro};
   color: ${colors.creme};
@@ -82,21 +84,79 @@ export const ProductItem = styled.li`
   }
 
   h4 {
-    padding-bottom: 0.5em;
+    /* padding-bottom: 0.5em; */
+  }
+`
+
+export const Amount = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    padding: 0 0.5em;
+    font-size: 1em;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 0.25em;
+
+    &:hover {
+      background-color: ${colors.marromEscuro};
+    }
+
+    &:active {
+      transform: scale(1.1);
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    width: 2em;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    outline: none;
+    appearance: textfield;
+    background-color: ${colors.marromClaro};
+    color: ${colors.creme};
   }
 `
 
 export const DeleteItem = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0.25em;
+  top: 0.25em;
   width: 1.5em;
   height: 1.5em;
-  position: absolute;
-  right: 0;
-  top: 8px;
   border: none;
   font-size: 1em;
   background-color: ${colors.marromClaro};
   color: ${colors.creme};
   cursor: pointer;
+
+  &:hover {
+    background-color: ${colors.marromEscuro};
+    border-radius: 0.25em;
+  }
+
+  img {
+    width: 1em;
+    height: 1em;
+    color: ${colors.creme};
+  }
 `
 
 export const TotalPrice = styled.div`

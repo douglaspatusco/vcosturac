@@ -10,7 +10,6 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import Cart from '@/components/Cart'
 
-
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
