@@ -30,9 +30,9 @@ const Cart = () => {
   const [amountValue, setAmountValue] = useState(1)
   const dispatch = useDispatch()
 
-  const removeItem = (id: string) => {
-    dispatch(removeItemFromCart(id))
-  }
+  const removeItem = (id: string, selectedPrint?: string) => {
+    dispatch(removeItemFromCart({ id, selectedPrint }));
+  };
 
   const handleQuantityChange = (id: string, increment: boolean) => {
     const produto = cartItems.find((item) => item.id === id)
@@ -45,7 +45,7 @@ const Cart = () => {
   }
 
   const totalPrice = cartItems.reduce(
-    (acc, product) => acc + product.price * product.quantity,
+    (acc, product) => acc + (product.price ?? 0) * product.quantity,
     0
   )
 
@@ -95,7 +95,7 @@ const Cart = () => {
                       +
                     </span>
                   </Amount>
-                  <DeleteItem onClick={() => removeItem(item.id)} type="button">
+                  <DeleteItem onClick={() => removeItem(item.id, item.selectedPrint)} type="button">
                     <img
                       src="https://www.svgrepo.com/show/533007/trash.svg"
                       alt="Remover item"

@@ -17,19 +17,16 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItemToCart: (
-      state,
-      action: PayloadAction<Product & { selectedPrint?: string }>
-    ) => {
+    addItemToCart: (state, action: PayloadAction<Product & { selectedPrint?: string }>) => {
       const produto = state.cartItems.find(
         (item) =>
           item.id === action.payload.id &&
           item.selectedPrint === action.payload.selectedPrint
-      )
+      );
       if (!produto) {
-        state.cartItems.push({ ...action.payload, quantity: 1 })
+        state.cartItems.push({ ...action.payload, quantity: 1 });
       } else {
-        alert('O produto já está no carrinho')
+        alert('O produto já está no carrinho');
       }
     },
     updateQuantity: (
@@ -43,10 +40,11 @@ const cartSlice = createSlice({
         produto.quantity = action.payload.quantity
       }
     },
-    removeItemFromCart: (state, action: PayloadAction<string>) => {
+    removeItemFromCart: (state, action: PayloadAction<{ id: string; selectedPrint?: string }>) => {
       state.cartItems = state.cartItems.filter(
-        (item) => item.id !== action.payload
-      )
+        (item) =>
+          item.id !== action.payload.id || item.selectedPrint !== action.payload.selectedPrint
+      );
     },
     toggleCart: (state) => {
       state.isCartOpen = !state.isCartOpen
