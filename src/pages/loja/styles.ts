@@ -9,10 +9,7 @@ export const Categories = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  h1 {
-    padding-top: 1em;
-  }
+  padding-top: 2em;
 
   ul {
     display: flex;
@@ -60,7 +57,6 @@ export const ContainerProducts = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 2em;
 `
 
 export const ProductsList = styled.ul`
@@ -70,7 +66,6 @@ export const ProductsList = styled.ul`
   justify-content: center;
   gap: 1em;
   padding: 2em;
-  margin-top: 4em;
 `
 
 export const ListItem = styled.li`

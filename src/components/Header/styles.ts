@@ -1,4 +1,5 @@
 import { colors } from '@/styles/GlobalStyles'
+import Link from 'next/link'
 import styled from 'styled-components'
 
 export const HeaderContainer = styled.header<{ pageIsScrolled: boolean }>`
@@ -38,7 +39,21 @@ export const Menu = styled.nav`
   li {
     padding: 0.5em;
     color: ${colors.preto};
+
+
+    &:hover {
+      scale: 1.1;
+    }
   }
+`
+
+export const LogoLink = styled(Link)`
+  height: 5em;
+  width: 5em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 export const Logotipo = styled.img<{ headerIsShort: boolean }>`

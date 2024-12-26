@@ -11,6 +11,6 @@ export const Content = styled.div`
   display: flex;
   justify-content: center;
   min-height: 100vh;
-  padding-top: 6em;
+  padding-top: 7.5em;
   background-color: ${colors.cinza};
 `

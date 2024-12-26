@@ -1,9 +1,12 @@
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, AppDispatch } from '../../store'
-import { useEffect } from 'react'
 import { fetchProducts } from '../../store/reducers/apiSlice'
-import Head from 'next/head'
+
+import { formattedPrice } from '@/services/utility'
+
 import {
   ItemLink,
   ContainerProducts,
@@ -11,7 +14,6 @@ import {
   ProductsList,
   Thumb,
 } from './styles'
-import { formattedPrice } from '@/services/utility'
 
 const CategoriaPage = () => {
   const { categoria } = useRouter().query
@@ -48,7 +50,7 @@ const CategoriaPage = () => {
             <ListItem key={product.slug}>
               <ItemLink href={`/loja/${categoria}/${product.slug}`}>
                 <Thumb
-                  src={product.medias?.thumbnail}
+                  src={typeof product.medias?.thumbnail === 'string' ? product.medias.thumbnail : ''}
                   alt={product.name}
                   width={100}
                   height={100}

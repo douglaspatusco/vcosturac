@@ -10,8 +10,8 @@ export const ContainerStore = styled.section`
   padding-top: 2em;
   background-color: #fff;
   box-shadow:
-    5px 0 10px rgba(0, 0, 0, 0.2),
-    -5px 0 10px rgba(0, 0, 0, 0.2);
+    0.375em 0 0.75em rgba(0, 0, 0, 0.2),
+    -0.375em 0 0.75em rgba(0, 0, 0, 0.2);
 `
 export const ProductContainer = styled.div`
   display: flex;
@@ -71,8 +71,8 @@ export const Thumbnail = styled.img`
 
   &:hover {
     box-shadow:
-      0 1px 2px 0 rgba(0, 0, 0, 0.3),
-      0 2px 6px 2px rgba(0, 0, 0, 0.15);
+      0 0.0625em 0.125em 0 rgba(0, 0, 0, 0.3),
+      0 0.125em 0.375em 0.125em rgba(0, 0, 0, 0.15);
     transition: 0.3s ease;
     transform: scale(1.05);
   }
@@ -111,15 +111,15 @@ export const Prints = styled.div`
     gap: 1em;
 
     img {
-      width: 50px;
-      height: 50px;
+      width: 3em;
+      height: 3em;
       border-radius: 50%;
       cursor: pointer;
 
       &:hover {
         box-shadow:
-          0 1px 2px 0 rgba(0, 0, 0, 0.3),
-          0 2px 6px 2px rgba(0, 0, 0, 0.15);
+        0 0.0625em 0.125em 0 rgba(0, 0, 0, 0.3),
+        0 0.125em 0.375em 0.125em rgba(0, 0, 0, 0.15);
         transition: 0.3s ease;
         transform: scale(1.05);
       }

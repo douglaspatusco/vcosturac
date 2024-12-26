@@ -8,12 +8,8 @@ import { Card, Categories, Imagem } from './styles'
 import { getFirstLetter } from '@/services/utility'
 
 const Loja = () => {
-  const router = useRouter()
   const dispatch: AppDispatch = useDispatch()
-
-  const { products, loading } = useSelector(
-    (state: RootState) => state.products
-  )
+  const { products, loading } = useSelector((state: RootState) => state.products)
 
   // Buscar produtos quando a página é carregada
   useEffect(() => {
@@ -43,11 +39,14 @@ const Loja = () => {
               <Card href={`/loja/${category}`}>
                 <Imagem
                   src={
-                    products.find((item) => item.category === category)?.medias
-                      ?.thumbnail || ''
+                    typeof products.find((item) => item.category === category)?.medias
+                      ?.thumbnail === 'string'
+                      ? (products.find((item) => item.category === category)?.medias
+                          ?.thumbnail as string)
+                      : ''
                   }
                   alt={category}
-                  title={getFirstLetter(`${category}s`)}
+                  title={getFirstLetter(`${category}`)}
                 />
                 <h3>{getFirstLetter(category)}</h3>
               </Card>
