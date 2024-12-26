@@ -4,6 +4,7 @@ import { RootState } from '../../store'
 import {
   closeCart,
   removeItemFromCart,
+  toggleCart,
   updateQuantity,
 } from '@/store/reducers/cartSlice'
 
@@ -44,6 +45,10 @@ const Cart = () => {
     }
   }
 
+  const handleCheckoutClick = () => {
+    dispatch(closeCart())
+  }
+
   const totalPrice = cartItems.reduce(
     (acc, product) => acc + (product.price ?? 0) * product.quantity,
     0
@@ -51,7 +56,7 @@ const Cart = () => {
 
   return (
     <Container className={isCartOpen ? 'is-open' : ''}>
-      <Overlay onClick={() => dispatch(closeCart())} />
+      <Overlay onClick={() => dispatch(toggleCart())} />
       <Sidebar className={isCartOpen ? 'is-open' : ''}>
         {cartItems.length > 0 ? (
           <CartContainer>
@@ -104,11 +109,13 @@ const Cart = () => {
                 </ProductItem>
               ))}
             </ProductsList>
-            <TotalPrice>
-              <h4>Total de {formattedPrice(totalPrice)}</h4>
-              <p>ou 2x de {formattedPrice(totalPrice / 2)} sem juros.</p>
-            </TotalPrice>
-            <Checkout href={'/checkout'}>Continuar com a compra</Checkout>
+            <div>
+              <TotalPrice>
+                <h4>Total de {formattedPrice(totalPrice)}</h4>
+                <p>ou 2x de {formattedPrice(totalPrice / 2)} sem juros.</p>
+              </TotalPrice>
+              <Checkout href={'/checkout'} onClick={handleCheckoutClick}>Continuar com a compra</Checkout>
+            </div>
           </CartContainer>
         ) : (
           <EmptyCart>

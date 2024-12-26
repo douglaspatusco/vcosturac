@@ -39,6 +39,13 @@ export const CartContainer = styled.div`
   flex-direction: column;
   gap: 2em;
   height: 100%;
+
+  div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin: auto 0 1em 0;
+  }
 `
 
 export const Sidebar = styled.aside`
@@ -81,10 +88,6 @@ export const ProductItem = styled.li`
     width: 4em;
     height: 4em;
     mix-blend-mode: darken;
-  }
-
-  h4 {
-    /* padding-bottom: 0.5em; */
   }
 `
 
