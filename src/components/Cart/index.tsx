@@ -10,6 +10,8 @@ import {
 
 import { formattedPrice, getFirstLetter } from '@/services/utility'
 
+import Amount from '../Amount'
+
 import {
   Container,
   CartContainer,
@@ -21,7 +23,6 @@ import {
   Sidebar,
   TotalPrice,
   Checkout,
-  Amount,
 } from './styles'
 
 const Cart = () => {
@@ -80,26 +81,12 @@ const Cart = () => {
                     </h4>
                     <h4>{item.price !== undefined ? formattedPrice(item.price * item.quantity) : 'Preço indisponível'}</h4>
                   </div>
-                  <Amount>
-                    <span
-                      onClick={() => handleQuantityChange(item.id, false)}
-                      title="Remover um item"
-                    >
-                      -
-                    </span>
-                    <input
-                      type="number"
-                      value={item.quantity}
-                      readOnly
-                      onChange={(e) => setAmountValue(Number(e.target.value))}
-                    />
-                    <span
-                      onClick={() => handleQuantityChange(item.id, true)}
-                      title="Adicionar um item"
-                    >
-                      +
-                    </span>
-                  </Amount>
+                  <Amount
+                    quantity={item.quantity}
+                    onIncrement={() => handleQuantityChange(item.id, true)}
+                    onDecrement={() => handleQuantityChange(item.id, false)}
+                    onQuantityChange={(value) => setAmountValue(value)} // Opcional
+                  />
                   <DeleteItem onClick={() => removeItem(item.id, item.selectedPrint)} type="button">
                     <img
                       src="https://www.svgrepo.com/show/533007/trash.svg"
