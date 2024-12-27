@@ -7,9 +7,9 @@ import { RootState } from '@/store'
 import Link from 'next/link'
 
 const Breadcrumbs = () => {
-  const { categoria, produtoSlug } = useRouter().query
+  const { categoria, produto } = useRouter().query
   const { products } = useSelector((state: RootState) => state.products)
-  const product = products.find((product) => product.slug === produtoSlug)
+  const product = products.find((product) => product.slug === produto)
 
   return (
     <Container>
@@ -17,7 +17,7 @@ const Breadcrumbs = () => {
         <li>
           <Link href={`/loja`}>Categorias</Link>
         </li>
-        <p>&nbsp;&gt;&nbsp;</p>
+        <span>&nbsp;&gt;&nbsp;</span>
         {categoria && (
           <li>
             <Link href={`/loja/${categoria}`}>
@@ -25,8 +25,8 @@ const Breadcrumbs = () => {
             </Link>
           </li>
         )}
-        {categoria && produtoSlug && <span>&nbsp; &gt; &nbsp;</span>}
-        {produtoSlug && product && <li>{product.name}</li>}
+        {categoria && produto && <span>&nbsp; &gt; &nbsp;</span>}
+        {produto && product && <li>{product.name}</li>}
       </List>
     </Container>
   )

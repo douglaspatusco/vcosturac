@@ -5,7 +5,7 @@ import { RootState, AppDispatch } from '../../../store'
 import { fetchProducts } from '@/store/reducers/apiSlice'
 import { addItemToCart, toggleCart } from '@/store/reducers/cartSlice'
 
-import { PrintsImages, Product } from '@/types'
+import { PrintsImages, Product } from '@/types/product'
 import { formattedPrice, getFirstLetter } from '@/services/utility'
 
 import Head from 'next/head'
@@ -32,7 +32,7 @@ import {
 
 const ProdutoPage = () => {
   const router = useRouter()
-  const { produtoSlug } = router.query
+  const { produto } = router.query
 
   const dispatch: AppDispatch = useDispatch()
   const { products, loading } = useSelector(
@@ -71,7 +71,7 @@ const ProdutoPage = () => {
   }, [dispatch, products])
 
   // Obtém o produto específico com base no produtoId
-  const product = products.find((product) => product.slug === produtoSlug)
+  const product = products.find((product) => product.slug === produto)
 
   useEffect(() => {
     if (product?.medias?.thumbnail) {

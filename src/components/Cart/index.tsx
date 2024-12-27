@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
+import Amount from '../Amount'
 import {
   closeCart,
   removeItemFromCart,
@@ -9,8 +10,6 @@ import {
 } from '@/store/reducers/cartSlice'
 
 import { formattedPrice, getFirstLetter } from '@/services/utility'
-
-import Amount from '../Amount'
 
 import {
   Container,
@@ -84,9 +83,15 @@ const Cart = () => {
                   </div>
                   <Amount
                     quantity={item.quantity}
-                    onIncrement={() => handleQuantityChange(item.id, item.selectedPrint, true)}
-                    onDecrement={() => handleQuantityChange(item.id, item.selectedPrint, false)}
-                    onQuantityChange={(value) => setAmountValue(value)} // Opcional
+                    onIncrement={() =>
+                      handleQuantityChange(item.id, item.selectedPrint, true)
+                    }
+                    onDecrement={() =>
+                      handleQuantityChange(item.id, item.selectedPrint, false)
+                    }
+                    onQuantityChange={
+                      (value) => setAmountValue(value)
+                    }
                   />
                   <DeleteItem onClick={() => removeItem(item.id, item.selectedPrint)} type="button">
                     <img
