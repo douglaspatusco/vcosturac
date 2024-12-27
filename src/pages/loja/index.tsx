@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, AppDispatch } from '../../store'
 import { useEffect } from 'react'
@@ -9,7 +8,9 @@ import { getFirstLetter } from '@/services/utility'
 
 const Loja = () => {
   const dispatch: AppDispatch = useDispatch()
-  const { products, loading } = useSelector((state: RootState) => state.products)
+  const { products, loading } = useSelector(
+    (state: RootState) => state.products
+  )
 
   // Buscar produtos quando a página é carregada
   useEffect(() => {
@@ -39,10 +40,10 @@ const Loja = () => {
               <Card href={`/loja/${category}`}>
                 <Imagem
                   src={
-                    typeof products.find((item) => item.category === category)?.medias
-                      ?.thumbnail === 'string'
-                      ? (products.find((item) => item.category === category)?.medias
-                          ?.thumbnail as string)
+                    typeof products.find((item) => item.category === category)
+                      ?.medias?.thumbnail === 'string'
+                      ? (products.find((item) => item.category === category)
+                          ?.medias?.thumbnail as string)
                       : ''
                   }
                   alt={category}

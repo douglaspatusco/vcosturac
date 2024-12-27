@@ -6,7 +6,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toggleCart } from '../../store/reducers/cartSlice'
 import { RootState } from '@/store'
 
-import { Carrinho, Content, HeaderContainer, LogoLink, Logotipo, Menu } from './styles'
+import {
+  Carrinho,
+  Content,
+  HeaderContainer,
+  LogoLink,
+  Logotipo,
+  Menu,
+} from './styles'
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)

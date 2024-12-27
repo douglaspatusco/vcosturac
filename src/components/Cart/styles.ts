@@ -111,9 +111,7 @@ export const DeleteItem = styled.button`
     border-radius: 0.25em;
   }
 
-  img {
-    width: 1em;
-    height: 1em;
+  svg path {
     color: ${colors.creme};
   }
 `

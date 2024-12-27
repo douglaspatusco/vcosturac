@@ -4,8 +4,6 @@
     "es2021": true
   },
   "extends": [
-    "react-app",
-    "react-app/jest",
     "next/core-web-vitals",
     "next/typescript",
     "eslint:recommended",
@@ -16,6 +14,9 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }

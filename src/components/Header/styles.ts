@@ -40,7 +40,6 @@ export const Menu = styled.nav`
     padding: 0.5em;
     color: ${colors.preto};
 
-
     &:hover {
       scale: 1.1;
     }

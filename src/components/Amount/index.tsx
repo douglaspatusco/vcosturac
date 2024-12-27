@@ -1,4 +1,5 @@
-import { AmountField } from "./styles"
+import { AmountField } from './styles'
+import PropTypes from 'prop-types'
 
 interface AmountProps {
   quantity: number
@@ -7,8 +8,12 @@ interface AmountProps {
   onQuantityChange?: (value: number) => void
 }
 
-const Amount: React.FC<AmountProps> = ({quantity, onDecrement, onIncrement, onQuantityChange}) => {
-
+const Amount: React.FC<AmountProps> = ({
+  quantity,
+  onDecrement,
+  onIncrement,
+  onQuantityChange,
+}) => {
   return (
     <AmountField>
       <span
@@ -34,6 +39,12 @@ const Amount: React.FC<AmountProps> = ({quantity, onDecrement, onIncrement, onQu
       </span>
     </AmountField>
   )
+}
+Amount.propTypes = {
+  quantity: PropTypes.number.isRequired,
+  onIncrement: PropTypes.func.isRequired,
+  onDecrement: PropTypes.func.isRequired,
+  onQuantityChange: PropTypes.func,
 }
 
 export default Amount

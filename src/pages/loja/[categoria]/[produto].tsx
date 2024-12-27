@@ -7,6 +7,14 @@ import { addItemToCart, toggleCart } from '@/store/reducers/cartSlice'
 
 import { PrintsImages, Product } from '@/types/product'
 import { formattedPrice, getFirstLetter } from '@/services/utility'
+import {
+  addToCart,
+  calculateMousePosition,
+  disableZoom,
+  enableZoom,
+  getPrintImageUrl,
+  handleThumbnailClick,
+} from '@/utils/produtoUtils'
 
 import Head from 'next/head'
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrubs'
@@ -29,7 +37,6 @@ import {
   ZoomedImage,
 } from './styles'
 
-
 const ProdutoPage = () => {
   const router = useRouter()
   const { produto } = router.query
@@ -41,28 +48,10 @@ const ProdutoPage = () => {
 
   const [mainImage, setMainImage] = useState<PrintsImages | null>(null)
   const [selectedPrint, setSelectedPrint] = useState<string>('')
-  const getPrintImageUrl = (key: string) =>
-    `https://raw.githubusercontent.com/eyelexx/vcosturac/refs/heads/main/src/public/images/estampas/${key}.jpg`
 
   // Zoom na imagem principal
   const [isZoomed, setIsZoomed] = useState(false)
   const [transformOrigin, setTransformOrigin] = useState('center center')
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isZoomed) return
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = ((e.clientX - rect.left) / rect.width) * 100 // Percentual X
-    const y = ((e.clientY - rect.top) / rect.height) * 100 // Percentual Y
-    setTransformOrigin(`${x}% ${y}%`)
-  }
-
-  const handleMouseEnter = () => {
-    setIsZoomed(true)
-  }
-
-  const handleMouseLeave = () => {
-    setIsZoomed(false)
-  }
 
   useEffect(() => {
     if (!loading && products.length === 0) {
@@ -86,19 +75,6 @@ const ProdutoPage = () => {
     ([_, images]) => images && images.length > 0
   )
 
-  const handleThumbnailClick = (image: PrintsImages) => {
-    setMainImage(image)
-  }
-
-  const addToCart = (product: Product) => {
-    const productWithPrint = {
-      ...product,
-      selectedPrint,
-    }
-    dispatch(addItemToCart(productWithPrint))
-    dispatch(toggleCart())
-  }
-
   if (loading) return <p>Carregando...</p>
   if (!product) return <p>Produto não encontrado.</p>
 
@@ -112,9 +88,9 @@ const ProdutoPage = () => {
         <ProductContainer>
           <ProductImages>
             <ZoomContainer
-              onMouseMove={handleMouseMove}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+              onMouseMove={(e) => calculateMousePosition(e, setTransformOrigin)}
+              onMouseEnter={() => enableZoom(setIsZoomed)}
+              onMouseLeave={() => disableZoom(setIsZoomed)}
             >
               {mainImage && typeof mainImage.src === 'string' ? (
                 <ZoomedImage
@@ -135,7 +111,7 @@ const ProdutoPage = () => {
                   src={image.src}
                   alt={image.alt}
                   title={image.alt}
-                  onClick={() => handleThumbnailClick(image)}
+                  onClick={() => handleThumbnailClick(image, setMainImage)}
                 />
               ))}
             </ThumbnailsContainer>
@@ -167,7 +143,7 @@ const ProdutoPage = () => {
               <BuyButton
                 type="submit"
                 title="Adicionar ao carrinho"
-                onClick={() => addToCart(product)}
+                onClick={() => addToCart(dispatch, product, selectedPrint)}
               >
                 ADICIONAR AO CARRINHO
               </BuyButton>

@@ -118,8 +118,8 @@ export const Prints = styled.div`
 
       &:hover {
         box-shadow:
-        0 0.0625em 0.125em 0 rgba(0, 0, 0, 0.3),
-        0 0.125em 0.375em 0.125em rgba(0, 0, 0, 0.15);
+          0 0.0625em 0.125em 0 rgba(0, 0, 0, 0.3),
+          0 0.125em 0.375em 0.125em rgba(0, 0, 0, 0.15);
         transition: 0.3s ease;
         transform: scale(1.05);
       }

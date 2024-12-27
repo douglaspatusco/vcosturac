@@ -1,5 +1,5 @@
-import { styled } from "styled-components";
-import { colors } from "@/styles/GlobalStyles";
+import { styled } from 'styled-components'
+import { colors } from '@/styles/GlobalStyles'
 
 export const AmountField = styled.div`
   display: flex;
@@ -44,4 +44,3 @@ export const AmountField = styled.div`
     color: ${colors.creme};
   }
 `
-

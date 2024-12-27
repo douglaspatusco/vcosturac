@@ -50,7 +50,11 @@ const CategoriaPage = () => {
             <ListItem key={product.slug}>
               <ItemLink href={`/loja/${categoria}/${product.slug}`}>
                 <Thumb
-                  src={typeof product.medias?.thumbnail === 'string' ? product.medias.thumbnail : ''}
+                  src={
+                    typeof product.medias?.thumbnail === 'string'
+                      ? product.medias.thumbnail
+                      : ''
+                  }
                   alt={product.name}
                   width={100}
                   height={100}
