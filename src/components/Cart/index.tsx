@@ -36,16 +36,17 @@ const Cart = () => {
     dispatch(removeItemFromCart({ id, selectedPrint }));
   };
 
-  const handleQuantityChange = (id: string, increment: boolean) => {
-    const produto = cartItems.find((item) => item.id === id)
+  const handleQuantityChange = (id: string, selectedPrint: string, increment: boolean) => {
+    const produto = cartItems.find(
+      (item) => item.id === id && item.selectedPrint === selectedPrint
+    )
     if (produto) {
       const newQuantity = increment
         ? produto.quantity + 1
         : Math.max(1, produto.quantity - 1)
-      dispatch(updateQuantity({ id, quantity: newQuantity }))
+      dispatch(updateQuantity({ id, selectedPrint, quantity: newQuantity }))
     }
   }
-
   const handleCheckoutClick = () => {
     dispatch(closeCart())
   }
@@ -83,8 +84,8 @@ const Cart = () => {
                   </div>
                   <Amount
                     quantity={item.quantity}
-                    onIncrement={() => handleQuantityChange(item.id, true)}
-                    onDecrement={() => handleQuantityChange(item.id, false)}
+                    onIncrement={() => handleQuantityChange(item.id, item.selectedPrint, true)}
+                    onDecrement={() => handleQuantityChange(item.id, item.selectedPrint, false)}
                     onQuantityChange={(value) => setAmountValue(value)} // Opcional
                   />
                   <DeleteItem onClick={() => removeItem(item.id, item.selectedPrint)} type="button">

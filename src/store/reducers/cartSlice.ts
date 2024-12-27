@@ -29,15 +29,13 @@ const cartSlice = createSlice({
         alert('O produto já está no carrinho');
       }
     },
-    updateQuantity: (
-      state,
-      action: PayloadAction<{ id: string; quantity: number }>
-    ) => {
-      const produto = state.cartItems.find(
-        (item) => item.id === action.payload.id
+    updateQuantity: (state, action) => {
+      const { id, selectedPrint, quantity } = action.payload
+      const item = state.cartItems.find(
+        (item) => item.id === id && item.selectedPrint === selectedPrint
       )
-      if (produto) {
-        produto.quantity = action.payload.quantity
+      if (item) {
+        item.quantity = quantity
       }
     },
     removeItemFromCart: (state, action: PayloadAction<{ id: string; selectedPrint?: string }>) => {

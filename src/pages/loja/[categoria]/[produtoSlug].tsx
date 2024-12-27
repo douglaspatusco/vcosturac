@@ -1,14 +1,16 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import Head from 'next/head'
-import Breadcrumbs from '@/components/Breadcrumbs/Breadcrubs'
-
 import { RootState, AppDispatch } from '../../../store'
 import { fetchProducts } from '@/store/reducers/apiSlice'
+import { addItemToCart, toggleCart } from '@/store/reducers/cartSlice'
 
 import { PrintsImages, Product } from '@/types'
 import { formattedPrice, getFirstLetter } from '@/services/utility'
+
+import Head from 'next/head'
+import Breadcrumbs from '@/components/Breadcrumbs/Breadcrubs'
+import FreightCalculator from '@/components/Freight'
 
 import {
   BuyButton,
@@ -27,8 +29,6 @@ import {
   ZoomedImage,
 } from './styles'
 
-import { addItemToCart, toggleCart } from '@/store/reducers/cartSlice'
-import FreightCalculator from '@/components/Freight'
 
 const ProdutoPage = () => {
   const router = useRouter()
@@ -40,7 +40,7 @@ const ProdutoPage = () => {
   )
 
   const [mainImage, setMainImage] = useState<PrintsImages | null>(null)
-  const [selectedPrint, setSelectedPrint] = useState<string>('') // Inicializa com 'floral' ou outra estampa por padrão
+  const [selectedPrint, setSelectedPrint] = useState<string>('')
   const getPrintImageUrl = (key: string) =>
     `https://raw.githubusercontent.com/eyelexx/vcosturac/refs/heads/main/src/public/images/estampas/${key}.jpg`
 
@@ -72,6 +72,7 @@ const ProdutoPage = () => {
 
   // Obtém o produto específico com base no produtoId
   const product = products.find((product) => product.slug === produtoSlug)
+
   useEffect(() => {
     if (product?.medias?.thumbnail) {
       setMainImage({ src: product.medias.thumbnail, alt: product.name })
@@ -94,8 +95,8 @@ const ProdutoPage = () => {
       ...product,
       selectedPrint,
     }
-    dispatch(toggleCart())
     dispatch(addItemToCart(productWithPrint))
+    dispatch(toggleCart())
   }
 
   if (loading) return <p>Carregando...</p>
