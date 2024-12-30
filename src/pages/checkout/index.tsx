@@ -1,8 +1,10 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import Link from 'next/link'
 
 import { RootState } from '@/store'
+import { setAmountValue } from '@/store/reducers/amountSlice'
 import { useDispatch, useSelector } from 'react-redux'
+
 import Amount from '@/components/Amount'
 
 import { formattedPrice, getFirstLetter } from '@/services/utility'
@@ -20,8 +22,6 @@ import {
 
 const Checkout = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart)
-
-  const [amountValue, setAmountValue] = useState(1)
   const dispatch = useDispatch()
 
   return (
@@ -40,12 +40,14 @@ const Checkout = () => {
           {cartItems.map((product) => (
             <Row key={product.id}>
               <CellProduct>
-                <ProductImage
-                  src={product.selectedPrintImage || '/default-thumbnail.jpg'}
-                  alt={product.name}
-                  width={100}
-                  height={100}
-                />
+                <Link href={`/loja/${product.category}/${product.slug}`}>
+                  <ProductImage
+                    src={product.selectedPrintImage || '/default-thumbnail.jpg'}
+                    alt={product.name}
+                    width={100}
+                    height={100}
+                  />
+                </Link>
                 <h4>{product.name}</h4>
                 <h5>{getFirstLetter(product.selectedPrint)}</h5>
               </CellProduct>
@@ -71,7 +73,7 @@ const Checkout = () => {
                       false
                     )
                   }
-                  onQuantityChange={(value) => setAmountValue(value)}
+                  onQuantityChange={(value) => dispatch(setAmountValue(value))}
                 />
               </CellBody>
               <CellBody>

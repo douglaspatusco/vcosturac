@@ -1,8 +1,10 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
+
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
+
 import { useFetchProducts } from '@/hooks/useFetchProducts'
 import { useMainImage } from '@/hooks/useMainImage'
 
@@ -11,8 +13,6 @@ import { formattedPrice, getFirstLetter } from '@/services/utility'
 import {
   addToCart,
   calculateMousePosition,
-  disableZoom,
-  enableZoom,
   getPrintImageUrl,
   handleThumbnailClick,
 } from '@/utils/produtoUtils'
@@ -39,6 +39,10 @@ import {
   ZoomedImage,
 } from './styles'
 
+import { setIsZoomed } from '@/store/zoomSlice'
+import { RootState } from '@/store'
+import { setTransformOrigin } from '@/store/reducers/transformOriginSlice'
+
 const ProdutoPage = () => {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -51,8 +55,10 @@ const ProdutoPage = () => {
   const [selectedPrint, setSelectedPrint] = useState<string>('')
   const [selectedPrintImage, setSelectedPrintImage] = useState<string>('')
 
-  const [isZoomed, setIsZoomed] = useState(false)
-  const [transformOrigin, setTransformOrigin] = useState('center center')
+  const isZoomed = useSelector((state: RootState) => state.zoom.isZoomed)
+  const transformOrigin = useSelector(
+    (state: RootState) => state.transformOrigin.value
+  )
 
   const printImages = product?.medias?.prints[selectedPrint] || []
   const availablePrints = Object.entries(product?.medias?.prints || {}).filter(
@@ -81,9 +87,13 @@ const ProdutoPage = () => {
         <ProductContainer>
           <ProductImages>
             <ZoomContainer
-              onMouseMove={(e) => calculateMousePosition(e, setTransformOrigin)}
-              onMouseEnter={() => enableZoom(setIsZoomed)}
-              onMouseLeave={() => disableZoom(setIsZoomed)}
+              onMouseMove={(e) =>
+                calculateMousePosition(e, (origin) =>
+                  dispatch(setTransformOrigin(origin as string))
+                )
+              }
+              onMouseEnter={() => dispatch(setIsZoomed(true))}
+              onMouseLeave={() => dispatch(setIsZoomed(false))}
             >
               {mainImage && typeof mainImage.src === 'string' ? (
                 <ZoomedImage

@@ -13,8 +13,8 @@ const initialState: ProductsApiState = {
   error: null,
 }
 
-export const fetchProducts = createAsyncThunk(
-  'products/fetchProducts',
+export const fetchApiProducts = createAsyncThunk(
+  'products/fetchApiProducts',
   async () => {
     const response = await fetch('/api/products')
 
@@ -32,22 +32,22 @@ export const productsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchProducts.pending, (state) => {
+      .addCase(fetchApiProducts.pending, (state) => {
         state.loading = true
         state.error = null
       })
       .addCase(
-        fetchProducts.fulfilled,
+        fetchApiProducts.fulfilled,
         (state, action: PayloadAction<Product[]>) => {
           state.loading = false
           state.products = action.payload
         }
       )
-      .addCase(fetchProducts.rejected, (state, action) => {
+      .addCase(fetchApiProducts.rejected, (state, action) => {
         state.loading = false
         state.error = action.error.message || 'Failed to fetch products'
       })
   },
 })
 
-export const productsReducer = productsSlice.reducer
+export const apiProductsReducer = productsSlice.reducer

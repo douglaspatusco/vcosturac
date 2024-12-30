@@ -27,3 +27,12 @@ export const removeItem = (
 ) => {
   dispatch(removeItemFromCart({ id, selectedPrint }))
 }
+
+export const calculateTotalPrice = (
+  cartItems: Array<{ price?: number; quantity: number }>
+) => {
+  return cartItems.reduce(
+    (acc, product) => acc + (product.price ?? 0) * product.quantity,
+    0
+  )
+}

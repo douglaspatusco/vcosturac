@@ -1,12 +1,18 @@
 import Image from 'next/image'
-import { useState } from 'react'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { closeCart, toggleCart } from '@/store/reducers/cartSlice'
+import { setAmountValue } from '@/store/reducers/amountSlice'
+
 import Amount from '../Amount'
 
 import { formattedPrice, getFirstLetter } from '@/services/utility'
-import { handleQuantityChange, removeItem } from '@/utils/cartUtils'
+import {
+  handleQuantityChange,
+  removeItem,
+  calculateTotalPrice,
+} from '@/utils/cartUtils'
 
 import {
   Container,
@@ -26,17 +32,11 @@ const Cart = () => {
   const { isCartOpen, cartItems } = useSelector(
     (state: RootState) => state.cart
   )
-  const [amountValue, setAmountValue] = useState(1)
   const dispatch = useDispatch()
 
   const handleCheckoutClick = () => {
     dispatch(closeCart())
   }
-
-  const totalPrice = cartItems.reduce(
-    (acc, product) => acc + (product.price ?? 0) * product.quantity,
-    0
-  )
 
   return (
     <Container className={isCartOpen ? 'is-open' : ''}>
@@ -93,7 +93,9 @@ const Cart = () => {
                         false
                       )
                     }
-                    onQuantityChange={(value) => setAmountValue(value)}
+                    onQuantityChange={(value) =>
+                      dispatch(setAmountValue(value))
+                    }
                   />
                   <DeleteItem
                     onClick={() =>
@@ -131,8 +133,13 @@ const Cart = () => {
             </ProductsList>
             <div>
               <TotalPrice>
-                <h4>Total de {formattedPrice(totalPrice)}</h4>
-                <p>ou 2x de {formattedPrice(totalPrice / 2)} sem juros.</p>
+                <h4>
+                  Total de {formattedPrice(calculateTotalPrice(cartItems))}
+                </h4>
+                <p>
+                  ou 2x de {formattedPrice(calculateTotalPrice(cartItems) / 2)}{' '}
+                  sem juros.
+                </p>
               </TotalPrice>
               <Checkout href={'/checkout'} onClick={handleCheckoutClick}>
                 Continuar com a compra

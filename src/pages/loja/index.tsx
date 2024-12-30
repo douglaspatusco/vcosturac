@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, AppDispatch } from '../../store'
 import { useEffect } from 'react'
-import { fetchProducts } from '@/store/reducers/apiSlice'
+import { fetchApiProducts } from '@/store/reducers/apiSlice'
 import { Card, Categories, Imagem } from './styles'
 import { getFirstLetter } from '@/services/utility'
 
@@ -15,7 +15,7 @@ const Loja = () => {
   // Buscar produtos quando a página é carregada
   useEffect(() => {
     if (products.length === 0) {
-      dispatch(fetchProducts())
+      dispatch(fetchApiProducts())
     }
   }, [dispatch, products])
 
