@@ -1,9 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/image'
 
-import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
+
+import { RootState } from '@/store'
+import { setIsZoomed } from '@/store/zoomSlice'
+import { setSelectedPrintImage } from '@/store/reducers/selectedPrintImageSlice'
+import { setSelectedPrint } from '@/store/reducers/selectedPrintSlice'
+import { setTransformOrigin } from '@/store/reducers/transformOriginSlice'
 
 import { useFetchProducts } from '@/hooks/useFetchProducts'
 import { useMainImage } from '@/hooks/useMainImage'
@@ -39,10 +44,6 @@ import {
   ZoomedImage,
 } from './styles'
 
-import { setIsZoomed } from '@/store/zoomSlice'
-import { RootState } from '@/store'
-import { setTransformOrigin } from '@/store/reducers/transformOriginSlice'
-
 const ProdutoPage = () => {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -52,12 +53,16 @@ const ProdutoPage = () => {
   const product = products.find((product) => product.slug === produto)
 
   const { mainImage, setMainImage } = useMainImage(product as Product)
-  const [selectedPrint, setSelectedPrint] = useState<string>('')
-  const [selectedPrintImage, setSelectedPrintImage] = useState<string>('')
+  const selectedPrintImage = useSelector(
+    (state: RootState) => state.selectedPrintImage.value
+  )
 
   const isZoomed = useSelector((state: RootState) => state.zoom.isZoomed)
   const transformOrigin = useSelector(
     (state: RootState) => state.transformOrigin.value
+  )
+  const selectedPrint = useSelector(
+    (state: RootState) => state.selectedPrint.value
   )
 
   const printImages = product?.medias?.prints[selectedPrint] || []
@@ -66,11 +71,11 @@ const ProdutoPage = () => {
   )
 
   const handlePrintClick = (key: string) => {
-    setSelectedPrint(key)
+    dispatch(setSelectedPrint(key))
     const firstImage = product?.medias?.prints[key][0]
     if (firstImage) {
       setMainImage(firstImage)
-      setSelectedPrintImage(firstImage.src)
+      dispatch(setSelectedPrintImage(firstImage.src))
     }
   }
 
@@ -116,7 +121,7 @@ const ProdutoPage = () => {
                   title={image.alt}
                   onClick={() => {
                     handleThumbnailClick(image, setMainImage)
-                    setSelectedPrintImage(image.src)
+                    dispatch(setSelectedPrintImage(image.src))
                   }}
                 />
               ))}

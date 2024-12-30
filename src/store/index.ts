@@ -6,6 +6,8 @@ import { cartReducer } from './reducers/cartSlice'
 import amountReducer from './reducers/amountSlice'
 import zoomReducer from './zoomSlice'
 import transformOriginReducer from './reducers/transformOriginSlice'
+import selectedPrintReducer from './reducers/selectedPrintSlice'
+import selectedPrintImageReducer from './reducers/selectedPrintImageSlice'
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +17,8 @@ export const store = configureStore({
     amount: amountReducer,
     zoom: zoomReducer,
     transformOrigin: transformOriginReducer,
+    selectedPrint: selectedPrintReducer,
+    selectedPrintImage: selectedPrintImageReducer,
   },
 })
 
