@@ -41,7 +41,7 @@ const Checkout = () => {
             <Row key={product.id}>
               <CellProduct>
                 <ProductImage
-                  src={product.medias?.thumbnail || '/default-thumbnail.jpg'}
+                  src={product.selectedPrintImage || '/default-thumbnail.jpg'}
                   alt={product.name}
                   width={100}
                   height={100}
@@ -51,6 +51,7 @@ const Checkout = () => {
               </CellProduct>
               <CellBody>
                 <Amount
+                  isCheckout={true}
                   quantity={product.quantity}
                   onIncrement={() =>
                     handleQuantityChange(

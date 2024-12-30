@@ -73,6 +73,7 @@ const Cart = () => {
                     </h4>
                   </div>
                   <Amount
+                    isCheckout={false}
                     quantity={item.quantity}
                     onIncrement={() =>
                       handleQuantityChange(

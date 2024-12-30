@@ -6,6 +6,7 @@ interface AmountProps {
   onIncrement: () => void
   onDecrement: () => void
   onQuantityChange?: (value: number) => void
+  isCheckout?: boolean
 }
 
 const Amount: React.FC<AmountProps> = ({
@@ -13,9 +14,10 @@ const Amount: React.FC<AmountProps> = ({
   onDecrement,
   onIncrement,
   onQuantityChange,
+  isCheckout = false,
 }) => {
   return (
-    <AmountField>
+    <AmountField isCheckout={isCheckout}>
       <span
         onClick={onDecrement}
         title="Remover um item"
@@ -40,11 +42,13 @@ const Amount: React.FC<AmountProps> = ({
     </AmountField>
   )
 }
+
 Amount.propTypes = {
   quantity: PropTypes.number.isRequired,
   onIncrement: PropTypes.func.isRequired,
   onDecrement: PropTypes.func.isRequired,
   onQuantityChange: PropTypes.func,
+  isCheckout: PropTypes.bool,
 }
 
 export default Amount

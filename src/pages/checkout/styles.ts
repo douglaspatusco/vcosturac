@@ -64,9 +64,7 @@ export const CellProduct = styled.div`
   }
 `
 
-export const CellBody = styled(CellProduct)`
-  background-color: red;
-`
+export const CellBody = styled(CellProduct)``
 
 export const ProductImage = styled(Image)`
   width: 6em;
