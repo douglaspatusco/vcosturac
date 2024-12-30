@@ -13,7 +13,6 @@ interface PrintsProducts {
 }
 
 interface Product {
-  selectedPrint: any
   id: string
   slug: string
   category: string
@@ -27,4 +26,6 @@ interface Product {
     thumbnail: string | StaticImport
     prints: PrintsProducts
   }
+  selectedPrint: unknown
+  selectedPrintImage: string
 }

@@ -3,6 +3,8 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 const products: Product[] = [
   {
+    selectedPrint: '',
+    selectedPrintImage: '',
     id: '1',
     category: 'mochilas',
     slug: 'mochila-escolar',
@@ -77,6 +79,8 @@ const products: Product[] = [
     },
   },
   {
+    selectedPrint: '',
+    selectedPrintImage: '',
     id: '2',
     category: 'pochetes',
     slug: 'pochete-de-carnaval',
@@ -123,6 +127,8 @@ const products: Product[] = [
     },
   },
   {
+    selectedPrint: '',
+    selectedPrintImage: '',
     id: '3',
     name: 'Bolsa Rosa',
     category: 'bolsas',
@@ -155,6 +161,8 @@ const products: Product[] = [
     },
   },
   {
+    selectedPrint: '',
+    selectedPrintImage: '',
     id: '4',
     category: 'mochilas',
     slug: 'mochila-de-couro',

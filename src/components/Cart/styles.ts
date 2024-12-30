@@ -38,6 +38,7 @@ export const CartContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2em;
+  width: 100%;
   height: 100%;
 
   div:last-child {
@@ -49,6 +50,9 @@ export const CartContainer = styled.div`
 `
 
 export const Sidebar = styled.aside`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   right: 0;
   top: 0;
@@ -111,8 +115,9 @@ export const DeleteItem = styled.button`
     border-radius: 0.25em;
   }
 
-  svg path {
-    color: ${colors.creme};
+  svg {
+    width: 1em;
+    height: 1em;
   }
 `
 
@@ -142,8 +147,8 @@ export const Checkout = styled(Link)`
 
 export const EmptyCart = styled.p`
   text-align: center;
-  padding-top: 6em;
-  font-size: 0.9em;
-  line-height: 22px;
+  padding-top: 8em;
+  font-size: 1em;
+  line-height: 1.5em;
   color: ${colors.creme};
 `

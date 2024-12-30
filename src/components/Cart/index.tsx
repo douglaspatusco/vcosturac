@@ -1,8 +1,9 @@
+import Image from 'next/image'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
-import Amount from '../Amount'
 import { closeCart, toggleCart } from '@/store/reducers/cartSlice'
+import Amount from '../Amount'
 
 import { formattedPrice, getFirstLetter } from '@/services/utility'
 import { handleQuantityChange, removeItem } from '@/utils/cartUtils'
@@ -19,7 +20,7 @@ import {
   TotalPrice,
   Checkout,
 } from './styles'
-import Image from 'next/image'
+import { colors } from '@/styles/GlobalStyles'
 
 const Cart = () => {
   const { isCartOpen, cartItems } = useSelector(
@@ -48,9 +49,11 @@ const Cart = () => {
                 <ProductItem key={`${item.id}-${item.selectedPrint}`}>
                   <Image
                     src={
-                      typeof item.medias?.thumbnail === 'string'
-                        ? item.medias.thumbnail
-                        : '/path/to/default/image.jpg'
+                      item.selectedPrintImage
+                        ? item.selectedPrintImage
+                        : typeof item.medias?.thumbnail === 'string'
+                          ? item.medias.thumbnail
+                          : '/path/to/default/image.jpg'
                     }
                     alt={item.name}
                     width={100}
@@ -76,7 +79,7 @@ const Cart = () => {
                         dispatch,
                         cartItems,
                         item.id,
-                        item.selectedPrint,
+                        item.selectedPrint ?? '',
                         true
                       )
                     }
@@ -85,7 +88,7 @@ const Cart = () => {
                         dispatch,
                         cartItems,
                         item.id,
-                        item.selectedPrint,
+                        item.selectedPrint ?? '',
                         false
                       )
                     }
@@ -93,22 +96,33 @@ const Cart = () => {
                   />
                   <DeleteItem
                     onClick={() =>
-                      removeItem(dispatch, item.id, item.selectedPrint)
+                      removeItem(dispatch, item.id, item.selectedPrint ?? '')
                     }
                     type="button"
                   >
                     <svg
-                      width="50px"
-                      height="50px"
-                      viewBox="0 0 50 50"
+                      fill={colors.creme}
+                      width={100}
+                      height={100}
+                      viewBox="0 0 36 36"
+                      version="1.1"
+                      preserveAspectRatio="xMidYMid meet"
                       xmlns="http://www.w3.org/2000/svg"
+                      xmlnsXlink="http://www.w3.org/1999/xlink"
                     >
-                      <path d="M20 18h2v16h-2z" />
-                      <path d="M24 18h2v16h-2z" />
-                      <path d="M28 18h2v16h-2z" />
-                      <path d="M12 12h26v2H12z" />
-                      <path d="M30 12h-2v-1c0-.6-.4-1-1-1h-4c-.6 0-1 .4-1 1v1h-2v-1c0-1.7 1.3-3 3-3h4c1.7 0 3 1.3 3 3v1z" />
-                      <path d="M31 40H19c-1.6 0-3-1.3-3.2-2.9l-1.8-24 2-.2 1.8 24c0 .6.6 1.1 1.2 1.1h12c.6 0 1.1-.5 1.2-1.1l1.8-24 2 .2-1.8 24C34 38.7 32.6 40 31 40z" />
+                      <title>trash-line</title>
+                      <path d="M27.14,34H8.86A2.93,2.93,0,0,1,6,31V11.23H8V31a.93.93,0,0,0,.86,1H27.14A.93.93,0,0,0,28,31V11.23h2V31A2.93,2.93,0,0,1,27.14,34Z"></path>
+                      <path d="M30.78,9H5A1,1,0,0,1,5,7H30.78a1,1,0,0,1,0,2Z"></path>
+                      <rect x="21" y="13" width="2" height="15"></rect>
+                      <rect x="13" y="13" width="2" height="15"></rect>
+                      <path d="M23,5.86H21.1V4H14.9V5.86H13V4a2,2,0,0,1,1.9-2h6.2A2,2,0,0,1,23,4Z"></path>
+                      <rect
+                        x="0"
+                        y="0"
+                        width="36"
+                        height="36"
+                        fillOpacity="0"
+                      />
                     </svg>
                   </DeleteItem>
                 </ProductItem>
@@ -126,8 +140,12 @@ const Cart = () => {
           </CartContainer>
         ) : (
           <EmptyCart>
-            O carrinho está vazio, adicione pelo menos um produto para continuar
-            com a compra.
+            O carrinho está vazio.
+            <br />
+            <br />
+            Adicione pelo menos um produto
+            <br />
+            para continuar com a compra.
           </EmptyCart>
         )}
       </Sidebar>

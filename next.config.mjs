@@ -8,10 +8,12 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: 'http', // Protocolo da URL
+        hostname: '**', // Hostname permitido
+      },
+      {
         protocol: 'https', // Protocolo da URL
-        hostname: 'images.tcdn.com.br', // Hostname permitido
-        port: '', // Vazio se não houver porta específica
-        pathname: '/img/img_prod/**', // Caminho específico (use '**' para wildcard)
+        hostname: '**', // Hostname permitido
       },
     ],
   },

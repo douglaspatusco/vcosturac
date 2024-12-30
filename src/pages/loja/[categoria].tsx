@@ -1,9 +1,7 @@
-import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import { useSelector, useDispatch } from 'react-redux'
-import { RootState, AppDispatch } from '../../store'
-import { fetchProducts } from '../../store/reducers/apiSlice'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store'
 
 import { formattedPrice } from '@/services/utility'
 
@@ -17,17 +15,9 @@ import {
 
 const CategoriaPage = () => {
   const { categoria } = useRouter().query
-  const dispatch: AppDispatch = useDispatch()
-
   const { products, loading } = useSelector(
     (state: RootState) => state.products
   )
-
-  useEffect(() => {
-    if (products.length === 0) {
-      dispatch(fetchProducts())
-    }
-  }, [dispatch, products])
 
   const filteredProducts = products.filter(
     (product) => product.category === categoria
@@ -36,7 +26,9 @@ const CategoriaPage = () => {
   if (loading) return <p>Carregando...</p>
 
   if (!filteredProducts.length)
-    return <p>Nenhum produto encontrado para a categoria "{categoria}".</p>
+    return (
+      <p>Nenhum produto encontrado para a categoria &quot;{categoria}&quot;.</p>
+    )
 
   return (
     <>

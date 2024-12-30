@@ -1,11 +1,12 @@
+import Head from 'next/head'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { RootState, AppDispatch } from '../../../store'
-import { fetchProducts } from '@/store/reducers/apiSlice'
-import { addItemToCart, toggleCart } from '@/store/reducers/cartSlice'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useFetchProducts } from '@/hooks/useFetchProducts'
+import { useMainImage } from '@/hooks/useMainImage'
 
-import { PrintsImages, Product } from '@/types/product'
+import { Product } from '@/types/product'
 import { formattedPrice, getFirstLetter } from '@/services/utility'
 import {
   addToCart,
@@ -16,7 +17,6 @@ import {
   handleThumbnailClick,
 } from '@/utils/produtoUtils'
 
-import Head from 'next/head'
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrubs'
 import FreightCalculator from '@/components/Freight'
 
@@ -27,10 +27,12 @@ import {
   Description,
   Price,
   Prints,
+  PrintsList,
   ProductContainer,
   ProductDetails,
   ProductImages,
   ProductName,
+  SelectedImage,
   Thumbnail,
   ThumbnailsContainer,
   ZoomContainer,
@@ -39,41 +41,32 @@ import {
 
 const ProdutoPage = () => {
   const router = useRouter()
+  const dispatch = useDispatch()
   const { produto } = router.query
 
-  const dispatch: AppDispatch = useDispatch()
-  const { products, loading } = useSelector(
-    (state: RootState) => state.products
-  )
+  const { products, loading } = useFetchProducts()
+  const product = products.find((product) => product.slug === produto)
 
-  const [mainImage, setMainImage] = useState<PrintsImages | null>(null)
+  const { mainImage, setMainImage } = useMainImage(product as Product)
   const [selectedPrint, setSelectedPrint] = useState<string>('')
+  const [selectedPrintImage, setSelectedPrintImage] = useState<string>('')
 
-  // Zoom na imagem principal
   const [isZoomed, setIsZoomed] = useState(false)
   const [transformOrigin, setTransformOrigin] = useState('center center')
 
-  useEffect(() => {
-    if (!loading && products.length === 0) {
-      dispatch(fetchProducts())
-    }
-  }, [dispatch, products])
-
-  // Obtém o produto específico com base no produtoId
-  const product = products.find((product) => product.slug === produto)
-
-  useEffect(() => {
-    if (product?.medias?.thumbnail) {
-      setMainImage({ src: product.medias.thumbnail, alt: product.name })
-    }
-  }, [product])
-
-  const printImages = product?.medias?.prints[selectedPrint] || [] // Filtra as imagens da estampa selecionada
-
-  // Obter as estampas disponíveis dinamicamente
+  const printImages = product?.medias?.prints[selectedPrint] || []
   const availablePrints = Object.entries(product?.medias?.prints || {}).filter(
-    ([_, images]) => images && images.length > 0
+    ([images]) => images && images.length > 0
   )
+
+  const handlePrintClick = (key: string) => {
+    setSelectedPrint(key)
+    const firstImage = product?.medias?.prints[key][0]
+    if (firstImage) {
+      setMainImage(firstImage)
+      setSelectedPrintImage(firstImage.src)
+    }
+  }
 
   if (loading) return <p>Carregando...</p>
   if (!product) return <p>Produto não encontrado.</p>
@@ -111,7 +104,10 @@ const ProdutoPage = () => {
                   src={image.src}
                   alt={image.alt}
                   title={image.alt}
-                  onClick={() => handleThumbnailClick(image, setMainImage)}
+                  onClick={() => {
+                    handleThumbnailClick(image, setMainImage)
+                    setSelectedPrintImage(image.src)
+                  }}
                 />
               ))}
             </ThumbnailsContainer>
@@ -127,23 +123,36 @@ const ProdutoPage = () => {
             </div>
             <Prints>
               <p>Estampas: </p>
-              <div>
-                {availablePrints.map(([key]) => (
-                  <img
-                    key={key}
-                    onClick={() => setSelectedPrint(key)}
-                    title={getFirstLetter(key)}
-                    alt={key}
-                    src={getPrintImageUrl(key)} // Use URLs dinâmicas ou estáticas conforme necessário
-                  />
-                ))}
-              </div>
+              <PrintsList>
+                {availablePrints.map(([key]) => {
+                  const ImageComponent =
+                    key === selectedPrint ? SelectedImage : Image
+                  return (
+                    <ImageComponent
+                      key={key}
+                      onClick={() => handlePrintClick(key)}
+                      title={getFirstLetter(key)}
+                      alt={key}
+                      src={getPrintImageUrl(key)} // Use URLs dinâmicas ou estáticas conforme necessário
+                      width={100}
+                      height={100}
+                    />
+                  )
+                })}
+              </PrintsList>
             </Prints>
             <ContainerBuy>
               <BuyButton
                 type="submit"
                 title="Adicionar ao carrinho"
-                onClick={() => addToCart(dispatch, product, selectedPrint)}
+                onClick={() =>
+                  addToCart(
+                    dispatch,
+                    product,
+                    selectedPrint,
+                    selectedPrintImage
+                  )
+                }
               >
                 ADICIONAR AO CARRINHO
               </BuyButton>

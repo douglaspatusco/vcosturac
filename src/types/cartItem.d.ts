@@ -1,7 +1,7 @@
 import { Product } from '@/types/product'
 
 export interface CartItem extends Product {
-  selectedPrint: string
+  selectedPrint?: string
   quantity: number
 }
 

@@ -1,5 +1,6 @@
 import { colors } from '@/styles/GlobalStyles'
 import styled from 'styled-components'
+import Image from 'next/image'
 
 export const ContainerStore = styled.section`
   display: flex;
@@ -83,7 +84,6 @@ export const ProductDetails = styled.div`
   flex-direction: column;
   gap: 2em;
   width: 100%;
-  padding: 1em 0;
 `
 
 export const ProductName = styled.h1`
@@ -105,26 +105,34 @@ export const Prints = styled.div`
   p {
     font-size: 0.8em;
   }
+`
 
-  div {
-    display: flex;
-    gap: 1em;
+export const PrintsList = styled.div`
+  display: flex;
+  gap: 1em;
 
-    img {
-      width: 3em;
-      height: 3em;
-      border-radius: 50%;
-      cursor: pointer;
+  img {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    cursor: pointer;
 
-      &:hover {
-        box-shadow:
-          0 0.0625em 0.125em 0 rgba(0, 0, 0, 0.3),
-          0 0.125em 0.375em 0.125em rgba(0, 0, 0, 0.15);
-        transition: 0.3s ease;
-        transform: scale(1.05);
-      }
+    &:hover {
+      box-shadow:
+        0 0.0625em 0.125em 0 rgba(0, 0, 0, 0.3),
+        0 0.125em 0.375em 0.125em rgba(0, 0, 0, 0.15);
+      transition: 0.3s ease;
+    }
+
+    &:active {
+      transform: scale(0.9);
+      transition: 0.3s ease;
     }
   }
+`
+
+export const SelectedImage = styled(Image)`
+  outline: 0.25em solid ${colors.mostarda};
 `
 
 export const ContainerBuy = styled.div`
@@ -144,8 +152,8 @@ export const BuyButton = styled.button`
 
   &:hover {
     box-shadow:
-      0 1px 2px 0 rgba(0, 0, 0, 0.3),
-      0 2px 6px 2px rgba(0, 0, 0, 0.15);
+      0 0.0625em 0.125em 0 rgba(0, 0, 0, 0.3),
+      0 0.125em 0.375em 0.125em rgba(0, 0, 0, 0.15);
   }
 
   &:active {

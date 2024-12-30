@@ -11,7 +11,7 @@ export const colors = {
   marromEscuro: '#976954',
   marromEscuroPlus: '#895f4b',
   azul: '#bdc5de',
-  cinza: '#f9f9f9',
+  cinza: '#e5e5e5',
   preto: '#000000',
 }
 

@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
-import { Container, List } from './styles'
-import { getFirstLetter } from '@/services/utility'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
-import Link from 'next/link'
+
+import { getFirstLetter } from '@/services/utility'
+import { Container, List } from './styles'
 
 const Breadcrumbs = () => {
   const { categoria, produto } = useRouter().query

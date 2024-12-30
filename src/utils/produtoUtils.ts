@@ -44,11 +44,13 @@ export const handleThumbnailClick = (
 export const addToCart = (
   dispatch: AppDispatch,
   product: Product,
-  selectedPrint: string
+  selectedPrint: string,
+  selectedPrintImage: string
 ) => {
   const productWithPrint = {
     ...product,
     selectedPrint,
+    selectedPrintImage,
   }
   dispatch(addItemToCart(productWithPrint))
   dispatch(toggleCart())
