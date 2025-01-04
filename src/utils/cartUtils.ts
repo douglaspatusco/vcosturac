@@ -9,6 +9,14 @@ export const handleQuantityChange = (
   selectedPrint: string,
   increment: boolean
 ) => {
+  if (!dispatch) {
+    throw new Error('Dispatch is undefined')
+  }
+
+  if (!cartItems) {
+    throw new Error('Cart items are undefined or null')
+  }
+
   const produto = cartItems.find(
     (item) => item.id === id && item.selectedPrint === selectedPrint
   )
@@ -25,14 +33,26 @@ export const removeItem = (
   id: string,
   selectedPrint: string
 ) => {
+  if (!dispatch) {
+    throw new Error('Dispatch is undefined')
+  }
+
   dispatch(removeItemFromCart({ id, selectedPrint }))
 }
 
 export const calculateTotalPrice = (
   cartItems: Array<{ price?: number; quantity: number }>
 ) => {
-  return cartItems.reduce(
-    (acc, product) => acc + (product.price ?? 0) * product.quantity,
-    0
-  )
+  if (!cartItems) {
+    throw new Error('Cart items are undefined or null')
+  }
+
+  return cartItems.reduce((acc, product) => {
+    const price = product.price ?? 0
+    const quantity = product.quantity
+    if (typeof price !== 'number' || typeof quantity !== 'number') {
+      throw new Error('Invalid price or quantity')
+    }
+    return acc + price * quantity
+  }, 0)
 }
