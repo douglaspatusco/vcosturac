@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react'
 import { PrintsImages, Product } from '@/types/product'
 
-export const useMainImage = (product: Product) => {
+interface UseMainImageReturn {
+  mainImage: PrintsImages | null
+  setMainImage: React.Dispatch<React.SetStateAction<PrintsImages | null>>
+}
+
+export const useMainImage = (product: Product): UseMainImageReturn => {
   const [mainImage, setMainImage] = useState<PrintsImages | null>(null)
 
   useEffect(() => {

@@ -10,7 +10,7 @@ export const HeaderContainer = styled.header<{ pageIsScrolled: boolean }>`
   height: ${(props) => (props.pageIsScrolled ? '80px' : '120px')};
   padding: 1em;
   z-index: 2;
-  box-shadow: 0px 3px 10px 0px rgba(88, 88, 88, 0.28);
+  box-shadow: 0em 0.25em 0.75em 0em rgba(88, 88, 88, 0.28);
   background-color: ${colors.mostarda};
   transition: height 0.1s ease;
 `
@@ -79,20 +79,20 @@ export const Carrinho = styled.div`
     top: 8px;
     display: inline-block;
     vertical-align: middle;
-    font-size: 9px;
+    font-size: 0.5em;
     font-weight: 400;
     border-radius: 100%;
     width: 17px;
     text-align: center;
     height: 17px;
     line-height: 17px;
-    padding: 0 1px;
+    padding: 0 0.0625em;
     color: ${colors.creme};
     background: ${colors.salmaoEscuro};
   }
 
   &:hover {
-    box-shadow: 0px 0px 10px 10px rgb(249 249 249 / 25%);
+    box-shadow: 0em 0em 0.5em 0.5em rgb(249 249 249 / 25%);
     transition: 0.3s ease;
     transform: scale(1.05);
   }

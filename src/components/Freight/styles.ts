@@ -25,7 +25,7 @@ export const Form = styled.div`
     align-content: center;
     text-align: center;
     height: 2.5em;
-    width: 150px;
+    width: 10em;
     padding: 0.5em;
     font-size: 1em;
   }

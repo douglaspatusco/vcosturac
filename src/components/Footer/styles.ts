@@ -9,7 +9,7 @@ export const FooterContainer = styled.footer`
   gap: 1em;
   padding: 1em;
   background-color: ${colors.mostarda};
-  box-shadow: 0px 3px 10px 0px rgba(88, 88, 88, 0.28);
+  box-shadow: 0em 0.25em 0.75em 0em rgba(88, 88, 88, 0.28);
 
   p {
     font-size: 0.75em;
