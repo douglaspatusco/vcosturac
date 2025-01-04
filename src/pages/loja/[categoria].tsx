@@ -1,9 +1,7 @@
-import { useRouter } from 'next/router'
 import Head from 'next/head'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../store'
+import { useRouter } from 'next/router'
 
-import { formattedPrice } from '@/services/utility'
+import { formattedPrice, getFirstLetter } from '@/services/utility'
 
 import {
   ItemLink,
@@ -12,12 +10,11 @@ import {
   ProductsList,
   Thumb,
 } from './styles'
+import { useFetchProducts } from '@/hooks/useFetchProducts'
 
 const CategoriaPage = () => {
+  const { loading, products } = useFetchProducts()
   const { categoria } = useRouter().query
-  const { products, loading } = useSelector(
-    (state: RootState) => state.products
-  )
 
   const filteredProducts = products.filter(
     (product) => product.category === categoria
@@ -27,7 +24,10 @@ const CategoriaPage = () => {
 
   if (!filteredProducts.length)
     return (
-      <p>Nenhum produto encontrado para a categoria &quot;{categoria}&quot;.</p>
+      <p>
+        Nenhum produto encontrado para a categoria &quot;
+        {getFirstLetter(categoria as string)}&quot;.
+      </p>
     )
 
   return (
@@ -36,7 +36,7 @@ const CategoriaPage = () => {
         <title>Categorias | Vânia Costura Criativa</title>
       </Head>
       <ContainerProducts>
-        <h1>Categoria: {categoria}</h1>
+        <h1>Categoria: {getFirstLetter(categoria as string)}</h1>
         <ProductsList>
           {filteredProducts.map((product) => (
             <ListItem key={product.slug}>

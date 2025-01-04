@@ -1,23 +1,12 @@
 import Head from 'next/head'
-import { useSelector, useDispatch } from 'react-redux'
-import { RootState, AppDispatch } from '../../store'
-import { useEffect } from 'react'
-import { fetchApiProducts } from '@/store/reducers/apiSlice'
-import { Card, Categories, Imagem } from './styles'
+
 import { getFirstLetter } from '@/services/utility'
 
-const Loja = () => {
-  const dispatch: AppDispatch = useDispatch()
-  const { products, loading } = useSelector(
-    (state: RootState) => state.products
-  )
+import { Card, Categories, Imagem } from './styles'
+import { useFetchProducts } from '@/hooks/useFetchProducts'
 
-  // Buscar produtos quando a página é carregada
-  useEffect(() => {
-    if (products.length === 0) {
-      dispatch(fetchApiProducts())
-    }
-  }, [dispatch, products])
+const Loja = () => {
+  const { loading, products } = useFetchProducts()
 
   if (loading) return <p>Carregando...</p>
 

@@ -12,7 +12,7 @@ import { handleQuantityChange } from '@/utils/cartUtils'
 
 import {
   CartTableContainer,
-  Container,
+  ContainerWhite,
   Row,
   Header,
   ProductImage,
@@ -29,7 +29,7 @@ const Checkout = () => {
       <Head>
         <title>Checkout | Vânia Costura Criativa</title>
       </Head>
-      <Container>
+      <ContainerWhite>
         <h1>Finalizando a sua encomenda</h1>
         <CartTableContainer>
           <Header>
@@ -84,7 +84,7 @@ const Checkout = () => {
             </Row>
           ))}
         </CartTableContainer>
-      </Container>
+      </ContainerWhite>
     </>
   )
 }

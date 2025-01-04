@@ -82,7 +82,7 @@ export const ProductItem = styled.li`
   justify-content: space-around;
   align-items: center;
   gap: 1em;
-  border-radius: 0.2em;
+  border-radius: 0.25em;
   height: 6em;
   position: relative;
   background-color: ${colors.marromClaro};
@@ -137,6 +137,7 @@ export const Checkout = styled(Link)`
   color: ${colors.creme};
   background-color: ${colors.marromEscuro};
   border: none;
+  border-radius: 0.25em;
   font-size: 1em;
   cursor: pointer;
 

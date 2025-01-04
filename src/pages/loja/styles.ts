@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { colors } from '@/styles/GlobalStyles'
 import { styled } from 'styled-components'
 
-// indesx.tsx
+// index.tsx
 
 export const Categories = styled.div`
   display: flex;
@@ -31,8 +31,8 @@ export const Card = styled(Link)`
   gap: 2em;
   padding: 1em;
   margin: 1em;
-  border: 1px solid gray;
-  border-radius: 0.5em;
+  border: 0.0625em solid gray;
+  border-radius: 0.25em;
   background-color: ${colors.creme};
   transition: 0.3s ease;
 
@@ -42,7 +42,7 @@ export const Card = styled(Link)`
 `
 
 export const Imagem = styled.img`
-  width: 200px;
+  width: 12.5em;
   mix-blend-mode: darken;
   transition: 0.3s ease;
 
@@ -71,9 +71,9 @@ export const ProductsList = styled.ul`
 export const ListItem = styled.li`
   padding: 1em;
   border: 1px solid gray;
-  border-radius: 1em;
+  border-radius: 0.5em;
   transition: 0.3s ease;
-  mix-blend-mode: darken;
+  background-color: ${colors.creme};
 
   &:hover {
     transform: scale(1.02);
@@ -84,6 +84,7 @@ export const Thumb = styled.img`
   width: 200px;
   height: 200px;
   transition: 0.3s ease;
+  mix-blend-mode: darken;
 
   ${ListItem}:hover & {
     transform: scale(1.05);

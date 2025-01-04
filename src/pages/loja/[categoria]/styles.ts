@@ -14,6 +14,7 @@ export const ContainerStore = styled.section`
     0.375em 0 0.75em rgba(0, 0, 0, 0.2),
     -0.375em 0 0.75em rgba(0, 0, 0, 0.2);
 `
+
 export const ProductContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -68,6 +69,7 @@ export const ThumbnailsContainer = styled.div`
 export const Thumbnail = styled.img`
   width: 5em;
   height: 5em;
+  border-radius: 0.25em;
   cursor: pointer;
 
   &:hover {

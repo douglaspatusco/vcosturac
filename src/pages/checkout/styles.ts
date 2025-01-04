@@ -2,13 +2,17 @@ import styled from 'styled-components'
 import Image from 'next/image'
 import { colors } from '@/styles/GlobalStyles'
 
-export const Container = styled.div`
+export const ContainerWhite = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1em;
+  max-width: 1280px;
   width: 100%;
-  padding: 2em 0;
+  padding-top: 2em;
+  background-color: #fff;
+  box-shadow:
+    0.375em 0 0.75em rgba(0, 0, 0, 0.2),
+    -0.375em 0 0.75em rgba(0, 0, 0, 0.2);
 `
 
 export const CartTableContainer = styled.ul`
@@ -19,7 +23,7 @@ export const CartTableContainer = styled.ul`
   padding: 0;
   margin: 0;
   border: 0.0625em solid #e5e5e5;
-  border-radius: 0.5em;
+  border-radius: 0.25em;
   padding: 1em;
 `
 
@@ -31,9 +35,9 @@ export const Header = styled.li`
   justify-items: center;
   font-weight: bold;
   text-transform: uppercase;
-  background-color: ${colors.cinza};
+  background-color: ${colors.marromClaro};
   padding: 1em;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid ${colors.marromEscuro};
 `
 
 export const Row = styled.li`

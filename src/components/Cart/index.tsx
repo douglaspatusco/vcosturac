@@ -1,11 +1,10 @@
 import Image from 'next/image'
+import Amount from '../Amount'
 
-import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
+import { useDispatch, useSelector } from 'react-redux'
 import { closeCart, toggleCart } from '@/store/reducers/cartSlice'
 import { setAmountValue } from '@/store/reducers/amountSlice'
-
-import Amount from '../Amount'
 
 import { formattedPrice, getFirstLetter } from '@/services/utility'
 import {
@@ -14,6 +13,7 @@ import {
   calculateTotalPrice,
 } from '@/utils/cartUtils'
 
+import { colors } from '@/styles/GlobalStyles'
 import {
   Container,
   CartContainer,
@@ -26,7 +26,6 @@ import {
   TotalPrice,
   Checkout,
 } from './styles'
-import { colors } from '@/styles/GlobalStyles'
 
 const Cart = () => {
   const { isCartOpen, cartItems } = useSelector(

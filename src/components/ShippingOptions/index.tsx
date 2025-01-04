@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Card, Container } from './styles'
 
 interface ShippingOption {
@@ -18,7 +19,12 @@ const ShippingOptions: React.FC<ShippingOptionsProps> = ({ options }) => {
     <Container>
       {options.map((option, index) => (
         <Card key={index}>
-          <img src={option.company.picture} alt={option.name} />
+          <Image
+            src={option.company.picture}
+            alt={option.name}
+            width={100}
+            height={100}
+          />
           <h5>{option.name}</h5>
           <p>
             Preço: <strong>R$ {option.price}</strong>
