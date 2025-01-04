@@ -10,8 +10,11 @@ export const useMainImage = (product: Product): UseMainImageReturn => {
   const [mainImage, setMainImage] = useState<PrintsImages | null>(null)
 
   useEffect(() => {
-    if (product?.medias?.thumbnail) {
-      setMainImage({ src: product.medias.thumbnail, alt: product.name })
+    if (product && product.medias && product.medias.thumbnail) {
+      setMainImage({
+        src: product.medias.thumbnail,
+        alt: product.name,
+      })
     }
   }, [product])
 
