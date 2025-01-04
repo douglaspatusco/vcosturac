@@ -3,13 +3,16 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: 'localhost:3000/api/products',
+    baseUrl: 'http://localhost:3000/api/products',
+    prepareHeaders: (headers) => {
+      headers.set('Content-Type', 'application/json')
+      return headers
+    },
   }),
   endpoints: (builder) => ({
     getProducts: builder.query<Product[], void>({
-      query: () => {
-        return 'products'
-      },
+      query: () => 'products',
+      transformResponse: (response: Product[]) => response,
     }),
   }),
 })
