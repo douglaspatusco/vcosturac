@@ -26,6 +26,7 @@ import {
   TotalPrice,
   Checkout,
   ProductInfos,
+  SubtotalAndCheckout,
 } from './styles'
 
 const Cart = () => {
@@ -45,42 +46,42 @@ const Cart = () => {
         {cartItems.length > 0 ? (
           <CartContainer>
             <ProductsList>
-              {cartItems.map((item) => (
-                <ProductItem key={`${item.id}-${item.selectedPrint}`}>
+              {cartItems.map((product) => (
+                <ProductItem key={`${product.id}-${product.selectedPrint}`}>
                   <Image
                     src={
-                      item.selectedPrintImage
-                        ? item.selectedPrintImage
-                        : typeof item.medias?.thumbnail === 'string'
-                          ? item.medias.thumbnail
+                      product.selectedPrintImage
+                        ? product.selectedPrintImage
+                        : typeof product.medias?.thumbnail === 'string'
+                          ? product.medias.thumbnail
                           : '/path/to/default/image.jpg'
                     }
-                    alt={item.name}
+                    alt={product.name}
                     width={100}
                     height={100}
                   />
                   <ProductInfos>
-                    <h4>{item.name}</h4>
+                    <h4>{product.name}</h4>
                     <h5>
-                      {getFirstLetter(item.selectedPrint)
-                        ? `Estampa: ${getFirstLetter(item.selectedPrint)}`
+                      {getFirstLetter(product.selectedPrint)
+                        ? `Estampa: ${getFirstLetter(product.selectedPrint)}`
                         : ''}
                     </h5>
                     <h4>
-                      {item.price !== undefined
-                        ? formattedPrice(item.price * item.quantity)
+                      {product.price !== undefined
+                        ? formattedPrice(product.price * product.quantity)
                         : 'Preço indisponível'}
                     </h4>
                   </ProductInfos>
                   <Amount
                     isCheckout={false}
-                    quantity={item.quantity}
+                    quantity={product.quantity}
                     onIncrement={() =>
                       handleQuantityChange(
                         dispatch,
                         cartItems,
-                        item.id,
-                        item.selectedPrint ?? '',
+                        product.id,
+                        product.selectedPrint ?? '',
                         true
                       )
                     }
@@ -88,8 +89,8 @@ const Cart = () => {
                       handleQuantityChange(
                         dispatch,
                         cartItems,
-                        item.id,
-                        item.selectedPrint ?? '',
+                        product.id,
+                        product.selectedPrint ?? '',
                         false
                       )
                     }
@@ -99,7 +100,11 @@ const Cart = () => {
                   />
                   <DeleteItem
                     onClick={() =>
-                      removeItem(dispatch, item.id, item.selectedPrint ?? '')
+                      removeItem(
+                        dispatch,
+                        product.id,
+                        product.selectedPrint ?? ''
+                      )
                     }
                     type="button"
                   >
@@ -131,20 +136,22 @@ const Cart = () => {
                 </ProductItem>
               ))}
             </ProductsList>
-            <div>
+            <SubtotalAndCheckout>
               <TotalPrice>
-                <h4>
-                  Total de {formattedPrice(calculateTotalPrice(cartItems))}
-                </h4>
-                <p>
-                  ou 2x de {formattedPrice(calculateTotalPrice(cartItems) / 2)}{' '}
-                  sem juros.
-                </p>
+                <h2>Total:</h2>
+                <div>
+                  <h2>{formattedPrice(calculateTotalPrice(cartItems))}</h2>
+                  <p>
+                    ou 2x de{' '}
+                    {formattedPrice(calculateTotalPrice(cartItems) / 2)} sem
+                    juros.
+                  </p>
+                </div>
               </TotalPrice>
               <Checkout href={'/checkout'} onClick={handleCheckoutClick}>
-                Continuar com a compra
+                CONTINUAR COM A COMPRA
               </Checkout>
-            </div>
+            </SubtotalAndCheckout>
           </CartContainer>
         ) : (
           <EmptyCart>

@@ -40,13 +40,6 @@ export const CartContainer = styled.div`
   gap: 2em;
   width: 100%;
   height: 100%;
-
-  div:last-child {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    margin: auto 0 1em 0;
-  }
 `
 
 export const Sidebar = styled.aside`
@@ -132,12 +125,28 @@ export const DeleteItem = styled.button`
   }
 `
 
+export const SubtotalAndCheckout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin: auto 0 1em 0;
+`
+
 export const TotalPrice = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
   color: ${colors.creme};
+
+  div {
+    justify-items: flex-end;
+  }
 
   p {
     font-size: 0.8em;
     font-weight: 700;
+    align-self: flex-end;
   }
 `
 
@@ -150,6 +159,7 @@ export const Checkout = styled(Link)`
   border: none;
   border-radius: 0.25em;
   font-size: 1em;
+  font-weight: 700;
   cursor: pointer;
 
   &:hover {
