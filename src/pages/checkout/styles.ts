@@ -15,6 +15,13 @@ export const ContainerWhite = styled.section`
     -0.375em 0 0.75em rgba(0, 0, 0, 0.2);
 `
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1em;
+`
+
 export const CartTableContainer = styled.ul`
   list-style: none;
   display: grid;
@@ -82,4 +89,16 @@ export const Infos = styled.li`
   flex-direction: row;
 
   background-color: blue;
+`
+
+/* SHIPPING */
+
+export const ShippingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 1em;
+  border: 0.0625em solid #e5e5e5;
+  border-radius: 0.25em;
 `
