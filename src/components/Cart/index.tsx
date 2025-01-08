@@ -25,6 +25,7 @@ import {
   Sidebar,
   TotalPrice,
   Checkout,
+  ProductInfos,
 } from './styles'
 
 const Cart = () => {
@@ -58,19 +59,19 @@ const Cart = () => {
                     width={100}
                     height={100}
                   />
-                  <div>
+                  <ProductInfos>
                     <h4>{item.name}</h4>
-                    <h4>
+                    <h5>
                       {getFirstLetter(item.selectedPrint)
                         ? `Estampa: ${getFirstLetter(item.selectedPrint)}`
                         : ''}
-                    </h4>
+                    </h5>
                     <h4>
                       {item.price !== undefined
                         ? formattedPrice(item.price * item.quantity)
                         : 'Preço indisponível'}
                     </h4>
-                  </div>
+                  </ProductInfos>
                   <Amount
                     isCheckout={false}
                     quantity={item.quantity}

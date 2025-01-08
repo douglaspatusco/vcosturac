@@ -74,7 +74,9 @@ export const ProductsList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1em;
-  padding-top: 6em;
+  margin-top: 6em;
+  overflow-y: auto;
+  overflow-x: hidden;
 `
 
 export const ProductItem = styled.li`
@@ -82,17 +84,26 @@ export const ProductItem = styled.li`
   justify-content: space-around;
   align-items: center;
   gap: 1em;
+  padding: 0.5em 2em 0.5em 0.5em;
   border-radius: 0.25em;
-  height: 6em;
+  height: 8em;
   position: relative;
   background-color: ${colors.marromClaro};
   color: ${colors.creme};
 
   img {
-    width: 4em;
-    height: 4em;
+    /* width: 4em; */
+    /* height: 4em; */
+    margin: 0 0.5em;
     mix-blend-mode: darken;
   }
+`
+
+export const ProductInfos = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  min-width: 10em;
 `
 
 export const DeleteItem = styled.button`

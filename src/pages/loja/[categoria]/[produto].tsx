@@ -43,6 +43,7 @@ import {
   ZoomContainer,
   ZoomedImage,
 } from './styles'
+import { useEffect } from 'react'
 
 const ProdutoPage = () => {
   const router = useRouter()
@@ -53,6 +54,7 @@ const ProdutoPage = () => {
   const product = products.find((product) => product.slug === produto)
 
   const { mainImage, setMainImage } = useMainImage(product as Product)
+
   const selectedPrintImage = useSelector(
     (state: RootState) => state.selectedPrintImage.value
   )
@@ -70,9 +72,22 @@ const ProdutoPage = () => {
     ([images]) => images && images.length > 0
   )
 
+  useEffect(() => {
+    if (product) {
+      // Definir a imagem padrão como o thumbnail ao carregar o produto
+      if (product.medias?.thumbnail) {
+        setMainImage({ src: product.medias.thumbnail, alt: product.name })
+      }
+
+      // Resetar a estampa selecionada ao carregar o produto
+      dispatch(setSelectedPrint('')) // Sem estampa selecionada
+      dispatch(setSelectedPrintImage('')) // Sem imagem de estampa selecionada
+    }
+  }, [product, dispatch, setMainImage])
+
   const handlePrintClick = (key: string) => {
-    dispatch(setSelectedPrint(key))
-    const firstImage = product?.medias?.prints[key][0]
+    dispatch(setSelectedPrint(key)) // Atualiza a estampa selecionada
+    const firstImage = product?.medias?.prints[key]?.[0]
     if (firstImage) {
       setMainImage(firstImage)
       dispatch(setSelectedPrintImage(firstImage.src))
@@ -130,7 +145,7 @@ const ProdutoPage = () => {
           <ProductDetails>
             <ProductName>{product.name}</ProductName>
             <div>
-              <Price>{formattedPrice(product.price)}</Price>
+              <Price>{formattedPrice(product.price as number)}</Price>
               <span>
                 ou <b>{product.division}</b> de{' '}
                 <b>{formattedPrice(product.installment)}</b> sem juros!
