@@ -1,6 +1,5 @@
 import { AppDispatch } from '@/store' // Tipo do dispatch
 import { updateQuantity, removeItemFromCart } from '@/store/reducers/cartSlice'
-import { CartItem } from '@/types/cartItem'
 
 export const handleQuantityChange = (
   dispatch: AppDispatch,

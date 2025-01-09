@@ -1,4 +1,3 @@
-import { Product } from '@/types/product'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 const products: Product[] = [

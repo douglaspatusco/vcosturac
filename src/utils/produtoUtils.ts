@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
 import { AppDispatch } from '@/store'
 import { addItemToCart, toggleCart } from '@/store/reducers/cartSlice'
-import { PrintsImages, Product } from '@/types/product'
 
 // URL base para as imagens de estampas
 const BASE_URL =
