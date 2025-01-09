@@ -12,7 +12,34 @@ export const colors = {
   marromEscuroPlus: '#895f4b',
   azul: '#bdc5de',
   cinza: '#e5e5e5',
+  cinzaEscuro: '#e4e9c8',
   preto: '#000000',
+  branco: '#ffffff',
+}
+
+export const cores = {
+  mostardaClara: '#F9E2A1',
+  mostarda: '#D4A917',
+  mostardaEscura: '#A8820C',
+
+  SalmaoClara: '#FFC9B5',
+  salmao: '#FF8264',
+  SalmaoEscura: '#C85A43',
+
+  marromClara: '#B08C6E',
+  marrom: '#8B5E34',
+  marromEscura: '#5E3C21',
+
+  azulClara: '#D4E9F9',
+  azul: '#8DBAE4',
+  azulEscura: '#567EA5',
+
+  cinzaClara: '#E6E6E6',
+  cinza: '#B3B3B3',
+  cinzaEscura: '#808080',
+
+  preto: '#000000',
+  branco: '#FFFFFF',
 }
 
 export const breakpoints = {}

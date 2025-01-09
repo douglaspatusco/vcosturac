@@ -1,12 +1,16 @@
 import { useState } from 'react'
+import { ShippingOption } from '@/types/shipping'
+
 import ShippingOptions from '../ShippingOptions'
+
 import { handleCalculateShipping } from '@/utils/shippingUtils'
 
 import { Container, Form } from './styles'
 
 const ShippingPage = () => {
   const [cepDestino, setCepDestino] = useState('')
-  const [shippingOptions, setShippingOptions] = useState<unknown[]>([])
+
+  const [shippingOptions, setShippingOptions] = useState<ShippingOption[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
   const handleCalculate = () => {

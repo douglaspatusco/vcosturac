@@ -109,6 +109,7 @@ export const DeleteItem = styled.button`
   width: 1.5em;
   height: 1.5em;
   border: none;
+  border-radius: 0.25em;
   font-size: 1em;
   background-color: ${colors.marromClaro};
   color: ${colors.creme};

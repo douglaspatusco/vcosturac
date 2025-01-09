@@ -9,19 +9,24 @@ import Amount from '@/components/Amount'
 import FreightCalculator from '@/components/Freight'
 
 import { formattedPrice, getFirstLetter } from '@/services/utility'
-import { handleQuantityChange } from '@/utils/cartUtils'
+import { handleQuantityChange, removeItem } from '@/utils/cartUtils'
 
 import {
   CartTableContainer,
   ContainerWhite,
-  Row,
-  Header,
+  TableRow,
+  TableHead,
   ProductImage,
   CellBody,
   CellProduct,
   ShippingContainer,
   Container,
+  Total,
+  ShippingAndTotal,
+  TableBody,
 } from './styles'
+
+import DeleteProduct from '@/components/DeleteProduct'
 
 const Checkout = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart)
@@ -36,65 +41,82 @@ const Checkout = () => {
         <h1>Finalizando a sua encomenda</h1>
         <Container>
           <CartTableContainer>
-            <Header>
+            <TableHead>
               <div>Produto</div>
               <div>Quantidade</div>
               <div>SubTotal</div>
-            </Header>
-            {cartItems.map((product) => (
-              <Row key={product.id}>
-                <CellProduct>
-                  <Link href={`/loja/${product.category}/${product.slug}`}>
-                    <ProductImage
-                      src={
-                        product.selectedPrintImage || '/default-thumbnail.jpg'
+              <div>{''}</div>
+            </TableHead>
+            <TableBody>
+              {cartItems.map((product) => (
+                <TableRow key={product.id}>
+                  <CellProduct>
+                    <Link href={`/loja/${product.category}/${product.slug}`}>
+                      <ProductImage
+                        src={
+                          product.selectedPrintImage || '/default-thumbnail.jpg'
+                        }
+                        alt={product.name}
+                        width={100}
+                        height={100}
+                      />
+                    </Link>
+                    <h4>{product.name}</h4>
+                    <h5>{getFirstLetter(product.selectedPrint)}</h5>
+                  </CellProduct>
+                  <CellBody>
+                    <Amount
+                      isCheckout={true}
+                      quantity={product.quantity}
+                      onIncrement={() =>
+                        handleQuantityChange(
+                          dispatch,
+                          cartItems,
+                          product.id,
+                          product.selectedPrint ?? '',
+                          true
+                        )
                       }
-                      alt={product.name}
-                      width={100}
-                      height={100}
+                      onDecrement={() =>
+                        handleQuantityChange(
+                          dispatch,
+                          cartItems,
+                          product.id,
+                          product.selectedPrint ?? '',
+                          false
+                        )
+                      }
+                      onQuantityChange={(value) =>
+                        dispatch(setAmountValue(value))
+                      }
                     />
-                  </Link>
-                  <h4>{product.name}</h4>
-                  <h5>{getFirstLetter(product.selectedPrint)}</h5>
-                </CellProduct>
-                <CellBody>
-                  <Amount
-                    isCheckout={true}
-                    quantity={product.quantity}
-                    onIncrement={() =>
-                      handleQuantityChange(
-                        dispatch,
-                        cartItems,
-                        product.id,
-                        product.selectedPrint ?? '',
-                        true
-                      )
-                    }
-                    onDecrement={() =>
-                      handleQuantityChange(
-                        dispatch,
-                        cartItems,
-                        product.id,
-                        product.selectedPrint ?? '',
-                        false
-                      )
-                    }
-                    onQuantityChange={(value) =>
-                      dispatch(setAmountValue(value))
-                    }
-                  />
-                </CellBody>
-                <CellBody>
-                  {product.price !== undefined
-                    ? formattedPrice(product.price * product.quantity)
-                    : 'Preço indisponível'}
-                </CellBody>
-              </Row>
-            ))}
+                  </CellBody>
+                  <CellBody>
+                    {product.price !== undefined
+                      ? formattedPrice(product.price * product.quantity)
+                      : 'Preço indisponível'}
+                  </CellBody>
+                  <CellBody>
+                    <DeleteProduct
+                      onClick={() =>
+                        removeItem(
+                          dispatch,
+                          product.id,
+                          product.selectedPrint ?? ''
+                        )
+                      }
+                    />
+                  </CellBody>
+                </TableRow>
+              ))}
+            </TableBody>
           </CartTableContainer>
-          <ShippingContainer>
-            <FreightCalculator />
-          </ShippingContainer>
+          <ShippingAndTotal>
+            <ShippingContainer>
+              <FreightCalculator />
+            </ShippingContainer>
+            <Total>Total</Total>
+          </ShippingAndTotal>
         </Container>
       </ContainerWhite>
     </>
