@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState, AppDispatch } from '../store'
 import { fetchApiProducts } from '@/store/reducers/apiSlice'
-import { Product } from '@/types/product'
 
 interface UseFetchProductsReturn {
   products: Product[]

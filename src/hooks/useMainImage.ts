@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { PrintsImages, Product } from '@/types/product'
 
 interface UseMainImageReturn {
   mainImage: PrintsImages | null

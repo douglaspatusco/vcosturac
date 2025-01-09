@@ -1,4 +1,3 @@
-import { PrintsImages, PrintsProducts } from '@/types/product'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface ProductState {

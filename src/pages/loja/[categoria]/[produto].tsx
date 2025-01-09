@@ -13,7 +13,6 @@ import { setTransformOrigin } from '@/store/reducers/transformOriginSlice'
 import { useFetchProducts } from '@/hooks/useFetchProducts'
 import { useMainImage } from '@/hooks/useMainImage'
 
-import { Product } from '@/types/product'
 import { formattedPrice, getFirstLetter } from '@/services/utility'
 import {
   addToCart,
@@ -23,7 +22,6 @@ import {
 } from '@/utils/produtoUtils'
 
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrubs'
-import FreightCalculator from '@/components/Freight'
 
 import {
   BuyButton,
@@ -191,7 +189,6 @@ const ProdutoPage = () => {
               <h4>Descrição:</h4>
               <p>{product.description}</p>
             </Description>
-            <FreightCalculator />
           </ProductDetails>
         </ProductContainer>
       </ContainerStore>
