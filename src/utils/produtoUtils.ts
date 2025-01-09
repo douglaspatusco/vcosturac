@@ -1,10 +1,45 @@
 import { Dispatch, SetStateAction } from 'react'
+
 import { AppDispatch } from '@/store'
 import { addItemToCart, toggleCart } from '@/store/reducers/cartSlice'
+
+// ---------- IMPLEMENTAÇÃO DE THROTTLE
+function throttle(
+  func: (
+    x: number,
+    y: number,
+    setTransformOrigin: Dispatch<SetStateAction<string>>
+  ) => void,
+  limit: number
+) {
+  let waiting = false
+
+  return (...args: [number, number, Dispatch<SetStateAction<string>>]) => {
+    if (!waiting) {
+      func(...args)
+      waiting = true
+      setTimeout(() => {
+        waiting = false
+      }, limit)
+    }
+  }
+}
 
 // URL base para as imagens de estampas
 const BASE_URL =
   'https://raw.githubusercontent.com/eyelexx/vcosturac/refs/heads/main/src/public/images/estampas/'
+
+// Função throttled para atualizar a origem do zoom
+const updateTransformOrigin = throttle(
+  (
+    x: number,
+    y: number,
+    setTransformOrigin: Dispatch<SetStateAction<string>>
+  ) => {
+    setTransformOrigin(`${x}% ${y}%`)
+  },
+  50 // Tempo mínimo entre execuções (em milissegundos)
+)
 
 // ---------- ZOOM NA IMAGEM
 
@@ -16,7 +51,9 @@ export const calculateMousePosition = (
   const rect = e.currentTarget.getBoundingClientRect()
   const x = ((e.clientX - rect.left) / rect.width) * 100
   const y = ((e.clientY - rect.top) / rect.height) * 100
-  setTransformOrigin(`${x}% ${y}%`)
+
+  // Chama a função throttled para atualizar a origem do zoom
+  updateTransformOrigin(x, y, setTransformOrigin)
 }
 
 // Ativa o zoom na imagem.
