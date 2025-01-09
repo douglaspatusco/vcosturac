@@ -1,18 +1,6 @@
 import Image from 'next/image'
 import { Card, Container } from './styles'
-
-interface ShippingOption {
-  name: string
-  price: string
-  delivery_time: string
-  company: {
-    picture: string
-  }
-}
-
-interface ShippingOptionsProps {
-  options: ShippingOption[]
-}
+import PropTypes from 'prop-types'
 
 const ShippingOptions: React.FC<ShippingOptionsProps> = ({ options }) => {
   return (
@@ -36,6 +24,19 @@ const ShippingOptions: React.FC<ShippingOptionsProps> = ({ options }) => {
       ))}
     </Container>
   )
+}
+
+ShippingOptions.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      delivery_time: PropTypes.string.isRequired,
+      company: PropTypes.shape({
+        picture: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired
+  ).isRequired,
 }
 
 export default ShippingOptions

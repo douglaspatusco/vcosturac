@@ -19,44 +19,47 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 1em;
+  gap: 2em;
+  padding: 4em;
+  width: 1280px;
 `
 
-export const CartTableContainer = styled.ul`
-  list-style: none;
+export const CartTableContainer = styled.table`
   display: grid;
   grid-template-rows: auto; /* Cada linha é criada automaticamente */
   gap: 1em;
-  padding: 0;
-  margin: 0;
+  width: 100%;
+  padding: 1em;
   border: 0.0625em solid #e5e5e5;
   border-radius: 0.25em;
-  padding: 1em;
+  list-style: none;
 `
 
-export const Header = styled.li`
+export const TableHead = styled.th`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1em;
+  grid-template-columns: 1fr 1fr 1fr auto;
   align-items: center;
   justify-items: center;
+  gap: 1em;
+  padding: 1em;
   font-weight: bold;
   text-transform: uppercase;
-  background-color: ${colors.marromClaro};
-  padding: 1em;
-  border-bottom: 2px solid ${colors.marromEscuro};
+  background-color: ${colors.creme};
+  border-bottom: 0.125em solid ${colors.cinzaEscuro};
+  border-radius: 0.25em;
 `
 
-export const Row = styled.li`
+export const TableBody = styled.tbody`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+`
+
+export const TableRow = styled.td`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
   gap: 1em;
   padding: 1em;
   border-bottom: 0.0625em solid #eee;
-
-  &:last-child {
-    border-bottom: none;
-  }
 `
 
 export const CellProduct = styled.div`
@@ -93,11 +96,27 @@ export const Infos = styled.li`
 
 /* SHIPPING */
 
+export const ShippingAndTotal = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  padding: 1em;
+  width: 50%;
+`
+
 export const ShippingContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  padding: 1em;
+  border: 0.0625em solid #e5e5e5;
+  border-radius: 0.25em;
+`
+
+export const Total = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 1em;
   border: 0.0625em solid #e5e5e5;
   border-radius: 0.25em;

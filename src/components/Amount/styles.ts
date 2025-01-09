@@ -49,6 +49,6 @@ export const AmountField = styled.div<AmountFieldProps>`
     outline: none;
     appearance: textfield;
     background-color: transparent;
-    color: ${({ isCheckout }) => (isCheckout ? colors.preto : colors.creme)};
+    color: ${({ isCheckout }) => (isCheckout ? colors.preto : colors.cinza)};
   }
 `
