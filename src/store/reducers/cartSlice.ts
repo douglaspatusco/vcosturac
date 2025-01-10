@@ -70,4 +70,4 @@ export const {
   removeItemFromCart,
   clearCart,
 } = cartSlice.actions
-export const cartReducer = cartSlice.reducer
+export default cartSlice.reducer

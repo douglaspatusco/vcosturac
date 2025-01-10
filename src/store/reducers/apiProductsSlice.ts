@@ -49,4 +49,4 @@ export const productsSlice = createSlice({
   },
 })
 
-export const apiProductsReducer = productsSlice.reducer
+export default productsSlice.reducer

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState } from '@/store'
-import { setIsZoomed } from '@/store/zoomSlice'
+import { setIsZoomed } from '@/store/reducers/zoomSlice'
 import { setSelectedPrintImage } from '@/store/reducers/selectedPrintImageSlice'
 import { setSelectedPrint } from '@/store/reducers/selectedPrintSlice'
 import { setTransformOrigin } from '@/store/reducers/transformOriginSlice'

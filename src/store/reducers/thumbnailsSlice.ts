@@ -24,4 +24,4 @@ const thumbnailsSlice = createSlice({
 })
 
 export const { setSelectedPrint, setThumbnails } = thumbnailsSlice.actions
-export const thumbnailsReducer = thumbnailsSlice.reducer
+export default thumbnailsSlice.reducer
