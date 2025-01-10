@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { Card, Container, Option } from './styles'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
@@ -27,19 +26,14 @@ const ShippingOptions: React.FC<ShippingOptionsProps> = ({ options }) => {
             onChange={() => handleSelect(option)}
           />
           <Card key={index} selected={selectedFreight?.name === option.name}>
-            <Image
-              src={option.company.picture}
-              alt={option.name}
-              width={100}
-              height={100}
-            />
-            <h5>{option.name}</h5>
+            <div>
+              <h5>{option.name}</h5>
+              <p>
+                <strong>R$ {option.price}</strong>
+              </p>
+            </div>
             <p>
-              Preço: <strong>R$ {option.price}</strong>
-            </p>
-            <p>
-              Prazo de entrega: <strong>{option.delivery_time}</strong> dias
-              úteis
+              Prazo: <strong>{option.delivery_time}</strong> dias úteis
             </p>
           </Card>
         </Option>
