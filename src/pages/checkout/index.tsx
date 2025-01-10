@@ -27,6 +27,7 @@ import {
 } from './styles'
 
 import DeleteProduct from '@/components/DeleteProduct'
+import TestComponent from '@/components/TestComponent'
 
 const Checkout = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart)

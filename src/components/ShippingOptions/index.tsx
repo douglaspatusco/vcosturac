@@ -1,26 +1,48 @@
 import Image from 'next/image'
-import { Card, Container } from './styles'
+import { Card, Container, Option } from './styles'
 import PropTypes from 'prop-types'
+import { useState } from 'react'
 
 const ShippingOptions: React.FC<ShippingOptionsProps> = ({ options }) => {
+  const [selectedFreight, setSelectedFreight] = useState<{
+    name: string
+    price: string
+  } | null>(null)
+
+  const handleSelect = (options: { name: string; price: string }) => {
+    setSelectedFreight(options)
+  }
+
   return (
     <Container>
       {options.map((option, index) => (
-        <Card key={index}>
-          <Image
-            src={option.company.picture}
-            alt={option.name}
-            width={100}
-            height={100}
+        <Option
+          key={option.name}
+          selected={selectedFreight?.name === option.name}
+        >
+          <input
+            key={option.name}
+            type="checkbox"
+            checked={selectedFreight?.name === option.name}
+            onChange={() => handleSelect(option)}
           />
-          <h5>{option.name}</h5>
-          <p>
-            Preço: <strong>R$ {option.price}</strong>
-          </p>
-          <p>
-            Prazo de entrega: <strong>{option.delivery_time}</strong> dias úteis
-          </p>
-        </Card>
+          <Card key={index} selected={selectedFreight?.name === option.name}>
+            <Image
+              src={option.company.picture}
+              alt={option.name}
+              width={100}
+              height={100}
+            />
+            <h5>{option.name}</h5>
+            <p>
+              Preço: <strong>R$ {option.price}</strong>
+            </p>
+            <p>
+              Prazo de entrega: <strong>{option.delivery_time}</strong> dias
+              úteis
+            </p>
+          </Card>
+        </Option>
       ))}
     </Container>
   )

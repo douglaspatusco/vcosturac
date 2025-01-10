@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 export const colors = {
   creme: '#f7f9ec',
-  mostarda: '#e2b42d',
+  mostarda: '#d3af43',
   salmaoClaro: '#c9816e',
   salmao: '#c5654c',
   salmaoEscuro: '#914c36',
@@ -22,9 +22,9 @@ export const cores = {
   mostarda: '#D4A917',
   mostardaEscura: '#A8820C',
 
-  SalmaoClara: '#FFC9B5',
+  salmaoClara: '#FFC9B5',
   salmao: '#FF8264',
-  SalmaoEscura: '#C85A43',
+  salmaoEscura: '#C85A43',
 
   marromClara: '#B08C6E',
   marrom: '#8B5E34',
@@ -38,6 +38,7 @@ export const cores = {
   cinza: '#B3B3B3',
   cinzaEscura: '#808080',
 
+  creme: '#F5E4C3',
   preto: '#000000',
   branco: '#FFFFFF',
 }
