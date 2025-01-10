@@ -120,4 +120,12 @@ export const Total = styled.div`
   padding: 1em;
   border: 0.0625em solid #e5e5e5;
   border-radius: 0.25em;
+  gap: 1em;
+
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
 `

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState, AppDispatch } from '../store'
-import { fetchApiProducts } from '@/store/reducers/apiSlice'
+import { fetchApiProducts } from '@/store/reducers/apiProductsSlice'
 
 interface UseFetchProductsReturn {
   products: Product[]
