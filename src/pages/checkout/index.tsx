@@ -9,7 +9,11 @@ import Amount from '@/components/Amount'
 import FreightCalculator from '@/components/Freight'
 
 import { formattedPrice, getFirstLetter } from '@/services/utility'
-import { handleQuantityChange, removeItem } from '@/utils/cartUtils'
+import {
+  calculateTotalPrice,
+  handleQuantityChange,
+  removeItem,
+} from '@/utils/cartUtils'
 
 import {
   CartTableContainer,
@@ -30,6 +34,15 @@ import DeleteProduct from '@/components/DeleteProduct'
 
 const Checkout = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart)
+  const selectedFreight = useSelector(
+    (state: RootState) => state.shipping.selectedFreight
+  )
+
+  const cartTotalPrice = calculateTotalPrice(cartItems)
+  const total = (cartTotalPrice + Number(selectedFreight?.price)).toFixed(2)
+
+  console.log(total)
+
   const dispatch = useDispatch()
 
   return (
@@ -115,7 +128,20 @@ const Checkout = () => {
             <ShippingContainer>
               <FreightCalculator />
             </ShippingContainer>
-            <Total>Total</Total>
+            <Total>
+              <div>
+                <h4>Subtotal:</h4>
+                <h4>{formattedPrice(calculateTotalPrice(cartItems))}</h4>
+              </div>
+              <div>
+                <h4>Frete:</h4>
+                <h4>{selectedFreight?.price}</h4>
+              </div>
+              <div>
+                <h2>Total:</h2>
+                <h2>{total}</h2>
+              </div>
+            </Total>
           </ShippingAndTotal>
         </Container>
       </ContainerWhite>

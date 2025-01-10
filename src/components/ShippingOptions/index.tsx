@@ -1,15 +1,19 @@
-import { Card, Container, Option } from './styles'
+import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+
+import { RootState } from '@/store'
+import { setSelectedFreight } from '@/store/reducers/shippingSlice'
+
+import { Card, Container, Option } from './styles'
 
 const ShippingOptions: React.FC<ShippingOptionsProps> = ({ options }) => {
-  const [selectedFreight, setSelectedFreight] = useState<{
-    name: string
-    price: string
-  } | null>(null)
+  const dispatch = useDispatch()
+  const selectedFreight = useSelector(
+    (state: RootState) => state.shipping.selectedFreight
+  )
 
-  const handleSelect = (options: { name: string; price: string }) => {
-    setSelectedFreight(options)
+  const handleSelect = (option: { name: string; price: string }) => {
+    dispatch(setSelectedFreight(option))
   }
 
   return (
