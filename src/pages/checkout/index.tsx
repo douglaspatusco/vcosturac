@@ -1,11 +1,14 @@
+import { useMemo } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 
-import { RootState } from '@/store'
-import { setAmountValue } from '@/store/reducers/amountSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/store'
+
+import { setAmountValue } from '@/store/reducers/amountSlice'
 
 import Amount from '@/components/Amount'
+import DeleteProduct from '@/components/DeleteProduct'
 import FreightCalculator from '@/components/Freight'
 
 import { formattedPrice, getFirstLetter } from '@/services/utility'
@@ -30,18 +33,20 @@ import {
   TableBody,
 } from './styles'
 
-import DeleteProduct from '@/components/DeleteProduct'
-
 const Checkout = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart)
   const selectedFreight = useSelector(
     (state: RootState) => state.shipping.selectedFreight
   )
 
-  const cartTotalPrice = calculateTotalPrice(cartItems)
-  const total = (cartTotalPrice + Number(selectedFreight?.price)).toFixed(2)
-
-  console.log(total)
+  const cartTotalPrice = useMemo(
+    () => calculateTotalPrice(cartItems),
+    [cartItems]
+  )
+  const total = useMemo(() => {
+    const freightPrice = Number(selectedFreight?.price) || 0
+    return (cartTotalPrice + freightPrice).toFixed(2)
+  }, [cartTotalPrice, selectedFreight])
 
   const dispatch = useDispatch()
 
@@ -135,11 +140,11 @@ const Checkout = () => {
               </div>
               <div>
                 <h4>Frete:</h4>
-                <h4>{selectedFreight?.price}</h4>
+                <h4>{formattedPrice(Number(selectedFreight?.price) || 0)}</h4>
               </div>
               <div>
                 <h2>Total:</h2>
-                <h2>{total}</h2>
+                <h2>{formattedPrice(Number(total))}</h2>
               </div>
             </Total>
           </ShippingAndTotal>

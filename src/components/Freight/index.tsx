@@ -1,20 +1,35 @@
 import { useState } from 'react'
-import { ShippingOption } from '@/types/shipping'
+import { useDispatch } from 'react-redux'
+import { clearFreight } from '@/store/reducers/shippingSlice'
 
 import ShippingOptions from '../ShippingOptions'
 
 import { handleCalculateShipping } from '@/utils/shippingUtils'
 
-import { Container, Form } from './styles'
+import { Button, Container, Form } from './styles'
 
 const ShippingPage = () => {
   const [cepDestino, setCepDestino] = useState('')
-
   const [shippingOptions, setShippingOptions] = useState<ShippingOption[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
+  const dispatch = useDispatch()
+
   const handleCalculate = () => {
     handleCalculateShipping(cepDestino, setShippingOptions, setIsLoading)
+  }
+
+  const handleReset = () => {
+    setCepDestino('')
+    setShippingOptions([])
+    dispatch(clearFreight())
+  }
+
+  const handleCepChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value
+    const numericValue = rawValue.replace(/\D/g, '').slice(0, 8)
+
+    setCepDestino(numericValue)
   }
 
   return (
@@ -25,11 +40,15 @@ const ShippingPage = () => {
           type="text"
           placeholder="CEP de destino"
           value={cepDestino}
-          onChange={(e) => setCepDestino(e.target.value)}
+          onChange={handleCepChange}
+          maxLength={8} // Apenas por segurança
         />
-        <button onClick={handleCalculate} disabled={isLoading}>
+        <Button
+          onClick={handleCalculate}
+          disabled={isLoading || cepDestino.length !== 8}
+        >
           BUSCAR
-        </button>
+        </Button>
       </Form>
       <a
         href="https://buscacepinter.correios.com.br/app/endereco/index.php"
@@ -42,7 +61,10 @@ const ShippingPage = () => {
       <div>
         {isLoading && <p>Calculando...</p>}
         {shippingOptions.length > 0 && (
-          <ShippingOptions options={shippingOptions} />
+          <>
+            <ShippingOptions options={shippingOptions} />
+            <Button onClick={handleReset}>Limpar</Button>
+          </>
         )}
       </div>
     </Container>

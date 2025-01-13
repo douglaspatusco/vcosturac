@@ -45,12 +45,3 @@ export const handleCalculateShipping = async (
     setIsLoading(false)
   }
 }
-
-// Definição do tipo ShippingOption (exemplo)
-interface ShippingOption {
-  // Defina os campos esperados aqui
-  id: string
-  name: string
-  price: number
-  deliveryTime: string
-}

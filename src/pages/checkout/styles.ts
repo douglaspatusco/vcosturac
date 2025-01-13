@@ -100,7 +100,6 @@ export const ShippingAndTotal = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2em;
-  padding: 1em;
   width: 50%;
 `
 

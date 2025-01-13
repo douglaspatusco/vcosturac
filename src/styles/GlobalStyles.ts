@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 export const colors = {
   creme: '#f7f9ec',
+  mostardaClaro: '#e5c564',
   mostarda: '#d3af43',
   salmaoClaro: '#c9816e',
   salmao: '#c5654c',
