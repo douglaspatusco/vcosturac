@@ -123,6 +123,7 @@ const Checkout = () => {
                           product.selectedPrint ?? ''
                         )
                       }
+                      isCheckout={true}
                     />
                   </CellBody>
                 </TableRow>

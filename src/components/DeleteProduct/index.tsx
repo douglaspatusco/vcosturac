@@ -4,11 +4,15 @@ import { colors } from '@/styles/GlobalStyles'
 
 interface DeleteProductProps {
   onClick: () => void
+  isCheckout: boolean
 }
 
-const DeleteProduct: React.FC<DeleteProductProps> = ({ onClick }) => {
+const DeleteProduct: React.FC<DeleteProductProps> = ({
+  onClick,
+  isCheckout,
+}) => {
   return (
-    <DeleteItem onClick={onClick} type="button">
+    <DeleteItem onClick={onClick} type="button" isCheckout={isCheckout}>
       <svg
         fill={colors.preto}
         width={100}

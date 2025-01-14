@@ -1,7 +1,11 @@
 import { colors } from '@/styles/GlobalStyles'
 import { styled } from 'styled-components'
 
-export const DeleteItem = styled.button`
+interface DeleteItemProps {
+  isCheckout: boolean
+}
+
+export const DeleteItem = styled.button<DeleteItemProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,10 +15,12 @@ export const DeleteItem = styled.button`
   border-radius: 0.25em;
   font-size: 1em;
   cursor: pointer;
-  background-color: ${colors.branco};
+  background-color: ${({ isCheckout }) =>
+    isCheckout ? colors.branco : colors.marromClaro};
 
   &:hover {
-    background-color: ${colors.cinza};
+    background-color: ${({ isCheckout }) =>
+      isCheckout ? colors.cinza : colors.marrom};
     border-radius: 0.25em;
   }
 

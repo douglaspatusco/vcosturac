@@ -105,6 +105,7 @@ const Cart = () => {
                         product.selectedPrint ?? ''
                       )
                     }
+                    isCheckout={false}
                   />
                 </ProductItem>
               ))}
