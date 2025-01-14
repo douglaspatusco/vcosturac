@@ -97,6 +97,7 @@ export const ProductInfos = styled.div`
   flex-direction: column;
   gap: 0.25em;
   min-width: 10em;
+  color: ${colors.creme};
 `
 
 export const DeleteItem = styled.button`

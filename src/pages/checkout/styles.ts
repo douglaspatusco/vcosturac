@@ -9,7 +9,7 @@ export const ContainerWhite = styled.section`
   max-width: 1280px;
   width: 100%;
   padding-top: 2em;
-  background-color: #fff;
+  background-color: ${colors.branco};
   box-shadow:
     0.375em 0 0.75em rgba(0, 0, 0, 0.2),
     -0.375em 0 0.75em rgba(0, 0, 0, 0.2);
@@ -30,23 +30,9 @@ export const CartTableContainer = styled.table`
   gap: 1em;
   width: 100%;
   padding: 1em;
-  border: 0.0625em solid #e5e5e5;
+  border: 0.0625em solid ${colors.cinza};
   border-radius: 0.25em;
   list-style: none;
-`
-
-export const TableHead = styled.th`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr auto;
-  align-items: center;
-  justify-items: center;
-  gap: 1em;
-  padding: 1em;
-  font-weight: bold;
-  text-transform: uppercase;
-  background-color: ${colors.creme};
-  border-bottom: 0.125em solid ${colors.cinzaEscuro};
-  border-radius: 0.25em;
 `
 
 export const TableBody = styled.tbody`
@@ -59,7 +45,7 @@ export const TableRow = styled.td`
   grid-template-columns: 1fr 1fr 1fr auto;
   gap: 1em;
   padding: 1em;
-  border-bottom: 0.0625em solid #eee;
+  border-bottom: 0.0625em solid ${colors.cinza};
 `
 
 export const CellProduct = styled.div`
@@ -108,7 +94,7 @@ export const ShippingContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 1em;
-  border: 0.0625em solid #e5e5e5;
+  border: 0.0625em solid ${colors.cinza};
   border-radius: 0.25em;
 `
 
@@ -117,7 +103,7 @@ export const Total = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 1em;
-  border: 0.0625em solid #e5e5e5;
+  border: 0.0625em solid ${colors.cinza};
   border-radius: 0.25em;
   gap: 1em;
 

@@ -5,24 +5,16 @@ import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
 
-import { setAmountValue } from '@/store/reducers/amountSlice'
-
-import Amount from '@/components/Amount'
 import DeleteProduct from '@/components/DeleteProduct'
 import FreightCalculator from '@/components/Freight'
 
 import { formattedPrice, getFirstLetter } from '@/services/utility'
-import {
-  calculateTotalPrice,
-  handleQuantityChange,
-  removeItem,
-} from '@/utils/cartUtils'
+import { calculateTotalPrice, removeItem } from '@/utils/cartUtils'
 
 import {
   CartTableContainer,
   ContainerWhite,
   TableRow,
-  TableHead,
   ProductImage,
   CellBody,
   CellProduct,
@@ -59,12 +51,6 @@ const Checkout = () => {
         <h1>Finalizando a sua encomenda</h1>
         <Container>
           <CartTableContainer>
-            <TableHead>
-              <div>Produto</div>
-              <div>Quantidade</div>
-              <div>SubTotal</div>
-              <div>{''}</div>
-            </TableHead>
             <TableBody>
               {cartItems.map((product) => (
                 <TableRow key={product.id}>
@@ -83,31 +69,7 @@ const Checkout = () => {
                     <h5>{getFirstLetter(product.selectedPrint)}</h5>
                   </CellProduct>
                   <CellBody>
-                    <Amount
-                      isCheckout={true}
-                      quantity={product.quantity}
-                      onIncrement={() =>
-                        handleQuantityChange(
-                          dispatch,
-                          cartItems,
-                          product.id,
-                          product.selectedPrint ?? '',
-                          true
-                        )
-                      }
-                      onDecrement={() =>
-                        handleQuantityChange(
-                          dispatch,
-                          cartItems,
-                          product.id,
-                          product.selectedPrint ?? '',
-                          false
-                        )
-                      }
-                      onQuantityChange={(value) =>
-                        dispatch(setAmountValue(value))
-                      }
-                    />
+                    <span>{product.quantity} </span>
                   </CellBody>
                   <CellBody>
                     {product.price !== undefined
