@@ -23,8 +23,11 @@ const shippingSlice = createSlice({
     ) => {
       state.selectedFreight = action.payload
     },
+    clearFreight(state) {
+      state.selectedFreight = null
+    }
   },
 })
 
-export const { setSelectedFreight } = shippingSlice.actions
+export const { setSelectedFreight, clearFreight } = shippingSlice.actions
 export default shippingSlice.reducer

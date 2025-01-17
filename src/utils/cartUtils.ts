@@ -1,4 +1,12 @@
-import { AppDispatch } from '@/store' // Tipo do dispatch
+import { AppDispatch } from '@/store'
+
+interface CartItem {
+  id: string
+  selectedPrint: string
+  quantity: number
+  price?: number
+}
+
 import { updateQuantity, removeItemFromCart } from '@/store/reducers/cartSlice'
 
 export const handleQuantityChange = (
@@ -37,6 +45,12 @@ export const removeItem = (
   }
 
   dispatch(removeItemFromCart({ id, selectedPrint }))
+}
+
+export const calculateTotalQuantity = (
+  cartItems: Array<{ quantity: number }>
+) => {
+  return cartItems.reduce((total, item) => total + item.quantity, 0)
 }
 
 export const calculateTotalPrice = (

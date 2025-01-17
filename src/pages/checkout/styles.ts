@@ -9,7 +9,7 @@ export const ContainerWhite = styled.section`
   max-width: 1280px;
   width: 100%;
   padding-top: 2em;
-  background-color: #fff;
+  background-color: ${colors.branco};
   box-shadow:
     0.375em 0 0.75em rgba(0, 0, 0, 0.2),
     -0.375em 0 0.75em rgba(0, 0, 0, 0.2);
@@ -30,23 +30,10 @@ export const CartTableContainer = styled.table`
   gap: 1em;
   width: 100%;
   padding: 1em;
-  border: 0.0625em solid #e5e5e5;
+  border: 0.0625em solid ${colors.cinzaEscuro};
   border-radius: 0.25em;
   list-style: none;
-`
-
-export const TableHead = styled.th`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr auto;
-  align-items: center;
-  justify-items: center;
-  gap: 1em;
-  padding: 1em;
-  font-weight: bold;
-  text-transform: uppercase;
-  background-color: ${colors.creme};
-  border-bottom: 0.125em solid ${colors.cinzaEscuro};
-  border-radius: 0.25em;
+  background-color: ${colors.cinza};
 `
 
 export const TableBody = styled.tbody`
@@ -59,7 +46,7 @@ export const TableRow = styled.td`
   grid-template-columns: 1fr 1fr 1fr auto;
   gap: 1em;
   padding: 1em;
-  border-bottom: 0.0625em solid #eee;
+  border-bottom: 0.0625em solid ${colors.cinzaEscuro};
 `
 
 export const CellProduct = styled.div`
@@ -69,6 +56,10 @@ export const CellProduct = styled.div`
   text-align: center;
   justify-content: center;
 
+  a {
+    position: relative;
+  }
+
   img {
     margin-bottom: 1em;
   }
@@ -76,6 +67,23 @@ export const CellProduct = styled.div`
   h4 {
     margin-bottom: 0.5em;
   }
+`
+
+export const ProductLength = styled.span`
+  position: absolute;
+  right: 0.5em;
+  top: 0.5em;
+  display: inline-block;
+  font-size: 0.75em;
+  font-weight: 400;
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 24px;
+  padding: 0 0.0625em;
+  color: ${colors.creme};
+  background: ${colors.salmaoEscuro};
 `
 
 export const CellBody = styled(CellProduct)``
@@ -100,7 +108,6 @@ export const ShippingAndTotal = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2em;
-  padding: 1em;
   width: 50%;
 `
 
@@ -109,7 +116,7 @@ export const ShippingContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 1em;
-  border: 0.0625em solid #e5e5e5;
+  border: 0.0625em solid ${colors.cinza};
   border-radius: 0.25em;
 `
 
@@ -118,7 +125,7 @@ export const Total = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 1em;
-  border: 0.0625em solid #e5e5e5;
+  border: 0.0625em solid ${colors.cinza};
   border-radius: 0.25em;
   gap: 1em;
 

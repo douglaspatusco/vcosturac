@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
-import PropTypes from 'prop-types'
 
 import { RootState } from '@/store'
 import { setSelectedFreight } from '@/store/reducers/shippingSlice'
 
-import { Card, Container, Option } from './styles'
+import PropTypes from 'prop-types'
+import { Card, Container, CustomCheckbox, Option } from './styles'
 
 const ShippingOptions: React.FC<ShippingOptionsProps> = ({ options }) => {
   const dispatch = useDispatch()
@@ -29,6 +29,7 @@ const ShippingOptions: React.FC<ShippingOptionsProps> = ({ options }) => {
             checked={selectedFreight?.name === option.name}
             onChange={() => handleSelect(option)}
           />
+          <CustomCheckbox selected={selectedFreight?.name === option.name} />
           <Card key={index} selected={selectedFreight?.name === option.name}>
             <div>
               <h5>{option.name}</h5>
@@ -37,7 +38,7 @@ const ShippingOptions: React.FC<ShippingOptionsProps> = ({ options }) => {
               </p>
             </div>
             <p>
-              Prazo: <strong>{option.delivery_time}</strong> dias úteis
+              Entrega em até <strong>{option.delivery_time}</strong> dias úteis
             </p>
           </Card>
         </Option>
