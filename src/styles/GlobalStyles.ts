@@ -13,7 +13,7 @@ export const colors = {
   marromEscuroPlus: '#895f4b',
   azul: '#bdc5de',
   cinza: '#e5e5e5',
-  cinzaEscuro: '#e4e9c8',
+  cinzaEscuro: '#B3B3B3',
   preto: '#000000',
   branco: '#ffffff',
 }

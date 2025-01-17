@@ -30,9 +30,10 @@ export const CartTableContainer = styled.table`
   gap: 1em;
   width: 100%;
   padding: 1em;
-  border: 0.0625em solid ${colors.cinza};
+  border: 0.0625em solid ${colors.cinzaEscuro};
   border-radius: 0.25em;
   list-style: none;
+  background-color: ${colors.cinza};
 `
 
 export const TableBody = styled.tbody`
@@ -45,7 +46,7 @@ export const TableRow = styled.td`
   grid-template-columns: 1fr 1fr 1fr auto;
   gap: 1em;
   padding: 1em;
-  border-bottom: 0.0625em solid ${colors.cinza};
+  border-bottom: 0.0625em solid ${colors.cinzaEscuro};
 `
 
 export const CellProduct = styled.div`
@@ -55,6 +56,10 @@ export const CellProduct = styled.div`
   text-align: center;
   justify-content: center;
 
+  a {
+    position: relative;
+  }
+
   img {
     margin-bottom: 1em;
   }
@@ -62,6 +67,23 @@ export const CellProduct = styled.div`
   h4 {
     margin-bottom: 0.5em;
   }
+`
+
+export const ProductLength = styled.span`
+  position: absolute;
+  right: 0.5em;
+  top: 0.5em;
+  display: inline-block;
+  font-size: 0.75em;
+  font-weight: 400;
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 24px;
+  padding: 0 0.0625em;
+  color: ${colors.creme};
+  background: ${colors.salmaoEscuro};
 `
 
 export const CellBody = styled(CellProduct)``

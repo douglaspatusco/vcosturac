@@ -12,6 +12,7 @@ import { setTransformOrigin } from '@/store/reducers/transformOriginSlice'
 
 import { useFetchProducts } from '@/hooks/useFetchProducts'
 import { useMainImage } from '@/hooks/useMainImage'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 import { formattedPrice, getFirstLetter } from '@/services/utility'
 import {
@@ -20,8 +21,6 @@ import {
   getPrintImageUrl,
   handleThumbnailClick,
 } from '@/utils/produtoUtils'
-
-import Breadcrumbs from '@/components/Breadcrumbs/Breadcrubs'
 
 import {
   BuyButton,

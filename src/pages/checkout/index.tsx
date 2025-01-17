@@ -23,6 +23,7 @@ import {
   Total,
   ShippingAndTotal,
   TableBody,
+  ProductLength,
 } from './styles'
 
 const Checkout = () => {
@@ -64,12 +65,12 @@ const Checkout = () => {
                         width={100}
                         height={100}
                       />
+                      <ProductLength>{product.quantity}</ProductLength>
                     </Link>
-                    <h4>{product.name}</h4>
-                    <h5>{getFirstLetter(product.selectedPrint)}</h5>
                   </CellProduct>
                   <CellBody>
-                    <span>{product.quantity} </span>
+                    <span>{product.name} </span>
+                    <span>{getFirstLetter(product.selectedPrint)}</span>
                   </CellBody>
                   <CellBody>
                     {product.price !== undefined

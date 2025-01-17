@@ -5,9 +5,11 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleCart } from '../../store/reducers/cartSlice'
 import { RootState } from '@/store'
+import { calculateTotalQuantity } from '@/utils/cartUtils'
 
 import {
   Carrinho,
+  CartLength,
   Content,
   HeaderContainer,
   LogoLink,
@@ -19,6 +21,8 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const { cartItems } = useSelector((state: RootState) => state.cart)
   const dispatch = useDispatch()
+
+  const totalQuantity = calculateTotalQuantity(cartItems)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -96,7 +100,7 @@ const Header = () => {
               strokeWidth="1.5"
             ></path>
           </svg>
-          <span>{cartItems.length}</span>
+          <CartLength>{totalQuantity}</CartLength>
         </Carrinho>
       </Content>
     </HeaderContainer>
