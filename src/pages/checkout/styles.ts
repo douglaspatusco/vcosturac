@@ -24,11 +24,17 @@ export const Container = styled.div`
   width: 1280px;
 `
 
-export const CartTableContainer = styled.table`
-  display: grid;
-  grid-template-rows: auto; /* Cada linha é criada automaticamente */
+export const Resume = styled.div`
+  display: flex;
+  flex-direction: column;
   gap: 1em;
-  width: 100%;
+`
+
+export const CartProductsList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: auto;
   padding: 1em;
   border: 0.0625em solid ${colors.cinzaEscuro};
   border-radius: 0.25em;
@@ -36,20 +42,24 @@ export const CartTableContainer = styled.table`
   background-color: ${colors.cinza};
 `
 
-export const TableBody = styled.tbody`
-  display: grid;
-  grid-template-rows: auto;
-`
-
-export const TableRow = styled.td`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr auto;
+export const CartProductsItem = styled.li`
+  display: flex;
+  justify-content: space-between;
   gap: 1em;
-  padding: 1em;
-  border-bottom: 0.0625em solid ${colors.cinzaEscuro};
+  padding: 1em 0;
+
+  &:not(:last-child) {
+    border-bottom: 0.0625em solid ${colors.cinzaEscuro};
+  }
 `
 
-export const CellProduct = styled.div`
+export const ImageAndDescription = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1em;
+`
+
+export const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,10 +68,9 @@ export const CellProduct = styled.div`
 
   a {
     position: relative;
-  }
-
-  img {
-    margin-bottom: 1em;
+    background-color: #fff;
+    border-radius: 0.25em;
+    border: 1px solid #bababa;
   }
 
   h4 {
@@ -69,10 +78,44 @@ export const CellProduct = styled.div`
   }
 `
 
+export const ProductDescription = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h3 {
+    font-weight: 400;
+  }
+
+  h4 {
+    color: #777777;
+    font-weight: 400;
+  }
+`
+
+export const ProductPrice = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const ProductImage = styled(Image)`
+  width: 4em;
+  height: 4em;
+  object-fit: cover;
+  mix-blend-mode: darken;
+`
+
+export const Infos = styled.li`
+  display: flex;
+  flex-direction: row;
+
+  background-color: blue;
+`
+
 export const ProductLength = styled.span`
   position: absolute;
-  right: 0.5em;
-  top: 0.5em;
+  right: -12px;
+  top: -12px;
   display: inline-block;
   font-size: 0.75em;
   font-weight: 400;
@@ -86,29 +129,35 @@ export const ProductLength = styled.span`
   background: ${colors.salmaoEscuro};
 `
 
-export const CellBody = styled(CellProduct)``
-
-export const ProductImage = styled(Image)`
-  width: 6em;
-  height: 6em;
-  object-fit: cover;
-  mix-blend-mode: darken;
-`
-
-export const Infos = styled.li`
-  display: flex;
-  flex-direction: row;
-
-  background-color: blue;
-`
-
 /* SHIPPING */
+
+export const ShippingData = styled.div`
+  width: auto;
+  padding: 1em;
+  border-radius: 0.25em;
+  border: 1px solid ${colors.cinzaEscuro};
+  background-color: ${colors.cinza};
+
+  label {
+    display: none;
+  }
+
+  input {
+    padding: 0.25em;
+    height: 2.5em;
+
+    &::placeholder {
+      position: relative;
+      top: -4px;
+    }
+  }
+`
 
 export const ShippingAndTotal = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2em;
-  width: 50%;
+  width: 60%;
 `
 
 export const ShippingContainer = styled.div`

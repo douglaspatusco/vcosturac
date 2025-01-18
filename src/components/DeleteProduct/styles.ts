@@ -9,9 +9,9 @@ export const DeleteItem = styled.button<DeleteItemProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 4px;
-  right: 4px;
+  position: ${({ isCheckout }) => (isCheckout ? 'relative' : 'absolute')};
+  top: ${({ isCheckout }) => (isCheckout ? '-1.5em' : '0.25em')};
+  right: ${({ isCheckout }) => (isCheckout ? '-0.5em' : '0.25em')};
   width: 1.5em;
   height: 1.5em;
   border: none;
@@ -19,11 +19,12 @@ export const DeleteItem = styled.button<DeleteItemProps>`
   font-size: 1em;
   cursor: pointer;
   background-color: ${({ isCheckout }) =>
-    isCheckout ? colors.creme : colors.marromClaro};
+    isCheckout ? colors.cinza : colors.marromClaro};
+  fill: ${({ isCheckout }) => (isCheckout ? colors.preto : colors.branco)};
 
   &:hover {
     background-color: ${({ isCheckout }) =>
-      isCheckout ? colors.cinza : colors.marrom};
+      isCheckout ? colors.cinzaEscuro : colors.marrom};
     border-radius: 0.25em;
   }
 

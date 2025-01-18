@@ -6,24 +6,24 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
 
 import DeleteProduct from '@/components/DeleteProduct'
-import FreightCalculator from '@/components/Freight'
 
 import { formattedPrice, getFirstLetter } from '@/services/utility'
 import { calculateTotalPrice, removeItem } from '@/utils/cartUtils'
 
 import {
-  CartTableContainer,
+  CartProductsList,
   ContainerWhite,
-  TableRow,
+  CartProductsItem,
   ProductImage,
-  CellBody,
-  CellProduct,
-  ShippingContainer,
+  ImageContainer,
   Container,
   Total,
-  ShippingAndTotal,
-  TableBody,
   ProductLength,
+  ShippingData,
+  ProductDescription,
+  ProductPrice,
+  Resume,
+  ImageAndDescription,
 } from './styles'
 
 const Checkout = () => {
@@ -51,52 +51,60 @@ const Checkout = () => {
       <ContainerWhite>
         <h1>Finalizando a sua encomenda</h1>
         <Container>
-          <CartTableContainer>
-            <TableBody>
+          <ShippingData>
+            <>
+              <label htmlFor="">Nome</label>
+              <input type="text" placeholder="Nome" />
+            </>
+            <>
+              <label htmlFor="">Sobrenome</label>
+              <input type="text" placeholder="Sobrenome" />
+            </>
+          </ShippingData>
+          <Resume>
+            <CartProductsList>
               {cartItems.map((product) => (
-                <TableRow key={product.id}>
-                  <CellProduct>
-                    <Link href={`/loja/${product.category}/${product.slug}`}>
-                      <ProductImage
-                        src={
-                          product.selectedPrintImage || '/default-thumbnail.jpg'
-                        }
-                        alt={product.name}
-                        width={100}
-                        height={100}
-                      />
-                      <ProductLength>{product.quantity}</ProductLength>
-                    </Link>
-                  </CellProduct>
-                  <CellBody>
-                    <span>{product.name} </span>
-                    <span>{getFirstLetter(product.selectedPrint)}</span>
-                  </CellBody>
-                  <CellBody>
-                    {product.price !== undefined
-                      ? formattedPrice(product.price * product.quantity)
-                      : 'Preço indisponível'}
-                  </CellBody>
-                  <CellBody>
-                    <DeleteProduct
-                      onClick={() =>
-                        removeItem(
-                          dispatch,
-                          product.id,
-                          product.selectedPrint ?? ''
-                        )
-                      }
-                      isCheckout={true}
-                    />
-                  </CellBody>
-                </TableRow>
+                <CartProductsItem key={product.id}>
+                  <ImageAndDescription>
+                    <ImageContainer>
+                      <Link href={`/loja/${product.category}/${product.slug}`}>
+                        <ProductImage
+                          src={
+                            product.selectedPrintImage ||
+                            '/default-thumbnail.jpg'
+                          }
+                          alt={product.name}
+                          width={100}
+                          height={100}
+                        />
+                        <ProductLength>{product.quantity}</ProductLength>
+                      </Link>
+                    </ImageContainer>
+                    <ProductDescription>
+                      <h3>{product.name} </h3>
+                      <h4>{getFirstLetter(product.selectedPrint)}</h4>
+                    </ProductDescription>
+                  </ImageAndDescription>
+                  <ProductPrice>
+                    <span>
+                      {product.price !== undefined
+                        ? formattedPrice(product.price * product.quantity)
+                        : 'Preço indisponível'}
+                    </span>
+                  </ProductPrice>
+                  <DeleteProduct
+                    onClick={() =>
+                      removeItem(
+                        dispatch,
+                        product.id,
+                        product.selectedPrint ?? ''
+                      )
+                    }
+                    isCheckout={true}
+                  />
+                </CartProductsItem>
               ))}
-            </TableBody>
-          </CartTableContainer>
-          <ShippingAndTotal>
-            <ShippingContainer>
-              <FreightCalculator />
-            </ShippingContainer>
+            </CartProductsList>
             <Total>
               <div>
                 <h4>Subtotal:</h4>
@@ -111,7 +119,7 @@ const Checkout = () => {
                 <h2>{formattedPrice(Number(total))}</h2>
               </div>
             </Total>
-          </ShippingAndTotal>
+          </Resume>
         </Container>
       </ContainerWhite>
     </>
