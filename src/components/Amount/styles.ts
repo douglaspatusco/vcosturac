@@ -1,17 +1,13 @@
 import { styled } from 'styled-components'
 import { colors } from '@/styles/GlobalStyles'
 
-interface AmountFieldProps {
-  isCheckout: boolean
-}
-
-export const AmountField = styled.div<AmountFieldProps>`
+export const AmountField = styled.div<{ $isCheckout: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
 
-  background-color: ${({ isCheckout }) =>
-    isCheckout ? 'transparent' : colors.marromClaro};
+  background-color: ${({ $isCheckout }) =>
+    $isCheckout ? 'transparent' : colors.marromClaro};
 
   span {
     padding: 0 0.5em;
@@ -21,8 +17,8 @@ export const AmountField = styled.div<AmountFieldProps>`
     border-radius: 0.25em;
 
     &:hover {
-      background-color: ${({ isCheckout }) =>
-        isCheckout ? colors.creme : colors.marromEscuro};
+      background-color: ${({ $isCheckout }) =>
+        $isCheckout ? colors.creme : colors.marromEscuro};
     }
 
     &:active {
@@ -49,6 +45,6 @@ export const AmountField = styled.div<AmountFieldProps>`
     outline: none;
     appearance: textfield;
     background-color: transparent;
-    color: ${({ isCheckout }) => (isCheckout ? colors.preto : colors.cinza)};
+    color: ${({ $isCheckout }) => ($isCheckout ? colors.preto : colors.cinza)};
   }
 `

@@ -25,7 +25,7 @@ const shippingSlice = createSlice({
     },
     clearFreight(state) {
       state.selectedFreight = null
-    }
+    },
   },
 })
 

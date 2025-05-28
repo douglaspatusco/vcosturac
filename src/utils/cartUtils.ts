@@ -1,19 +1,20 @@
 import { AppDispatch } from '@/store'
+import { updateQuantity, removeItemFromCart } from '@/store/reducers/cartSlice'
 
 interface CartItem {
   id: string
   selectedPrint: string
+  selectedPrintAlt: string
   quantity: number
   price?: number
 }
-
-import { updateQuantity, removeItemFromCart } from '@/store/reducers/cartSlice'
 
 export const handleQuantityChange = (
   dispatch: AppDispatch,
   cartItems: CartItem[],
   id: string,
   selectedPrint: string,
+  selectedPrintAlt: string,
   increment: boolean
 ) => {
   if (!dispatch) {
@@ -25,26 +26,39 @@ export const handleQuantityChange = (
   }
 
   const produto = cartItems.find(
-    (item) => item.id === id && item.selectedPrint === selectedPrint
+    (item) =>
+      item.id === id &&
+      item.selectedPrint === selectedPrint &&
+      item.selectedPrintAlt === selectedPrintAlt
   )
+
   if (produto) {
     const newQuantity = increment
       ? produto.quantity + 1
       : Math.max(1, produto.quantity - 1)
-    dispatch(updateQuantity({ id, selectedPrint, quantity: newQuantity }))
+
+    dispatch(
+      updateQuantity({
+        id,
+        selectedPrint,
+        selectedPrintAlt,
+        quantity: newQuantity,
+      })
+    )
   }
 }
 
 export const removeItem = (
   dispatch: AppDispatch,
   id: string,
-  selectedPrint: string
+  selectedPrint: string,
+  selectedPrintAlt: string
 ) => {
   if (!dispatch) {
     throw new Error('Dispatch is undefined')
   }
 
-  dispatch(removeItemFromCart({ id, selectedPrint }))
+  dispatch(removeItemFromCart({ id, selectedPrint, selectedPrintAlt }))
 }
 
 export const calculateTotalQuantity = (

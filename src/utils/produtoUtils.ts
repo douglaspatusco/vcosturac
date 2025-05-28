@@ -3,48 +3,27 @@ import { Dispatch, SetStateAction } from 'react'
 import { AppDispatch } from '@/store'
 import { addItemToCart, toggleCart } from '@/store/reducers/cartSlice'
 
-// ---------- IMPLEMENTAÇÃO DE THROTTLE
-function throttle(
-  func: (
-    x: number,
-    y: number,
-    setTransformOrigin: Dispatch<SetStateAction<string>>
-  ) => void,
-  limit: number
-) {
-  let waiting = false
-
-  return (...args: [number, number, Dispatch<SetStateAction<string>>]) => {
-    if (!waiting) {
-      func(...args)
-      waiting = true
-      setTimeout(() => {
-        waiting = false
-      }, limit)
-    }
-  }
-}
-
-// URL base para as imagens de estampas
-const BASE_URL =
-  'https://raw.githubusercontent.com/eyelexx/vcosturac/refs/heads/main/src/public/images/estampas/'
-
-// Função throttled para atualizar a origem do zoom
-const updateTransformOrigin = throttle(
-  (
-    x: number,
-    y: number,
-    setTransformOrigin: Dispatch<SetStateAction<string>>
-  ) => {
-    setTransformOrigin(`${x}% ${y}%`)
-  },
-  50 // Tempo mínimo entre execuções (em milissegundos)
-)
-
 // ---------- ZOOM NA IMAGEM
 
+let animationFrameId: number | null = null
+
+// Atualiza a origem do zoom de forma suave com requestAnimationFrame
+const updateTransformOrigin = (
+  x: number,
+  y: number,
+  setTransformOrigin: Dispatch<SetStateAction<string>>
+) => {
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId)
+  }
+
+  animationFrameId = requestAnimationFrame(() => {
+    setTransformOrigin(`${x}% ${y}%`)
+  })
+}
+
 // Calcula a origem da transformação para o efeito de zoom.
-export const calculateMousePosition = (
+export const handleZoomMouseMove = (
   e: React.MouseEvent<HTMLDivElement>,
   setTransformOrigin: Dispatch<SetStateAction<string>>
 ): void => {
@@ -52,7 +31,6 @@ export const calculateMousePosition = (
   const x = ((e.clientX - rect.left) / rect.width) * 100
   const y = ((e.clientY - rect.top) / rect.height) * 100
 
-  // Chama a função throttled para atualizar a origem do zoom
   updateTransformOrigin(x, y, setTransformOrigin)
 }
 
@@ -72,6 +50,10 @@ export const disableZoom = (
 
 // ---------- ESTAMPAS
 
+// URL base para as imagens de estampas
+const BASE_URL =
+  'https://raw.githubusercontent.com/eyelexx/vcosturac/refs/heads/main/src/public/images/estampas/'
+
 // Obtém a URL de uma estampa específica.
 export const getPrintImageUrl = (key: string): string => `${BASE_URL}${key}.jpg`
 
@@ -88,12 +70,20 @@ export const addToCart = (
   dispatch: AppDispatch,
   product: Product,
   selectedPrint: string,
-  selectedPrintImage: string
+  selectedPrintImage: string,
+  selectedPrintAlt: string
 ) => {
+  const prints = product.medias?.prints[selectedPrint] || []
+
+  const imageIndex = prints.findIndex((img) => img.src === selectedPrintImage)
+
   const productWithPrint = {
     ...product,
     selectedPrint,
     selectedPrintImage,
+    selectedPrintAlt,
+    imageIndex,
+    selectedPrintSrc: getPrintImageUrl(selectedPrint),
   }
   dispatch(addItemToCart(productWithPrint))
   dispatch(toggleCart())

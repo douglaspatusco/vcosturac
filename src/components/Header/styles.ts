@@ -2,12 +2,12 @@ import { colors } from '@/styles/GlobalStyles'
 import Link from 'next/link'
 import styled from 'styled-components'
 
-export const HeaderContainer = styled.header<{ pageIsScrolled: boolean }>`
+export const HeaderContainer = styled.header<{ $pageIsScrolled: boolean }>`
   display: flex;
   justify-content: center;
   position: fixed;
   width: 100%;
-  height: ${(props) => (props.pageIsScrolled ? '80px' : '120px')};
+  height: ${(props) => (props.$pageIsScrolled ? '80px' : '120px')};
   padding: 1em;
   z-index: 2;
   box-shadow: 0em 0.25em 0.75em 0em rgba(88, 88, 88, 0.28);
@@ -55,20 +55,21 @@ export const LogoLink = styled(Link)`
   justify-content: center;
 `
 
-export const Logotipo = styled.img<{ headerIsShort: boolean }>`
-  height: ${(props) => (props.headerIsShort ? '4em' : '5em;')};
-  width: ${(props) => (props.headerIsShort ? '4em' : '5em;')};
+export const Logotipo = styled.img<{ $headerIsShort: boolean }>`
+  height: ${(props) => (props.$headerIsShort ? '4em' : '5em;')};
+  width: ${(props) => (props.$headerIsShort ? '4em' : '5em;')};
   border-radius: 50%;
   transition: height 0.1s ease;
 `
 
-export const Carrinho = styled.div`
+export const Carrinho = styled.button`
   display: flex;
   align-items: center;
   position: relative;
   gap: 1em;
   padding: 1em;
   border-radius: 2em;
+  border: none;
   color: ${colors.creme};
   background-color: ${colors.salmao};
   cursor: pointer;

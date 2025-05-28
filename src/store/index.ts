@@ -7,7 +7,8 @@ import amountReducer from './reducers/amountSlice'
 import zoomReducer from './reducers/zoomSlice'
 import transformOriginReducer from './reducers/transformOriginSlice'
 import selectedPrintReducer from './reducers/selectedPrintSlice'
-import selectedPrintImageReducer from './reducers/selectedPrintImageSlice'
+import selectedPrintSrcReducer from './reducers/selectedPrintSrcSlice'
+import selectedPrintAltReducer from './reducers/selectedPrintAltSlice'
 import shippingReducer from './reducers/shippingSlice'
 
 export const store = configureStore({
@@ -19,9 +20,18 @@ export const store = configureStore({
     zoom: zoomReducer,
     transformOrigin: transformOriginReducer,
     selectedPrint: selectedPrintReducer,
-    selectedPrintImage: selectedPrintImageReducer,
+    selectedPrintSrc: selectedPrintSrcReducer,
+    selectedPrintAlt: selectedPrintAltReducer,
+
     shipping: shippingReducer,
   },
+})
+
+store.subscribe(() => {
+  const state = store.getState()
+  if (typeof window !== 'undefined') {
+    sessionStorage.setItem('cartItems', JSON.stringify(state.cart.cartItems))
+  }
 })
 
 export type RootState = ReturnType<typeof store.getState>

@@ -47,15 +47,15 @@ export const ZoomContainer = styled.div`
 `
 
 export const ZoomedImage = styled.img<{
-  isZoomed: boolean
-  transformOrigin: string
+  $isZoomed: boolean
+  $transformOrigin: string
 }>`
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.1s ease;
-  transform: ${({ isZoomed }) => (isZoomed ? 'scale(2)' : 'scale(1)')};
-  transform-origin: ${({ transformOrigin }) => transformOrigin};
+  transform: ${({ $isZoomed }) => ($isZoomed ? 'scale(2)' : 'scale(1)')};
+  transform-origin: ${({ $transformOrigin }) => $transformOrigin};
 `
 
 export const ThumbnailsContainer = styled.div`

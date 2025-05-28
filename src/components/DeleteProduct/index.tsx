@@ -3,15 +3,15 @@ import { DeleteItem } from './styles'
 
 interface DeleteProductProps {
   onClick: () => void
-  isCheckout: boolean
+  $isCheckout: boolean
 }
 
 const DeleteProduct: React.FC<DeleteProductProps> = ({
   onClick,
-  isCheckout,
+  $isCheckout,
 }) => {
   return (
-    <DeleteItem onClick={onClick} type="button" isCheckout={isCheckout}>
+    <DeleteItem onClick={onClick} type="button" $isCheckout={$isCheckout}>
       <svg
         width={100}
         height={100}

@@ -22,10 +22,11 @@ interface Product {
   installment: number
   description?: string
   details?: string
-  medias?: {
+  medias: {
     thumbnail: string | StaticImport
     prints: PrintsProducts
   }
   selectedPrint: unknown
-  selectedPrintImage: string
+  selectedPrintSrc: string
+  selectedPrintAlt: string
 }

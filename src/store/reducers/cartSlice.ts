@@ -16,6 +16,9 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    setCartItems(state, action) {
+      state.cartItems = action.payload
+    },
     addItemToCart: (
       state,
       action: PayloadAction<Product & { selectedPrint?: string }>
@@ -23,7 +26,8 @@ const cartSlice = createSlice({
       const produto = state.cartItems.find(
         (item) =>
           item.id === action.payload.id &&
-          item.selectedPrint === action.payload.selectedPrint
+          item.selectedPrint === action.payload.selectedPrint &&
+          item.selectedPrintAlt === action.payload.selectedPrintAlt
       )
       if (!produto) {
         state.cartItems.push({ ...action.payload, quantity: 1 })
@@ -34,7 +38,10 @@ const cartSlice = createSlice({
     updateQuantity: (state, action) => {
       const { id, selectedPrint, quantity } = action.payload
       const item = state.cartItems.find(
-        (item) => item.id === id && item.selectedPrint === selectedPrint
+        (item) =>
+          item.id === id &&
+          item.selectedPrint === selectedPrint &&
+          item.selectedPrintAlt === action.payload.selectedPrintAlt
       )
       if (item) {
         item.quantity = quantity
@@ -42,12 +49,17 @@ const cartSlice = createSlice({
     },
     removeItemFromCart: (
       state,
-      action: PayloadAction<{ id: string; selectedPrint?: string }>
+      action: PayloadAction<{
+        selectedPrintAlt: string
+        id: string
+        selectedPrint?: string
+      }>
     ) => {
       state.cartItems = state.cartItems.filter(
         (item) =>
           item.id !== action.payload.id ||
-          item.selectedPrint !== action.payload.selectedPrint
+          item.selectedPrint !== action.payload.selectedPrint ||
+          item.selectedPrintAlt !== action.payload.selectedPrintAlt
       )
     },
     toggleCart: (state) => {
@@ -63,6 +75,7 @@ const cartSlice = createSlice({
 })
 
 export const {
+  setCartItems,
   addItemToCart,
   updateQuantity,
   toggleCart,

@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -36,12 +36,18 @@ const Checkout = () => {
     () => calculateTotalPrice(cartItems),
     [cartItems]
   )
+
   const total = useMemo(() => {
     const freightPrice = Number(selectedFreight?.price) || 0
     return (cartTotalPrice + freightPrice).toFixed(2)
   }, [cartTotalPrice, selectedFreight])
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    console.log(`Qtd de itens no carrinho:`, cartItems.length)
+    console.log(`Itens no carrinho:`, cartItems)
+  }, [cartItems, selectedFreight])
 
   return (
     <>
@@ -64,10 +70,20 @@ const Checkout = () => {
           <Resume>
             <CartProductsList>
               {cartItems.map((product) => (
-                <CartProductsItem key={product.id}>
+                <CartProductsItem
+                  key={`${product.id}-${product.selectedPrint}-${product.selectedPrintAlt}`}
+                >
                   <ImageAndDescription>
                     <ImageContainer>
-                      <Link href={`/loja/${product.category}/${product.slug}`}>
+                      <Link
+                        href={{
+                          pathname: `/loja/${product.category}/${product.slug}`,
+                          query: {
+                            estampa: product.selectedPrint,
+                            imagem: product.selectedPrintAlt?.toLowerCase(),
+                          },
+                        }}
+                      >
                         <ProductImage
                           src={
                             product.selectedPrintImage ||
@@ -97,10 +113,11 @@ const Checkout = () => {
                       removeItem(
                         dispatch,
                         product.id,
-                        product.selectedPrint ?? ''
+                        product.selectedPrint,
+                        product.selectedPrintAlt ?? ''
                       )
                     }
-                    isCheckout={true}
+                    $isCheckout={true}
                   />
                 </CartProductsItem>
               ))}

@@ -27,8 +27,10 @@ import {
   ProductInfos,
   SubtotalAndCheckout,
 } from './styles'
+import { useEffect, useState } from 'react'
 
 const Cart = () => {
+  const [isReady, setIsReady] = useState(false)
   const { isCartOpen, cartItems } = useSelector(
     (state: RootState) => state.cart
   )
@@ -36,6 +38,17 @@ const Cart = () => {
 
   const handleCheckoutClick = () => {
     dispatch(closeCart())
+  }
+
+  useEffect(() => {
+    sessionStorage.setItem('cartItems', JSON.stringify(cartItems))
+    setIsReady(true)
+    console.log('Carrinho atualizado:', cartItems)
+  }, [cartItems])
+
+  if (!isReady) {
+    // Ou pode colocar um loader, ou simplesmente não renderiza o carrinho ainda
+    return null
   }
 
   return (
@@ -46,7 +59,9 @@ const Cart = () => {
           <CartContainer>
             <ProductsList>
               {cartItems.map((product) => (
-                <ProductItem key={`${product.id}-${product.selectedPrint}`}>
+                <ProductItem
+                  key={`${product.id}-${product.selectedPrint}-${product.selectedPrintAlt}`}
+                >
                   <Image
                     src={
                       product.selectedPrintImage
@@ -66,6 +81,11 @@ const Cart = () => {
                         ? `Estampa: ${getFirstLetter(product.selectedPrint)}`
                         : ''}
                     </h5>
+                    <h5>
+                      {getFirstLetter(product.selectedPrintAlt)
+                        ? `Cor: ${getFirstLetter(product.selectedPrintAlt)}`
+                        : ''}
+                    </h5>
                     <h4>
                       {product.price !== undefined
                         ? formattedPrice(product.price * product.quantity)
@@ -81,6 +101,7 @@ const Cart = () => {
                         cartItems,
                         product.id,
                         product.selectedPrint ?? '',
+                        product.selectedPrintAlt ?? '',
                         true
                       )
                     }
@@ -90,6 +111,7 @@ const Cart = () => {
                         cartItems,
                         product.id,
                         product.selectedPrint ?? '',
+                        product.selectedPrintAlt ?? '',
                         false
                       )
                     }
@@ -102,10 +124,11 @@ const Cart = () => {
                       removeItem(
                         dispatch,
                         product.id,
-                        product.selectedPrint ?? ''
+                        product.selectedPrint ?? '',
+                        product.selectedPrintAlt ?? ''
                       )
                     }
-                    isCheckout={false}
+                    $isCheckout={false}
                   />
                 </ProductItem>
               ))}

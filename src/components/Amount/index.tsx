@@ -1,5 +1,4 @@
 import { AmountField } from './styles'
-import PropTypes from 'prop-types'
 
 interface AmountProps {
   quantity: number
@@ -9,15 +8,17 @@ interface AmountProps {
   isCheckout?: boolean
 }
 
-const Amount: React.FC<AmountProps> = ({
-  quantity,
-  onDecrement,
-  onIncrement,
-  onQuantityChange,
-  isCheckout = false,
-}) => {
+const Amount = (props: AmountProps) => {
+  const {
+    quantity,
+    onDecrement,
+    onIncrement,
+    onQuantityChange,
+    isCheckout = false,
+  } = props
+
   return (
-    <AmountField isCheckout={isCheckout}>
+    <AmountField $isCheckout={isCheckout}>
       <span
         onClick={onDecrement}
         title="Remover um item"
@@ -41,14 +42,6 @@ const Amount: React.FC<AmountProps> = ({
       </span>
     </AmountField>
   )
-}
-
-Amount.propTypes = {
-  quantity: PropTypes.number.isRequired,
-  onIncrement: PropTypes.func.isRequired,
-  onDecrement: PropTypes.func.isRequired,
-  onQuantityChange: PropTypes.func,
-  isCheckout: PropTypes.bool,
 }
 
 export default Amount
