@@ -34,11 +34,10 @@ const ShippingPage = () => {
 
   return (
     <Container>
-      <h4>Calcular Frete</h4>
       <Form>
         <input
           type="text"
-          placeholder="CEP de destino"
+          placeholder="CEP"
           value={cepDestino}
           onChange={handleCepChange}
           maxLength={8} // Apenas por segurança
@@ -47,8 +46,13 @@ const ShippingPage = () => {
           onClick={handleCalculate}
           disabled={isLoading || cepDestino.length !== 8}
         >
-          BUSCAR
+          Calcular Frete
         </Button>
+        {shippingOptions.length > 0 && (
+          <>
+            <Button onClick={handleReset}>Limpar</Button>
+          </>
+        )}
       </Form>
       <a
         href="https://buscacepinter.correios.com.br/app/endereco/index.php"
@@ -56,17 +60,14 @@ const ShippingPage = () => {
         title="Clique aqui para encontrar o seu CEP"
         rel="noreferrer"
       >
-        Não sei o meu CEP
+        Não sei o CEP
       </a>
-      <div>
-        {isLoading && <p>Calculando...</p>}
-        {shippingOptions.length > 0 && (
-          <>
-            <ShippingOptions options={shippingOptions} />
-            <Button onClick={handleReset}>Limpar</Button>
-          </>
-        )}
-      </div>
+      {isLoading && <p>Calculando...</p>}
+      {shippingOptions.length > 0 && (
+        <>
+          <ShippingOptions options={shippingOptions} />
+        </>
+      )}
     </Container>
   )
 }

@@ -6,6 +6,10 @@ import { store } from '@/store'
 import GlobalStyle from '@/styles/GlobalStyles'
 import { Content } from './styles'
 
+import '@fortawesome/fontawesome-svg-core/styles.css'
+import { config } from '@fortawesome/fontawesome-svg-core'
+config.autoAddCss = false
+
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import Cart from '@/components/Cart'

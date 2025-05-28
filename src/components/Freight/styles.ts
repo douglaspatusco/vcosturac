@@ -5,6 +5,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1em;
+  height: 100%;
 
   a {
     position: relative;
@@ -18,14 +19,12 @@ export const Container = styled.div`
 `
 
 export const Form = styled.div`
-  input {
-    align-content: center;
-    text-align: center;
-    height: 2em;
-    width: 10em;
-    padding: 0.5em;
-    margin-right: 1em;
-    font-size: 1em;
+  display: flex;
+  gap: 1em;
+
+  &::placeholder {
+    position: relative;
+    top: -4px;
   }
 `
 
