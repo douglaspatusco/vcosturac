@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -27,6 +27,7 @@ import {
 } from './styles'
 
 const Checkout = () => {
+  const [isClientHydrated, setIsClientHydrated] = useState(false)
   const { cartItems } = useSelector((state: RootState) => state.cart)
   const selectedFreight = useSelector(
     (state: RootState) => state.shipping.selectedFreight
@@ -49,6 +50,15 @@ const Checkout = () => {
     console.log(`Itens no carrinho:`, cartItems)
   }, [cartItems, selectedFreight])
 
+  // Este efeito roda apenas no cliente, após a montagem inicial. Renderiza 0 para corresponder ao "Server: 0".
+  // Isso garante que o componente não tente acessar o DOM antes de ser montado.
+  useEffect(() => {
+    setIsClientHydrated(true)
+  }, [])
+
+  if (!isClientHydrated) {
+    return <span>0</span>
+  }
   return (
     <>
       <Head>

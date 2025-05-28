@@ -12,6 +12,7 @@ import {
   handleQuantityChange,
   removeItem,
   calculateTotalPrice,
+  calculateTotalQuantity,
 } from '@/utils/cartUtils'
 
 import {
@@ -41,9 +42,18 @@ const Cart = () => {
   }
 
   useEffect(() => {
-    sessionStorage.setItem('cartItems', JSON.stringify(cartItems))
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('cartItems', JSON.stringify(cartItems))
+        console.log('Carrinho salvo no localStorage:', cartItems)
+      } catch (error) {
+        console.error('Erro ao salvar carrinho no localStorage:', error)
+      }
+    }
+
     setIsReady(true)
     console.log('Carrinho atualizado:', cartItems)
+    console.log(`Qtd de itens no carrinho:`, calculateTotalQuantity(cartItems))
   }, [cartItems])
 
   if (!isReady) {

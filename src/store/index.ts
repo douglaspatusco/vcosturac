@@ -30,9 +30,23 @@ export const store = configureStore({
 store.subscribe(() => {
   const state = store.getState()
   if (typeof window !== 'undefined') {
-    sessionStorage.setItem('cartItems', JSON.stringify(state.cart.cartItems))
+    localStorage.setItem('cartItems', JSON.stringify(state.cart.cartItems))
+    try {
+      localStorage.setItem(
+        process.env.CART_STORAGE_KEY || 'cartItems',
+        JSON.stringify(state.cart.cartItems)
+      )
+    } catch (error) {
+      console.error(
+        'Erro ao salvar carrinho no localStorage via subscribe:',
+        error
+      )
+    }
   }
 })
+
+// LEMBRAR DE LIMPAR O LOCAL STORAGE NA CONCLUSAÇÃO DO PEDIDO
+// Isso pode ser feito no reducer de checkout ou em um efeito colateral após a finalização do pedido.
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

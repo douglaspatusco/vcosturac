@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toggleCart } from '../../store/reducers/cartSlice'
 import { RootState } from '@/store'
 import { calculateTotalQuantity } from '@/utils/cartUtils'
+import ShoppingCart from '../ShoppingCart'
 
 import {
   Carrinho,
@@ -16,10 +17,10 @@ import {
   Logotipo,
   Menu,
 } from './styles'
-import ShoppingCart from '../ShoppingCart'
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isClientHydrated, setIsClientHydrated] = useState(false)
   const { cartItems } = useSelector((state: RootState) => state.cart)
   const dispatch = useDispatch()
 
@@ -39,6 +40,16 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Este efeito roda apenas no cliente, após a montagem inicial. Renderiza 0 para corresponder ao "Server: 0".
+  // Isso garante que o componente não tente acessar o DOM antes de ser montado.
+  useEffect(() => {
+    setIsClientHydrated(true)
+  }, [])
+
+  if (!isClientHydrated) {
+    return <span>0</span>
+  }
 
   return (
     <HeaderContainer $pageIsScrolled={isScrolled}>

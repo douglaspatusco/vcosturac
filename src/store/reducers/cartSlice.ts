@@ -1,15 +1,40 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+// Definir um tipo mais específico para os itens do carrinho,
+// incluindo todos os campos usados para identificar unicamente um item e sua quantidade.
+type CartItemType = Product & {
+  selectedPrint?: string
+  selectedPrintAlt?: string // Adicionado pois é usado para identificar itens
+  quantity: number
+}
+
 type CartState = {
   isCartOpen: boolean
-  cartItems: (Product & { selectedPrint?: string; quantity: number })[]
+  cartItems: CartItemType[]
+}
+
+const chave = process.env.CART_STORAGE_KEY || 'cartItems'
+
+const loadCartFromLocalStorage = (): CartItemType[] => {
+  // Garante que o localStorage só seja acessado no lado do cliente
+  if (typeof window === 'undefined') {
+    return []
+  }
+  try {
+    const serializedCart = localStorage.getItem(chave) // Usar a chave constante
+    if (serializedCart === null) {
+      return [] // Nenhum carrinho salvo, retorna array vazio
+    }
+    return JSON.parse(serializedCart)
+  } catch (error) {
+    console.error('Erro ao carregar carrinho do localStorage:', error)
+    return [] // Em caso de erro, retorna array vazio
+  }
 }
 
 const initialState: CartState = {
   isCartOpen: false,
-  cartItems: [] as Array<
-    Product & { selectedPrint?: string; quantity: number }
-  >,
+  cartItems: loadCartFromLocalStorage(),
 }
 
 const cartSlice = createSlice({
@@ -21,18 +46,23 @@ const cartSlice = createSlice({
     },
     addItemToCart: (
       state,
-      action: PayloadAction<Product & { selectedPrint?: string }>
+      // O payload deve conter todos os identificadores necessários
+      action: PayloadAction<
+        Product & { selectedPrint?: string; selectedPrintAlt?: string }
+      >
     ) => {
-      const produto = state.cartItems.find(
+      const existingItem = state.cartItems.find(
         (item) =>
           item.id === action.payload.id &&
           item.selectedPrint === action.payload.selectedPrint &&
           item.selectedPrintAlt === action.payload.selectedPrintAlt
       )
-      if (!produto) {
+      if (!existingItem) {
         state.cartItems.push({ ...action.payload, quantity: 1 })
       } else {
-        alert('O produto já está no carrinho')
+        // Em vez de alert, considere uma notificação mais amigável ou incrementar a quantidade
+        console.warn('Produto já existe no carrinho:', action.payload)
+        existingItem.quantity += 1 // Exemplo: incrementar quantidade se já existe
       }
     },
     updateQuantity: (state, action) => {
@@ -41,7 +71,7 @@ const cartSlice = createSlice({
         (item) =>
           item.id === id &&
           item.selectedPrint === selectedPrint &&
-          item.selectedPrintAlt === action.payload.selectedPrintAlt
+          item.selectedPrintAlt === action.payload.selectedPrintAlt // Certifique-se que payload tem selectedPrintAlt
       )
       if (item) {
         item.quantity = quantity
@@ -51,7 +81,7 @@ const cartSlice = createSlice({
       state,
       action: PayloadAction<{
         selectedPrintAlt: string
-        id: string
+        id: number | string // id pode ser number ou string dependendo da sua definição de Product
         selectedPrint?: string
       }>
     ) => {
