@@ -17,6 +17,7 @@ const ShippingPage = () => {
 
   const handleCalculate = () => {
     handleCalculateShipping(cepDestino, setShippingOptions, setIsLoading)
+    console.log('Calculando frete para o CEP:', cepDestino)
   }
 
   const handleReset = () => {

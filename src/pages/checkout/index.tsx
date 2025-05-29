@@ -30,6 +30,7 @@ const Checkout = () => {
   }, [])
 
   if (!isClientHydrated) {
+    // Trocar por um loader
     return <span>0</span>
   }
   return (

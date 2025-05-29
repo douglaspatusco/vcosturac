@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-// Chadamar a API do Melhor Envio para calcular o frete
 const calculateShipping = async (cepDestino: string) => {
   const response = await fetch(
     'https://www.melhorenvio.com.br/api/v2/me/shipment/calculate',
@@ -13,7 +12,7 @@ const calculateShipping = async (cepDestino: string) => {
         'User-Agent': 'Aplicação (douglaspatusco@gmail.com)',
       },
       body: JSON.stringify({
-        from: { postal_code: '20540215' },
+        from: { postal_code: '25961146' },
         to: { postal_code: cepDestino },
         package: { height: 20, width: 20, length: 20, weight: 0.5 },
         services: '1,2',

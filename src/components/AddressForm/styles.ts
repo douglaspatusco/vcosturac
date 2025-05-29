@@ -25,3 +25,17 @@ export const ShippingData = styled.div`
     display: none;
   }
 `
+
+export const Button = styled.button`
+  border: 0.0625em solid;
+  border-radius: 0.25em;
+  padding: 0.5em;
+  font-size: 1em;
+  color: ${colors.creme};
+  background-color: ${colors.salmao};
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${colors.salmaoClaro};
+  }
+`
