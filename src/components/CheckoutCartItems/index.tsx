@@ -42,6 +42,7 @@ const CheckoutCartItem = ({ product }: { product: Product }) => {
         <ProductDescription>
           <h3>{product.name} </h3>
           <h4>{getFirstLetter(product.selectedPrint)}</h4>
+          <h4>{getFirstLetter(product.selectedPrintAlt)}</h4>
         </ProductDescription>
       </ImageAndDescription>
       <ProductPrice>

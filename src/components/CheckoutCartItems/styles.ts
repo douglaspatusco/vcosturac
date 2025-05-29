@@ -45,17 +45,20 @@ export const ProductDescription = styled.div`
 
   h3 {
     font-weight: 400;
+    font-size: 1em;
   }
 
   h4 {
     color: #777777;
     font-weight: 400;
+    font-size: 0.75em;
   }
 `
 
 export const ProductPrice = styled.div`
   display: flex;
   align-items: center;
+  font-size: 1em;
 `
 
 export const ProductImage = styled(Image)`

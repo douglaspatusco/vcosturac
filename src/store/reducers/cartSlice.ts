@@ -60,9 +60,7 @@ const cartSlice = createSlice({
       if (!existingItem) {
         state.cartItems.push({ ...action.payload, quantity: 1 })
       } else {
-        // Em vez de alert, considere uma notificação mais amigável ou incrementar a quantidade
-        console.warn('Produto já existe no carrinho:', action.payload)
-        existingItem.quantity += 1 // Exemplo: incrementar quantidade se já existe
+        alert('O produto já está no carrinho')
       }
     },
     updateQuantity: (state, action) => {

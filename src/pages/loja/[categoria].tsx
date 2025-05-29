@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
+import { useFetchProducts } from '@/hooks/useFetchProducts'
 import { formattedPrice, getFirstLetter } from '@/services/utility'
 
 import {
@@ -10,7 +11,6 @@ import {
   ProductsList,
   Thumb,
 } from './styles'
-import { useFetchProducts } from '@/hooks/useFetchProducts'
 
 const CategoriaPage = () => {
   const { loading, products } = useFetchProducts()

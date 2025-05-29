@@ -49,8 +49,8 @@ const Checkout = () => {
               <CheckoutTitle icon={faCartShopping}>
                 Resumo da Compra
               </CheckoutTitle>
-              {cartItems.map((product) => (
-                <CheckoutCartItem key={product.id} product={product} />
+              {cartItems.map((product, index) => (
+                <CheckoutCartItem key={index} product={product} />
               ))}
               <OrderSummary />
             </CartProductsList>

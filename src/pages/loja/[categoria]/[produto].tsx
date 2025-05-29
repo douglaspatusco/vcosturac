@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -12,16 +11,12 @@ import { setSelectedPrintAlt } from '@/store/reducers/selectedPrintAltSlice'
 import { useFetchProducts } from '@/hooks/useFetchProducts'
 import { useMainImage } from '@/hooks/useMainImage'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import { ProductImagesWithZoom } from '@/components/ProductImagesWithZoom'
+import { PrintSelector } from '@/components/PrintSelector'
 
-import { formattedPrice, getFirstLetter } from '@/services/utility'
-import {
-  addToCart,
-  getPrintImageUrl,
-  handleThumbnailClick,
-  handleZoomMouseMove,
-  enableZoom,
-  disableZoom,
-} from '@/utils/produtoUtils'
+import { formattedPrice } from '@/services/utility'
+import { addToCart } from '@/utils/produtoUtils'
+import { handlePrintClick } from '@/utils/handlePrintClick'
 
 import {
   BuyButton,
@@ -29,17 +24,9 @@ import {
   ContainerStore,
   Description,
   Price,
-  Prints,
-  PrintsList,
   ProductContainer,
   ProductDetails,
-  ProductImages,
   ProductName,
-  SelectedImage,
-  Thumbnail,
-  ThumbnailsContainer,
-  ZoomContainer,
-  ZoomedImage,
 } from './styles'
 
 const ProdutoPage = () => {
@@ -58,9 +45,6 @@ const ProdutoPage = () => {
     selectedPrintKey: estampaParam,
     selectedPrintAlt: imagemParam,
   })
-
-  const [isZoomed, setIsZoomed] = useState(false)
-  const [transformOrigin, setTransformOrigin] = useState('center center')
 
   const selectedPrintAlt = useSelector(
     (state: RootState) => state.selectedPrintAlt.value
@@ -107,30 +91,6 @@ const ProdutoPage = () => {
     }
   }, [product, estampaParam, imagemParam, dispatch, setMainImage])
 
-  const handlePrintClick = (key: string) => {
-    const firstImage = product?.medias?.prints[key]?.[0]
-    if (firstImage) {
-      dispatch(setSelectedPrint(key))
-      dispatch(setSelectedPrintSrc(firstImage.src))
-      dispatch(setSelectedPrintAlt(firstImage.alt))
-      setMainImage(firstImage)
-
-      router.push(
-        {
-          pathname: router.pathname,
-          query: {
-            ...router.query,
-            produto,
-            estampa: key,
-            imagem: firstImage.alt.toLowerCase(),
-          },
-        },
-        undefined,
-        { shallow: true }
-      )
-    }
-  }
-
   if (loading) return <p>Carregando...</p>
   if (!product) return <p>Produto não encontrado.</p>
 
@@ -141,53 +101,28 @@ const ProdutoPage = () => {
       </Head>
       <Breadcrumbs />
       <ProductContainer>
-        <ProductImages>
-          <ZoomContainer
-            onMouseMove={(e) => handleZoomMouseMove(e, setTransformOrigin)}
-            onMouseEnter={() => enableZoom(setIsZoomed)}
-            onMouseLeave={() => disableZoom(setIsZoomed)}
-          >
-            {mainImage && typeof mainImage.src === 'string' ? (
-              <ZoomedImage
-                src={mainImage.src}
-                alt={mainImage.alt}
-                title={mainImage.alt}
-                $isZoomed={isZoomed}
-                $transformOrigin={transformOrigin}
-              />
-            ) : (
-              <p>Carregando imagem...</p>
-            )}
-          </ZoomContainer>
-          <ThumbnailsContainer>
-            {printImages.map((image) => (
-              <Thumbnail
-                key={image.src}
-                src={image.src}
-                alt={image.alt}
-                title={image.alt}
-                onClick={() => {
-                  handleThumbnailClick(image, setMainImage)
-                  dispatch(setSelectedPrintSrc(image.src))
-                  dispatch(setSelectedPrintAlt(image.alt))
-                  router.push(
-                    {
-                      pathname: router.pathname,
-                      query: {
-                        ...router.query,
-                        produto,
-                        estampa: selectedPrint,
-                        imagem: image.alt.toLowerCase(),
-                      },
-                    },
-                    undefined,
-                    { shallow: true }
-                  )
-                }}
-              />
-            ))}
-          </ThumbnailsContainer>
-        </ProductImages>
+        <ProductImagesWithZoom
+          mainImage={mainImage}
+          printImages={printImages}
+          setMainImage={setMainImage}
+          onThumbnailClick={(image) => {
+            dispatch(setSelectedPrintSrc(image.src))
+            dispatch(setSelectedPrintAlt(image.alt))
+            router.push(
+              {
+                pathname: router.pathname,
+                query: {
+                  ...router.query,
+                  produto,
+                  estampa: selectedPrint,
+                  imagem: image.alt.toLowerCase(),
+                },
+              },
+              undefined,
+              { shallow: true }
+            )
+          }}
+        />
         <ProductDetails>
           <ProductName>{product.name}</ProductName>
           <div>
@@ -197,26 +132,20 @@ const ProdutoPage = () => {
               <b>{formattedPrice(product.installment)}</b> sem juros!
             </span>
           </div>
-          <Prints>
-            <p>Estampas: </p>
-            <PrintsList>
-              {availablePrints.map(([key]) => {
-                const ImageComponent =
-                  key === selectedPrint ? SelectedImage : Image
-                return (
-                  <ImageComponent
-                    key={key}
-                    onClick={() => handlePrintClick(key)}
-                    title={getFirstLetter(key)}
-                    alt={key}
-                    src={getPrintImageUrl(key)}
-                    width={100}
-                    height={100}
-                  />
-                )
-              })}
-            </PrintsList>
-          </Prints>
+          <PrintSelector
+            selectedPrint={selectedPrint}
+            availablePrints={availablePrints}
+            onSelect={(key) =>
+              handlePrintClick(
+                key,
+                product,
+                router,
+                dispatch,
+                setMainImage,
+                produto as string
+              )
+            }
+          />
           <ContainerBuy>
             <BuyButton
               type="submit"
