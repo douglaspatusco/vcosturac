@@ -6,7 +6,11 @@ const SocialMedias = () => {
   return (
     <List>
       <li>
-        <a href="https://instagram.com/vaniafcostura" target="_blank">
+        <a
+          href="https://instagram.com/vaniafcostura"
+          target="_blank"
+          rel="noreferrer"
+        >
           <Image
             width={0}
             height={0}
@@ -16,7 +20,11 @@ const SocialMedias = () => {
         </a>
       </li>
       <li>
-        <a href="https://www.facebook.com/VaniaFCostura" target="_blank">
+        <a
+          href="https://www.facebook.com/VaniaFCostura"
+          target="_blank"
+          rel="noreferrer"
+        >
           <Image
             width={0}
             height={0}
@@ -29,6 +37,7 @@ const SocialMedias = () => {
         <a
           href="https://wa.me/5521968334606?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20produtos."
           target="_blank"
+          rel="noreferrer"
         >
           <Image
             width={0}
