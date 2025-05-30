@@ -1,21 +1,22 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import CheckoutTitle from '../CheckoutTitles'
 import { Button, ShippingData } from './styles'
-import { useState } from 'react'
+
+import { setName } from '@/store/reducers/userFormSlice'
+import { setSurname } from '@/store/reducers/userFormSlice'
+import { setEmail } from '@/store/reducers/userFormSlice'
+import { setPhone } from '@/store/reducers/userFormSlice'
+import { RootState } from '@/store'
+import { useDispatch, useSelector } from 'react-redux'
 
 const PersonalDataForm = () => {
-  const [name, setName] = useState('')
-  const [surname, setSurname] = useState('')
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
+  const userForm = useSelector((state: RootState) => state.userForm)
+  const dispatch = useDispatch()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission logic here
-    console.log(`Dados do Usuário:`, { name, surname, email, phone })
+    console.log(`Dados do Usuário:`, { userForm })
   }
-  // Note: The handleSubmit function is defined but not used in this component.
-  // It can be used to handle form submission if needed.
 
   return (
     <ShippingData>
@@ -26,8 +27,7 @@ const PersonalDataForm = () => {
         <input
           type="text"
           placeholder="Nome"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => dispatch(setName(e.target.value))}
         />
       </>
       <>
@@ -35,8 +35,7 @@ const PersonalDataForm = () => {
         <input
           type="text"
           placeholder="Sobrenome"
-          value={surname}
-          onChange={(e) => setSurname(e.target.value)}
+          onChange={(e) => dispatch(setSurname(e.target.value))}
         />
       </>
       <>
@@ -44,8 +43,7 @@ const PersonalDataForm = () => {
         <input
           type="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => dispatch(setEmail(e.target.value))}
         />
       </>
       <>
@@ -53,8 +51,7 @@ const PersonalDataForm = () => {
         <input
           type="tel"
           placeholder="Telefone"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={(e) => dispatch(setPhone(e.target.value))}
         />
       </>
       <Button type="submit" onClick={handleSubmit}>

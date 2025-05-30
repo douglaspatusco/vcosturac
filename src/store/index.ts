@@ -10,6 +10,8 @@ import selectedPrintReducer from './reducers/selectedPrintSlice'
 import selectedPrintSrcReducer from './reducers/selectedPrintSrcSlice'
 import selectedPrintAltReducer from './reducers/selectedPrintAltSlice'
 import shippingReducer from './reducers/shippingSlice'
+import userFormReducer from './reducers/userFormSlice'
+import addressFormReducer from './reducers/addressFormSlice'
 
 export const store = configureStore({
   reducer: {
@@ -22,8 +24,9 @@ export const store = configureStore({
     selectedPrint: selectedPrintReducer,
     selectedPrintSrc: selectedPrintSrcReducer,
     selectedPrintAlt: selectedPrintAltReducer,
-
     shipping: shippingReducer,
+    userForm: userFormReducer,
+    addressForm: addressFormReducer,
   },
 })
 

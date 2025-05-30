@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 
 import ShippingPage from '../Freight'
@@ -6,13 +5,20 @@ import CheckoutTitle from '../CheckoutTitles'
 
 import { Button, ShippingData } from './styles'
 
+import { RootState } from '@/store'
+import { useSelector } from 'react-redux'
+import { setStreet } from '@/store/reducers/addressFormSlice'
+import { setNumber } from '@/store/reducers/addressFormSlice'
+import { setComplement } from '@/store/reducers/addressFormSlice'
+import { setNeighborhood } from '@/store/reducers/addressFormSlice'
+import { setCity } from '@/store/reducers/addressFormSlice'
+import { setState } from '@/store/reducers/addressFormSlice'
+
+import { useDispatch } from 'react-redux'
+
 const AddressForm = () => {
-  const [street, setStreet] = useState('')
-  const [number, setNumber] = useState('')
-  const [complement, setComplement] = useState('')
-  const [neighborhood, setNeighborhood] = useState('')
-  const [city, setCity] = useState('')
-  const [state, setState] = useState('')
+  const addressForm = useSelector((state: RootState) => state.addressForm)
+  const dispatch = useDispatch()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -24,12 +30,7 @@ const AddressForm = () => {
     console.log(`Formulário enviado em: ${time}`)
     console.log(`Timestamp formatado: ${timeStamp}`)
     console.log(`Dados de Entrega:`, {
-      street,
-      number,
-      complement,
-      neighborhood,
-      city,
-      state,
+      addressForm,
     })
   }
 
@@ -42,8 +43,7 @@ const AddressForm = () => {
           type="text"
           id="street"
           placeholder="Rua"
-          value={street}
-          onChange={(e) => setStreet(e.target.value)}
+          onChange={(e) => dispatch(setStreet(e.target.value))}
         />
       </>
       <>
@@ -52,8 +52,7 @@ const AddressForm = () => {
           type="text"
           id="number"
           placeholder="Número"
-          value={number}
-          onChange={(e) => setNumber(e.target.value)}
+          onChange={(e) => dispatch(setNumber(e.target.value))}
         />
       </>
       <>
@@ -62,8 +61,7 @@ const AddressForm = () => {
           type="text"
           id="complement"
           placeholder="Complemento (opcional)"
-          value={complement}
-          onChange={(e) => setComplement(e.target.value)}
+          onChange={(e) => dispatch(setComplement(e.target.value))}
         />
       </>
       <>
@@ -72,8 +70,7 @@ const AddressForm = () => {
           type="text"
           id="neighborhood"
           placeholder="Bairro"
-          value={neighborhood}
-          onChange={(e) => setNeighborhood(e.target.value)}
+          onChange={(e) => dispatch(setNeighborhood(e.target.value))}
         />
       </>
       <>
@@ -82,8 +79,7 @@ const AddressForm = () => {
           type="text"
           id="city"
           placeholder="Cidade"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
+          onChange={(e) => dispatch(setCity(e.target.value))}
         />
       </>
       <>
@@ -92,8 +88,7 @@ const AddressForm = () => {
           type="text"
           id="state"
           placeholder="Estado"
-          value={state}
-          onChange={(e) => setState(e.target.value)}
+          onChange={(e) => dispatch(setState(e.target.value))}
         />
       </>
       <ShippingPage />
