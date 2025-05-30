@@ -6,16 +6,13 @@ import { setName } from '@/store/reducers/userFormSlice'
 import { setSurname } from '@/store/reducers/userFormSlice'
 import { setEmail } from '@/store/reducers/userFormSlice'
 import { setPhone } from '@/store/reducers/userFormSlice'
-import { RootState } from '@/store'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const PersonalDataForm = () => {
-  const userForm = useSelector((state: RootState) => state.userForm)
   const dispatch = useDispatch()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(`Dados do Usuário:`, { userForm })
   }
 
   return (

@@ -1,13 +1,16 @@
 import { useEffect, useMemo } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { formattedPrice } from '@/services/utility'
 import { calculateTotalPrice } from '@/utils/cartUtils'
+
 import { RootState } from '@/store'
+import { setTotal } from '@/store/reducers/cartSlice'
 
 import { Total } from './styles'
 
 const OrderSummary = () => {
+  const dispatch = useDispatch()
   const selectedFreight = useSelector(
     (state: RootState) => state.shipping.selectedFreight
   )
@@ -22,10 +25,8 @@ const OrderSummary = () => {
   }, [cartTotalPrice, selectedFreight])
 
   useEffect(() => {
-    console.log(`Qtd de itens no carrinho:`, cartItems.length)
-    console.log(`Itens no carrinho:`, cartItems)
-    console.log(`Preço Total:`, total)
-  }, [cartItems, selectedFreight, total])
+    dispatch(setTotal(Number(total)))
+  }, [dispatch, total])
 
   return (
     <Total>

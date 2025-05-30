@@ -1,12 +1,13 @@
+import { useDispatch } from 'react-redux'
+import type { AppDispatch } from '@/store'
+import { setTimeStamp } from '@/store/reducers/timeSlice'
+import { generateReport } from '@/store/thunks/reportThunk'
+
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 
 import ShippingPage from '../Freight'
 import CheckoutTitle from '../CheckoutTitles'
 
-import { Button, ShippingData } from './styles'
-
-import { RootState } from '@/store'
-import { useSelector } from 'react-redux'
 import { setStreet } from '@/store/reducers/addressFormSlice'
 import { setNumber } from '@/store/reducers/addressFormSlice'
 import { setComplement } from '@/store/reducers/addressFormSlice'
@@ -14,24 +15,19 @@ import { setNeighborhood } from '@/store/reducers/addressFormSlice'
 import { setCity } from '@/store/reducers/addressFormSlice'
 import { setState } from '@/store/reducers/addressFormSlice'
 
-import { useDispatch } from 'react-redux'
-
+import { Button, ShippingData } from './styles'
 const AddressForm = () => {
-  const addressForm = useSelector((state: RootState) => state.addressForm)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
     const time = new Date().toLocaleString()
-    const timeOnlyNumbers = time.replace(/[^0-9]/g, '') // Remove tudo que não for número
-    const timeStamp = timeOnlyNumbers.slice(0, 14) // Pega os primeiros 14 dígitos (ano, mês, dia, hora, minuto e segundo)
+    const timeOnlyNumbers = time.replace(/[^0-9]/g, '')
+    const timeStamp = timeOnlyNumbers.slice(0, 14)
 
-    console.log(`Formulário enviado em: ${time}`)
-    console.log(`Timestamp formatado: ${timeStamp}`)
-    console.log(`Dados de Entrega:`, {
-      addressForm,
-    })
+    dispatch(setTimeStamp(timeStamp)) // Salva no Redux
+    dispatch(generateReport()) // Gera o relatório
   }
 
   return (

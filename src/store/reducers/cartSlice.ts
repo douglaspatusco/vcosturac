@@ -11,6 +11,7 @@ type CartItemType = Product & {
 type CartState = {
   isCartOpen: boolean
   cartItems: CartItemType[]
+  total?: number
 }
 
 const chave = process.env.CART_STORAGE_KEY || 'cartItems'
@@ -35,6 +36,7 @@ const loadCartFromLocalStorage = (): CartItemType[] => {
 const initialState: CartState = {
   isCartOpen: false,
   cartItems: loadCartFromLocalStorage(),
+  total: 0,
 }
 
 const cartSlice = createSlice({
@@ -99,6 +101,9 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.cartItems = []
     },
+    setTotal: (state, action: PayloadAction<number>) => {
+      state.total = action.payload
+    },
   },
 })
 
@@ -110,5 +115,6 @@ export const {
   closeCart,
   removeItemFromCart,
   clearCart,
+  setTotal,
 } = cartSlice.actions
 export default cartSlice.reducer

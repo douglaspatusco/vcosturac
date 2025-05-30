@@ -12,10 +12,8 @@ const ShippingOptions: React.FC<ShippingOptionsProps> = ({ options }) => {
     (state: RootState) => state.shipping.selectedFreight
   )
 
-  const handleSelect = (option: { name: string; price: string }) => {
+  const selectBox = (option: { name: string; price: string }) => {
     dispatch(setSelectedFreight(option))
-    console.log(`Frete selecionado:`, selectedFreight?.name)
-    console.log(`Preço:`, selectedFreight?.price)
   }
 
   return (
@@ -29,7 +27,7 @@ const ShippingOptions: React.FC<ShippingOptionsProps> = ({ options }) => {
             key={option.name}
             type="checkbox"
             checked={selectedFreight?.name === option.name}
-            onChange={() => handleSelect(option)}
+            onChange={() => selectBox(option)}
           />
           <CustomCheckbox selected={selectedFreight?.name === option.name} />
           <Card key={index} selected={selectedFreight?.name === option.name}>
