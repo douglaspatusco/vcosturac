@@ -1,38 +1,39 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from '../index'
 
-// Envia ou salva o relatório
 export const generateReport = createAsyncThunk(
-  'relatorio/gerar',
+  'report/generate',
   async (_, { getState }) => {
     const state = getState() as RootState
 
-    const dadosRelatorio = {
+    const reportData = {
       name: state.userForm.name,
       surname: state.userForm.surname,
-      telefone: state.userForm.phone,
+      phone: state.userForm.phone,
       email: state.userForm.email,
 
-      steet: state.addressForm.street,
+      street: state.addressForm.street,
       number: state.addressForm.number,
       complement: state.addressForm.complement,
       neighborhood: state.addressForm.neighborhood,
       city: state.addressForm.city,
       state: state.addressForm.state,
-      cep: state.shipping.selectedFreight,
+      selectedFreightName: state.shipping.selectedFreight?.name,
+      selectedFreightPrice: state.shipping.selectedFreight?.price,
 
-      cartItems: state.cart.cartItems,
+      cartItems: state.cart.cartItems.map((item) => ({
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+      })),
       total: state.cart.total,
 
-      time: state.time,
+      timeOrder: state.time.timeOrder,
+      timeStamp: state.time.timeStamp,
     }
 
-    const jsonString = JSON.stringify(dadosRelatorio, null, 2)
+    const jsonString = JSON.stringify(reportData, null, 2)
 
-    // Exemplo 1: salvar localmente
-    sessionStorage.setItem('relatorioUsuario', jsonString)
-
-    // Exemplo 2: enviar para backend (se tiver uma API)
     await fetch('/api/report', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

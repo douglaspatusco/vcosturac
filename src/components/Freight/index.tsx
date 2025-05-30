@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { clearFreight } from '@/store/reducers/shippingSlice'
+import { setCEP, clearCEP } from '@/store/reducers/addressFormSlice'
+import { RootState } from '@/store'
+import { useSelector } from 'react-redux'
 
 import ShippingOptions from '../ShippingOptions'
 
@@ -9,9 +12,10 @@ import { handleCalculateShipping } from '@/utils/shippingUtils'
 import { Button, Container, Form } from './styles'
 
 const ShippingPage = () => {
-  const [cepDestino, setCepDestino] = useState('')
   const [shippingOptions, setShippingOptions] = useState<ShippingOption[]>([])
   const [isLoading, setIsLoading] = useState(false)
+
+  const cepDestino = useSelector((state: RootState) => state.addressForm.cep)
 
   const dispatch = useDispatch()
 
@@ -21,7 +25,7 @@ const ShippingPage = () => {
   }
 
   const handleReset = () => {
-    setCepDestino('')
+    dispatch(clearCEP())
     setShippingOptions([])
     dispatch(clearFreight())
   }
@@ -30,7 +34,7 @@ const ShippingPage = () => {
     const rawValue = e.target.value
     const numericValue = rawValue.replace(/\D/g, '').slice(0, 8)
 
-    setCepDestino(numericValue)
+    dispatch(setCEP(numericValue))
   }
 
   return (

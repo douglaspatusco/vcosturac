@@ -1,19 +1,20 @@
 import { useDispatch } from 'react-redux'
+
 import type { AppDispatch } from '@/store'
 import { setTimeStamp } from '@/store/reducers/timeSlice'
-import { generateReport } from '@/store/thunks/reportThunk'
-
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
-
-import ShippingPage from '../Freight'
-import CheckoutTitle from '../CheckoutTitles'
-
 import { setStreet } from '@/store/reducers/addressFormSlice'
 import { setNumber } from '@/store/reducers/addressFormSlice'
 import { setComplement } from '@/store/reducers/addressFormSlice'
 import { setNeighborhood } from '@/store/reducers/addressFormSlice'
 import { setCity } from '@/store/reducers/addressFormSlice'
 import { setState } from '@/store/reducers/addressFormSlice'
+import { setTimeOrder } from '@/store/reducers/timeSlice'
+import { generateReport } from '@/store/thunks/reportThunk'
+
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
+
+import ShippingPage from '../Freight'
+import CheckoutTitle from '../CheckoutTitles'
 
 import { Button, ShippingData } from './styles'
 const AddressForm = () => {
@@ -22,10 +23,11 @@ const AddressForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    const time = new Date().toLocaleString()
-    const timeOnlyNumbers = time.replace(/[^0-9]/g, '')
+    const timeOrder = new Date().toLocaleString()
+    const timeOnlyNumbers = timeOrder.replace(/[^0-9]/g, '')
     const timeStamp = timeOnlyNumbers.slice(0, 14)
 
+    dispatch(setTimeOrder(timeOrder)) // Salva o timestamp no Redux
     dispatch(setTimeStamp(timeStamp)) // Salva no Redux
     dispatch(generateReport()) // Gera o relatório
   }

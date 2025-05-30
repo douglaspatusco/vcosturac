@@ -7,10 +7,11 @@ const initialState = {
   neighborhood: '',
   city: '',
   state: '',
+  cep: '',
 }
 
-export const deliveryFormSlice = createSlice({
-  name: 'deliveryForm',
+export const addressFormSlice = createSlice({
+  name: 'addressForm',
   initialState,
   reducers: {
     setStreet: (state, action) => {
@@ -31,6 +32,12 @@ export const deliveryFormSlice = createSlice({
     setState: (state, action) => {
       state.state = action.payload
     },
+    setCEP: (state, action) => {
+      state.cep = action.payload
+    },
+    clearCEP: (state) => {
+      state.cep = ''
+    },
   },
 })
 
@@ -41,6 +48,8 @@ export const {
   setNeighborhood,
   setCity,
   setState,
-} = deliveryFormSlice.actions
+  setCEP,
+  clearCEP,
+} = addressFormSlice.actions
 
-export default deliveryFormSlice.reducer
+export default addressFormSlice.reducer
