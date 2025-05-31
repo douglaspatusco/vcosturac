@@ -7,29 +7,31 @@ export const generateReport = createAsyncThunk(
     const state = getState() as RootState
 
     const reportData = {
-      name: state.userForm.name,
-      surname: state.userForm.surname,
-      phone: state.userForm.phone,
+      nome: state.userForm.name,
+      sobrenome: state.userForm.surname,
+      telefone: state.userForm.phone,
       email: state.userForm.email,
 
-      street: state.addressForm.street,
-      number: state.addressForm.number,
-      complement: state.addressForm.complement,
-      neighborhood: state.addressForm.neighborhood,
-      city: state.addressForm.city,
-      state: state.addressForm.state,
-      selectedFreightName: state.shipping.selectedFreight?.name,
-      selectedFreightPrice: state.shipping.selectedFreight?.price,
+      endereco: state.addressForm.street,
+      numero: state.addressForm.number,
+      complemento: state.addressForm.complement,
+      bairro: state.addressForm.neighborhood,
+      cidade: state.addressForm.city,
+      estado: state.addressForm.state,
+      opcaoDeEntrega: state.shipping.selectedFreight?.name,
+      precoDoFrete: state.shipping.selectedFreight?.price,
 
-      cartItems: state.cart.cartItems.map((item) => ({
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
+      itensDoCarrinho: state.cart.cartItems.map((item) => ({
+        produto: item.name,
+        tema: item.selectedPrint,
+        estampa: item.selectedPrintAlt,
+        preco: item.price,
+        quantidade: item.quantity,
       })),
       total: state.cart.total,
 
-      timeOrder: state.time.timeOrder,
-      timeStamp: state.time.timeStamp,
+      horaDoPedido: state.time.timeOrder,
+      codigoDoPedido: state.time.timeStamp,
     }
 
     const jsonString = JSON.stringify(reportData, null, 2)
@@ -38,6 +40,12 @@ export const generateReport = createAsyncThunk(
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: jsonString,
+    })
+
+    await fetch('/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(reportData),
     })
 
     return jsonString

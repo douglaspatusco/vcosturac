@@ -7,17 +7,26 @@ export default async function handler(
 ) {
   try {
     const client = await clientPromise
-    const db = client.db('vania_costura_criativa')
 
+    // Seleciona o banco de dados 'vania-costura'
+    const db = client.db('vania-costura')
+
+    // Verifica o método HTTP da requisição
     switch (req.method) {
       case 'GET': {
+        // Se for GET, busca todos os documentos da coleção 'products'
         const items = await db.collection('products').find({}).toArray()
+
         res.status(200).json(items)
         break
       }
       case 'POST': {
+        // Se for POST, pega os dados enviados no corpo da requisição
         const newItem = req.body
-        const result = await db.collection('products').insertOne(newItem)
+
+        // Insere os dados na coleção 'order-reports'
+        const result = await db.collection('order-reports').insertOne(newItem)
+
         res.status(201).json(result)
         break
       }
@@ -30,5 +39,3 @@ export default async function handler(
     res.status(500).json({ message: 'Erro ao conectar com o MongoDB', error })
   }
 }
-
-// https://cloud.mongodb.com/v2/67448447e3343c1cbc8abebf#/metrics/replicaSet/674485a2894949025fb3e95f/explorer/vania_costura_criativa/products/find
