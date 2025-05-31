@@ -1,7 +1,14 @@
 import { colors } from '@/styles/GlobalStyles'
 import styled from 'styled-components'
 
-export const ShippingData = styled.div`
+export const OrderForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  width: 100%;
+`
+
+export const FormSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -20,6 +27,14 @@ export const ShippingData = styled.div`
       top: -4px;
     }
   }
+`
+
+export const Field = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  font-size: 0.875em;
+  color: red;
 
   > label {
     display: none;

@@ -1,27 +1,28 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { clearFreight } from '@/store/reducers/shippingSlice'
-import { setCEP, clearCEP } from '@/store/reducers/addressFormSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import Inputmask from 'react-input-mask'
+
 import { RootState } from '@/store'
-import { useSelector } from 'react-redux'
+import { clearFreight } from '@/store/reducers/shippingSlice'
+import { setCEP, clearCEP } from '@/store/reducers/formOrderSlice'
 
 import ShippingOptions from '../ShippingOptions'
 
 import { handleCalculateShipping } from '@/utils/shippingUtils'
 
-import { Button, Container, Form } from './styles'
+import { Button, Container, FormCEP } from './styles'
 
 const ShippingPage = () => {
   const [shippingOptions, setShippingOptions] = useState<ShippingOption[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
-  const cepDestino = useSelector((state: RootState) => state.addressForm.cep)
+  const destinationCEP = useSelector((state: RootState) => state.formOrder.cep)
 
   const dispatch = useDispatch()
 
   const handleCalculate = () => {
-    handleCalculateShipping(cepDestino, setShippingOptions, setIsLoading)
-    console.log('Calculando frete para o CEP:', cepDestino)
+    handleCalculateShipping(destinationCEP, setShippingOptions, setIsLoading)
+    console.log('Calculando frete para o CEP:', destinationCEP)
   }
 
   const handleReset = () => {
@@ -39,17 +40,18 @@ const ShippingPage = () => {
 
   return (
     <Container>
-      <Form>
-        <input
+      <FormCEP>
+        <Inputmask
+          mask="99999-999"
+          maskChar=""
           type="text"
           placeholder="CEP"
-          value={cepDestino}
+          value={destinationCEP}
           onChange={handleCepChange}
-          maxLength={8} // Apenas por segurança
         />
         <Button
           onClick={handleCalculate}
-          disabled={isLoading || cepDestino.length !== 8}
+          disabled={isLoading || destinationCEP.length !== 8}
         >
           Calcular Frete
         </Button>
@@ -58,7 +60,7 @@ const ShippingPage = () => {
             <Button onClick={handleReset}>Limpar</Button>
           </>
         )}
-      </Form>
+      </FormCEP>
       <a
         href="https://buscacepinter.correios.com.br/app/endereco/index.php"
         target="_blank"

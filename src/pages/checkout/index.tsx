@@ -7,17 +7,10 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 import CheckoutTitle from '@/components/CheckoutTitles'
 import CheckoutCartItem from '@/components/CheckoutCartItems'
-import PersonalDataForm from '@/components/PersonalDataForm'
-import AddressForm from '@/components/AddressForm'
+import FormOrder from '@/components/FormOrder'
 import OrderSummary from '@/components/OrderSummary'
 
-import {
-  CartProductsList,
-  ContainerWhite,
-  Container,
-  Resume,
-  Data,
-} from './styles'
+import { CartProductsList, ContainerWhite, Container, Resume } from './styles'
 
 const Checkout = () => {
   const [isClientHydrated, setIsClientHydrated] = useState(false)
@@ -41,10 +34,7 @@ const Checkout = () => {
       <ContainerWhite>
         <h1>Finalizando a sua encomenda</h1>
         <Container>
-          <Data>
-            <PersonalDataForm />
-            <AddressForm />
-          </Data>
+          <FormOrder />
           <Resume>
             <CartProductsList>
               <CheckoutTitle icon={faCartShopping}>

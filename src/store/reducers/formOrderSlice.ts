@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+  name: '',
+  surname: '',
+  email: '',
+  phone: '',
   street: '',
   number: '',
   complement: '',
@@ -10,10 +14,22 @@ const initialState = {
   cep: '',
 }
 
-export const addressFormSlice = createSlice({
-  name: 'addressForm',
+export const formOrderSlice = createSlice({
+  name: 'formOrder',
   initialState,
   reducers: {
+    setName: (state, action) => {
+      state.name = action.payload
+    },
+    setSurname: (state, action) => {
+      state.surname = action.payload
+    },
+    setEmail: (state, action) => {
+      state.email = action.payload
+    },
+    setPhone: (state, action) => {
+      state.phone = action.payload
+    },
     setStreet: (state, action) => {
       state.street = action.payload
     },
@@ -42,6 +58,10 @@ export const addressFormSlice = createSlice({
 })
 
 export const {
+  setName,
+  setSurname,
+  setEmail,
+  setPhone,
   setStreet,
   setNumber,
   setComplement,
@@ -50,6 +70,5 @@ export const {
   setState,
   setCEP,
   clearCEP,
-} = addressFormSlice.actions
-
-export default addressFormSlice.reducer
+} = formOrderSlice.actions
+export default formOrderSlice.reducer

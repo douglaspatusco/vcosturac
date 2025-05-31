@@ -18,7 +18,7 @@ export const Container = styled.div`
   }
 `
 
-export const Form = styled.div`
+export const FormCEP = styled.div`
   display: flex;
   gap: 1em;
 

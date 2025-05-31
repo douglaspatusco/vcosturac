@@ -7,20 +7,20 @@ export const generateReport = createAsyncThunk(
     const state = getState() as RootState
 
     const reportData = {
-      nome: state.userForm.name,
-      sobrenome: state.userForm.surname,
-      telefone: state.userForm.phone,
-      email: state.userForm.email,
+      nome: state.formOrder.name,
+      sobrenome: state.formOrder.surname,
+      telefone: state.formOrder.phone,
+      email: state.formOrder.email,
 
-      endereco: state.addressForm.street,
-      numero: state.addressForm.number,
-      complemento: state.addressForm.complement,
-      bairro: state.addressForm.neighborhood,
-      cidade: state.addressForm.city,
-      estado: state.addressForm.state,
+      endereco: state.formOrder.street,
+      numero: state.formOrder.number,
+      complemento: state.formOrder.complement,
+      bairro: state.formOrder.neighborhood,
+      cidade: state.formOrder.city,
+      estado: state.formOrder.state,
+      cep: state.formOrder.cep,
       opcaoDeEntrega: state.shipping.selectedFreight?.name,
       precoDoFrete: state.shipping.selectedFreight?.price,
-
       itensDoCarrinho: state.cart.cartItems.map((item) => ({
         produto: item.name,
         tema: item.selectedPrint,
@@ -29,8 +29,7 @@ export const generateReport = createAsyncThunk(
         quantidade: item.quantity,
       })),
       total: state.cart.total,
-
-      horaDoPedido: state.time.timeOrder,
+      dataDoPedido: state.time.timeOrder,
       codigoDoPedido: state.time.timeStamp,
     }
 
